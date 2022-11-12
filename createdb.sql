@@ -1,3 +1,7 @@
+/*NOTES FOR IMPORTING EXCEL DATA:
+1. Import one table at a time.
+2. Import them in their spreadsheet order. (Open the excel file to view their order) */
+
 CREATE TABLE JOBTITLE (
 	JobTitleID int primary key,
 	JobTitle varchar(30)
@@ -53,10 +57,10 @@ Create table WORKORDERPRIORITY
 
 CREATE TABLE CONTACT (
 	ContactID int primary key,
-	FirstName varchar(50),
-	LastName varchar(50),
-	EmailAddress nvarchar(70),
-	PhoneNumber varchar(15)
+	ContactFirstName varchar(50),
+	ContactLastName varchar(50),
+	ContactEmail nvarchar(70),
+	ContactPhone varchar(15)
 );
 
 Create Table TBL_GRANT (
@@ -67,10 +71,10 @@ Create Table TBL_GRANT (
 
 CREATE TABLE SERVICERATE (
 	ServiceRateID int PRIMARY KEY,
-	StartDate date,
-	EndDate date,
+	RateStartDate date,
+	RateEndDate date,
 	FiscalYear varchar(4),
-	Rate decimal(12,6)
+	ServiceRate decimal(12,6)
 );
 
 CREATE TABLE IPOSTATUS (
@@ -86,27 +90,27 @@ CREATE TABLE DEPARTMENT (
 
 CREATE TABLE CUSTOMER (
 	CustomerID int primary key,
-	FirstName varchar(50),
-	LastName varchar(50),
-	EmailAddress nvarchar(70),
-	PhoneNumber varchar(15),
-	EmpAddress varchar(100),
-	City varchar(50),
-	EmpState Char(2),
-	ZipCode varchar(10),
+	CustFirstName varchar(50),
+	CustLastName varchar(50),
+	CustEmail nvarchar(70),
+	CustPhone varchar(15),
+	CustAddress varchar(100),
+	CustCity varchar(50),
+	CustState Char(2),
+	CustZip varchar(10),
 	DepartmentID int REFERENCES DEPARTMENT(DepartmentID)
 );
 
 CREATE TABLE EMPLOYEE (
 	EmployeeID int primary key,
-	FirstName varchar(50),
-	LastName varchar(50),
-	Email nvarchar(70),
-	Phone varchar(15),
+	EmpFirstName varchar(50),
+	EmpLastName varchar(50),
+	EmpEmail nvarchar(70),
+	EmpPhone varchar(15),
 	EmpAddress varchar(100),
-	City varchar(50),
+	EmpCity varchar(50),
 	EmpState Char(2),
-	ZipCode varchar(10),
+	EmpZipCode varchar(10),
 	DepartmentID int FOREIGN KEY REFERENCES DEPARTMENT(DepartmentID),
 	JobTitleID int FOREIGN KEY REFERENCES JOBTITLE(JobTitleID),
 	EmployeeTypeID int FOREIGN KEY REFERENCES EMPLOYEETYPE(EmployeeTypeID)
@@ -115,8 +119,8 @@ CREATE TABLE EMPLOYEE (
 CREATE TABLE IPO (
 	IPOID int PRIMARY KEY,
 	IPODate date,
-	CreationDate date,
-	PaymentDate date,
+	IPOCreationDate date,
+	IPOPaymentDate date,
 	IPOStatusID int FOREIGN KEY REFERENCES IPOSTATUS(IPOStatusID)
 );
 
@@ -133,12 +137,12 @@ Create table WORKORDER
 	CustomerID int foreign key references CUSTOMER(CustomerID),
 	PriorityID int foreign key references WORKORDERPRIORITY(PriorityID),
 	StatusID int foreign key references WORKORDERSTATUS(StatusID),
-	SubmittedDate date,
+	WorkOrderSubmittedDate date,
 	WorkOrderDescription varchar(300),
-	StartDate date,
-	DueDate date,
-	ClosedDate date,
-	Notes varchar(2000),
+	WorkOrderStartDate date,
+	WorkOrderDueDate date,
+	WorkOrderClosedDate date,
+	WorkOrderNotes varchar(2000),
 	ProjectName varchar(200)
 );
 
@@ -159,7 +163,7 @@ Create Table TIMESHEET
 	BillingTypeID int foreign key references BILLINGTYPE(BillingTypeID),
 	TimeTypeID int foreign key references TIMETYPE(TimeTypeID),
 	ServiceTypeID int foreign key references SERVICETYPE(ServiceTypeID),
-	IPODID int foreign key references IPO(IPOID),
+	IPOID int foreign key references IPO(IPOID),
 	WorkDateTime date,
 	TimeWorkedHours decimal(4,2),
 	WorkPerformed varchar(1000)
@@ -177,6 +181,7 @@ CREATE TABLE WORKORDERGRANT (
 	WorkOrderID int REFERENCES WORKORDER(WorkOrderID),
 	GrantID varchar(10) REFERENCES TBL_GRANT(GrantID)
 );
+
 
 
 SELECT * FROM COMPANY;
@@ -202,3 +207,12 @@ SELECT * FROM ASSIGNEE;
 SELECT * FROM timesheet;
 SELECT * FROM WORKORDERCONTACT;
 SELECT * FROM WORKORDERGRANT;
+
+
+
+
+/* VIEW ALL DATA AT ONCE */
+SELECT * FROM COMPANY, EMPLOYEETYPE, ENTRYTYPE, JOBTITLE, SERVICETYPE, TIMETYPE, BILLINGTYPE, WORKORDERSTATUS, WORKORDERPRIORITY, CONTACT, TBL_GRANT, SERVICERATE, IPOSTATUS, DEPARTMENT, CUSTOMER, EMPLOYEE, IPO, IPORATE, WORKORDER, ASSIGNEE, TIMESHEET, WORKORDERCONTACT, WORKORDERGRANT;
+
+
+DELETE FROM CUSTOMER;
