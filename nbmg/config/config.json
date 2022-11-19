@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "nbmg",
+    "password": "agile-alpha-2022",
+    "database": "nbmg",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
