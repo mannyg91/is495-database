@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "nbmg",
+    "password": "agile-alpha-2022",
+    "database": "nbmg",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "nbmg",
+    "password": "agile-alpha-2022",
+    "database": "nbmg",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "nbmg",
+    "password": "agile-alpha-2022",
+    "database": "nbmg",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
+
+
+

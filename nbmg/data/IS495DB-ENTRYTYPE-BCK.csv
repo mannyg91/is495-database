@@ -1,0 +1,7 @@
+EntryTypeID,EntryType,Billable
+1,Regular Time,True
+2,Admin Time,False
+3,Match Time,False
+4,Write Off,False
+5,Adjustment,True
+6,Not Billed,True
