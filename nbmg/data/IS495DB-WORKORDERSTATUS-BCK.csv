@@ -1,0 +1,6 @@
+StatusID,StatusType
+1,Assigned
+2,Unassigned
+3,Pending
+4,Completed
+5,Closed
