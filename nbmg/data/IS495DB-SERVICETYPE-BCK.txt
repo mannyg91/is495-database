@@ -1,0 +1,11 @@
+ServiceTypeID,ServiceType,ServiceDescription
+8000,Books,Publication and Design
+8010,Figures,Cataloging, Classifying and Categorizing Geological Resources
+8020,GIS Services,Drafting and GIS Database creation services
+8030,Topographical Maps,Creation of maps with topographical and elevation data
+8040,On Demand Printing,Large scale printing of greater than 11" x 17" layouts
+8050,Photography and Editing Services,Photographical production and editing publication services
+8060,Platt Map Plotting Services,Production of WGS 84 default standard datum coordinated maps
+8070,Poster Production,Photography, Editing and Poster creation services
+8080,Web Design and Web Apps,Creation of Geological Web Applications and Web Design Services
+8081,Admin,Non billable administrative time entry
