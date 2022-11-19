@@ -1,0 +1,21 @@
+DepartmentID,DepartmentName,CompanyID
+5000,Department of Earth Sciences,127050
+5001,Accounting,127070
+5002,Cartography and Publication Support,126920
+5003,State Geological Services,127010
+5004,Federal Geological Services,126950
+5005,Administration,126910
+5006,Campus Computing,126910
+5007,Department of Mechanical Engineering,127040
+5008,Division of Minerals,127010
+5009,Economic Geology, Geologic Mapping, and Geologic Framework,126930
+5010,Geologic Hazards and Engineering Geology,126960
+5011,Geological Sciences,127030
+5012,Geology,126910
+5013,Great Basin Center for Geothermal Energy,127050
+5014,Mines and Mining Operations,127030
+5015,National Resources & Environmental Sciences,126990
+5016,Nevada Geodetic Laboratory,126910
+5017,Nevada Radon Education Program,126910
+5018,Publication Sales and Information,126910
+5019,Structural Geology, Tectonics and Neotectonics,126910
