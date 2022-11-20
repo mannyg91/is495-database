@@ -14,158 +14,71 @@
         <h2>Select What You Would Like to Include:</h2>
         <div id="timesheet-container" class="table-form">
             <h3>TIMESHEET</h3>
-            <input
-                type="checkbox"
-                id="timesheetid"
-                name="timesheetid"
-                value="TimeSheetID"
-                class="TIMESHEET" />
-            <label for="timesheetid">TimeSheetID</label>
-            <input
-                type="checkbox"
-                id="workdatetime"
-                name="workdatetime"
-                value="WorkDateTime"
-                class="TIMESHEET" />
-            <label for="workdatetime">WorkDateTime</label>
-            <input
-                type="checkbox"
-                id="timeworkedhours"
-                name="timeworkedhours"
-                value="TimeWorkedHours"
-                class="TIMESHEET" />
-            <label for="timeworkedhours">TimeWorkedHours</label>
-            <input
-                type="checkbox"
-                id="workperformed"
-                name="workperformed"
-                value="WorkPerformed"
-                class="TIMESHEET" />
-            <label for="workperformed">WorkPerformed</label>
-
-            <input
-                type="checkbox"
-                id="entrytypeid"
-                name="entrytypeid"
-                value="EntryTypeID"
-                class="ENTRYTYPE" />
-            <label for="entrytypeid">EntryTypeID</label>
-            <input
-                type="checkbox"
-                id="entrytype"
-                name="entrytype"
-                value="EntryType"
-                class="ENTRYTYPE" />
-            <label for="entrytype">EntryType</label>
-
-            <input
-                type="checkbox"
-                id="timetypeid"
-                name="timetypeid"
-                value="TimeTypeID"
-                class="TIMETYPE" />
-            <label for="timetypei">TimeTypeID</label>
-            <input
-                type="checkbox"
-                id="timetype"
-                name="timetype"
-                value="TimeType"
-                class="TIMETYPE" />
-            <label for="timetype">TimeType</label>
-
-            
-            <input
-                type="checkbox"
-                id="billingtypeid"
-                name="billingtypeid"
-                value="billingtypeid"
-                class="BILLINGTYPE" />
-            <label for="billingtypeid">BillingTypeID</label>
-            <input
-                type="checkbox"
-                id="billingtype"
-                name="billingtype"
-                value="BillingType"
-                class="BILLINGTYPE" />
-            <label for="billingtype">BillingType</label>
-
-
-
-            <input
-                type="checkbox"
-                id="servicetypeid"
-                name="servicetypeid"
-                value="ServiceTypeID"
-                class="SERVICETYPE" />
-            <label for="servicetypeid">ServiceTypeID</label>
-            <input
-                type="checkbox"
-                id="servicetype"
-                name="servicetype"
-                value="ServiceType"
-                class="SERVICETYPE" />
-            <label for="servicetype">ServiceType</label>
-
-
-
-
-
-
-            <input
-                type="checkbox"
-                id="workorderid"
-                name="workorderid"
-                value="workorderid"
-                class="WORKORDER" />
-            <label for="workorderid">WorkOrderID</label>
-            <input
-                type="checkbox"
-                id="employeeid"
-                name="employeeid"
-                value="employeeid"
-                class="EMPLOYEE" />
-            <label for="employeeid">EmployeeID</label>
-            
-            <input
-                type="checkbox"
-                id="ipoid"
-                name="ipoid"
-                value="ipoid"
-                class="IPO" />
-            <label for="ipoid">IPOID</label>
-          
         </div>
 
 
         <h4>WHERE:</h4>
         <div class="selector" id="selector">
             <div class="where-condition">
-                <input type="text" class="where" id="where" name="where"> = </input>
-                    <select>
+                
+                    <select id="where-options">
+                        <option value=""></option> 
                         <option value="FirstName">FirstName</option>
                         <option value="LastName">LastName</option>
                         <option value="WorkOrderID">WorkOrderID</option>
                     </select>
+    
+                    <input type="text" class="where" id="where" name="where" />
+
                     <button type="button" onclick="removeInputField()" class="minus-btn">-</button>
                     <button type="button" onclick="addInputField()" class="plus-btn">+</button>
+
                 <br>
             </div>
         </div>
-            
+        
+
+        <div class="orderby" id="orderby">
+            <select id="sort-criteria">
+                <option value=""></option>
+            </select>
+            <select id="sort-options">
+                <option value=""></option>                  
+                <option value="ASC">Ascending</option>
+                <option value="DESC">Descending</option>
+            </select>
+        </div>
+
+
 
 
 
 
         <div class="submit">
-          <button type="submit">Create SQL Query</button>
+          <button id="submit-btn" type="submit">Create SQL Query</button>
         </div>
+
+    </form>
+
+    <form id="search-bar">
+        <span class='search-icon'></span>
+        <input id="search-input" type="text">
+        <button id="search-btn" type="submit">Search</button>
+    </form>
+
         <div class="code-container">
             <code id="sql-code">
             </code>
         </div>
 
-      </form>
-      <script src="./createSQL.js"></script>
-      <!-- <script src="./next.js"></script> -->
+        <table class="results" id="results">
+        </table>
+
+        <nav id="pagination-bar">
+            <ul id="pagination" class="pagination"></ul>
+        </nav>
+        <div id="page-summary"></div>
+
+    <script src="./createSQL.js"></script>
 </body>
 </html>
