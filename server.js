@@ -41,14 +41,14 @@ function getDatabase(req, res, next) {
       var request = new sql.Request();
       request.query(userQuery,function(err,recordSet) {
           if(err){
-              console.log(err)
+              console.log(err);
+              next(err)
           } else {
               // console.log(recordSet); //LOGS CORRECTLY
               res.status(201).send(recordSet);
           }
       });
   });
-
   next();
 }
 
@@ -56,7 +56,7 @@ function getDatabase(req, res, next) {
 
 //works
 app.post('/', getDatabase, (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   userSQL = req.body;
 });
 
