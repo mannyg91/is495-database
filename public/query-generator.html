@@ -12,9 +12,20 @@
     <h1>SQL Query Generator</h1>
     <form id="timesheet-form">
         <h2>Select What You Would Like to Include:</h2>
-        <div id="timesheet-container" class="table-form">
-            <h3>TIMESHEET</h3>
+
+        <div>
+            <select id="table-selection">
+                <option value=""></option>
+            </select>
         </div>
+
+
+        <div id="timesheet-container" class="table-form">
+
+
+        </div>
+
+
 
 
         <h4>WHERE:</h4>
@@ -55,7 +66,7 @@
 
 
         <div class="submit">
-          <button id="submit-btn" type="submit">Create SQL Query</button>
+          <button id="submit-btn" type="submit">Get Records</button>
         </div>
 
     </form>
@@ -66,18 +77,26 @@
         <button id="search-btn" type="submit">Search</button>
     </form>
 
-        <div class="code-container">
-            <code id="sql-code">
-            </code>
-        </div>
+    <div class="code-container">
+        <code id="sql-code">
+        </code>
+    </div>
 
-        <table class="results" id="results">
-        </table>
+    <table class="results" id="results">
+    </table>
 
-        <nav id="pagination-bar">
-            <ul id="pagination" class="pagination"></ul>
-        </nav>
-        <div id="page-summary"></div>
+    <nav id="pagination-bar">
+        <ul id="pagination" class="pagination"></ul>
+    </nav>
+    <div id="page-summary"></div>
+
+    <div id="edit-warning">
+        Would you like to edit this cell? Changes can be overwritten, but not reversed.
+        <button type="button">Yes</button><button type="button">No</button>
+    </div>
+
+
+
 
     <script src="./createSQL.js"></script>
 </body>

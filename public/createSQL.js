@@ -7,8 +7,8 @@ const primaryKeys = {
     ENTRYTYPE : 'EntryTypeID',
     TIMETYPE : 'TimeTypeID',
     BILLINGTYPE : 'BillingTypeID',
-    WORKORDERSTATUS : 'WorkOrderStatusID',
-    WORKORDERPRIORITY : 'WorkOrderPriorityID',
+    WORKORDERSTATUS : 'StatusID',
+    WORKORDERPRIORITY : 'PriorityID',
     CONTACT : 'ContactID',
     TBL_GRANT : 'GrantID',
     SERVICERATE : 'ServiceRateID',
@@ -62,11 +62,11 @@ const dbAttributes = {
     IPOStatus : 'IPOSTATUS',
     DepartmentID : 'DEPARTMENT',
     DepartmentName : 'DEPARTMENT',
-    CompanyID : 'DEPARTMENT', 
+    CompanyID_DEPARTMENT : 'DEPARTMENT', 
     CustomerID : 'CUSTOMER',
     CustFirstName : 'CUSTOMER',
     CustLastName : 'CUSTOMER',
-    DepartmentID : 'CUSTOMER', 
+    DepartmentID_CUSTOMER : 'CUSTOMER', 
     CustEmail : 'CUSTOMER',
     CustPhone : 'CUSTOMER',
     CustAddress : 'CUSTOMER',
@@ -76,60 +76,110 @@ const dbAttributes = {
     EmployeeID : 'EMPLOYEE',
     EmpFirstName : 'EMPLOYEE',
     EmpLastName : 'EMPLOYEE',
-    DepartmentID : 'EMPLOYEE',
+    DepartmentID_EMPLOYEE : 'EMPLOYEE',
     EmpEmail : 'EMPLOYEE',
-    JobTitleID : 'EMPLOYEE',
+    JobTitleID_EMPLOYEE : 'EMPLOYEE',
     EmpPhone : 'EMPLOYEE',
     EmpAddress : 'EMPLOYEE',
     EmpCity : 'EMPLOYEE',
     EmpState : 'EMPLOYEE',
     EmpZipCode : 'EMPLOYEE',
-    EmployeeTypeID : 'EMPLOYEE',
+    EmployeeTypeID_EMPLOYEE : 'EMPLOYEE',
     IPOID : 'IPO',
     IPODate : 'IPO',
     IPOCreationDate : 'IPO',
-    IPOStatusID : 'IPO', 
+    IPOStatusID_IPO : 'IPO', 
     IPOPaymentDate : 'IPO',
     IPORateID : 'IPORATE',
-    ServiceRateID : 'IPORATE',
-    IPOID : 'IPORATE',
+    ServiceRateID_IPORATE : 'IPORATE',
+    IPOID_IPORATE : 'IPORATE',
     GrantID : 'TBL_GRANT',
     GrantName : 'TBL_GRANT',
     Budget : 'TBL_GRANT',
     WorkOrderID : 'WORKORDER',
-    EmployeeID : 'WORKORDER',
-    CustomerID : 'WORKORDER',
-    PriorityID : 'WORKORDER',
-    StatusID : 'WORKORDER',
+    EmployeeID_WORKORDER : 'WORKORDER',
+    CustomerID_WORKORDER : 'WORKORDER',
+    PriorityID_WORKORDER : 'WORKORDER',
+    StatusID_WORKORDER : 'WORKORDER',
     WorkOrderSubmittedDate : 'WORKORDER',
     WorkOrderDescription : 'WORKORDER',
     WorkOrderStartDate : 'WORKORDER',
     WorkOrderDueDate : 'WORKORDER',
     WorkOrderClosedDate : 'WORKORDER',
     WorkOrderNotes : 'WORKORDER', 
-    GrantID : 'WORKORDER',
+    GrantID_WORKORDER : 'WORKORDER',
     ProjectName : 'WORKORDER', 
     AssigneeID : 'ASSIGNEE',
-    EmployeeID : 'ASSIGNEE',
-    WorkOrderID : 'ASSIGNEE',
+    EmployeeID_ASSIGNEE : 'ASSIGNEE',
+    WorkOrderID_ASSIGNEE : 'ASSIGNEE',
     TimeSheetID : 'TIMESHEET',
-    WorkOrderID : 'TIMESHEET',
-    EmployeeID : 'TIMESHEET',
-    EntryTypeID : 'TIMESHEET',
-    BillingTypeID : 'TIMESHEET',
-    TimeTypeID : 'TIMESHEET',
-    ServiceTypeID : 'TIMESHEET',
-    IPOID : 'TIMESHEET',
+    WorkOrderID_TIMESHEET : 'TIMESHEET',
+    EmployeeID_TIMESHEET : 'TIMESHEET',
+    EntryTypeID_TIMESHEET : 'TIMESHEET',
+    BillingTypeID_TIMESHEET : 'TIMESHEET',
+    TimeTypeID_TIMESHEET : 'TIMESHEET',
+    ServiceTypeID_TIMESHEET : 'TIMESHEET',
+    IPOID_TIMESHEET : 'TIMESHEET',
     TimeSheetDate : 'TIMESHEET',
     TimeWorkedHours : 'TIMESHEET',
     WorkPerformed : 'TIMESHEET',
     WorkOrderContactID : 'WORKORDERCONTACT',
-    ContactID : 'WORKORDERCONTACT',
-    WorkOrderID : 'WORKORDERCONTACT',
+    ContactID_WORKORDERCONTACT : 'WORKORDERCONTACT',
+    WorkOrderID_WORKORDERCONTACT : 'WORKORDERCONTACT',
     WorkOrderGrantID : 'WORKORDERGRANT',
-    WorkOrderID : 'WORKORDERGRANT',
-    GrantID : 'WORKORDERGRANT'
+    WorkOrderID_WORKORDERGRANT : 'WORKORDERGRANT',
+    GrantID_WORKORDERGRANT : 'WORKORDERGRANT'
 };
+
+const tableToAttributes = {
+    JOBTITLE : ['JobTitleID','JobTitle'],
+    EMPLOYEETYPE : ['EmployeeTypeID', 'EmployeeType'],
+    COMPANY : ['CompanyID','CompanyName'],
+    SERVICETYPE : ['ServiceTypeID','ServiceType','ServiceDescription'],
+    ENTRYTYPE : ['EntryTypeID', 'EntryType', 'Billable'],
+    TIMETYPE : ['TimeTypeID', 'TimeType', 'Category'],
+    BILLINGTYPE : ['BillingTypeID', 'BillingType'],
+    WORKORDERSTATUS : ['StatusID','StatusType'],
+    WORKORDERPRIORITY : ['PriorityID', 'PriorityType'],
+    CONTACT : ['ContactID','ContactFirstName','ContactLastName','ContactEmail','ContactPhone'],
+    SERVICERATE : ['ServiceRateID','RateStartDate','RateEndDate','FiscalYear','ServiceRate'],
+    IPOSTATUS : ['IPOStatusID', 'IPOStatus'],
+    // DEPARTMENT : ['DepartmentID', 'DepartmentName','CompanyID_DEPARTMENT'],
+    DEPARTMENT : ['DepartmentID', 'DepartmentName'],
+    // CUSTOMER : ['CustomerID','CustFirstName','CustLastName','CustEmail','CustPhone','CustAddress','CustCity','CustState','CustZip','DepartmentID_CUSTOMER'],
+    CUSTOMER : ['CustomerID','CustFirstName','CustLastName','CustEmail','CustPhone','CustAddress','CustCity','CustState','CustZip'],
+    // EMPLOYEE : ['EmployeeID','EmpFirstName','EmpLastName','EmpEmail','EmpPhone','EmpAddress','EmpCity','EmpState','EmpZipCode','DepartmentID_EMPLOYEE','JobTitleID_EMPLOYEE','EmployeeTypeID_EMPLOYEE'],
+    EMPLOYEE : ['EmployeeID','EmpFirstName','EmpLastName','EmpEmail','EmpPhone','EmpAddress','EmpCity','EmpState','EmpZipCode'],
+    // IPO : ['IPOID','IPODate','IPOCreationDate','IPOPaymentDate','IPOStatusID_IPO'],
+    IPO : ['IPOID','IPODate','IPOCreationDate','IPOPaymentDate'],
+    // IPORATE : ['IPORateID', 'ServiceRateID_IPORATE','IPOID_IPORATE'],
+    IPORATE : ['IPORateID'],
+    TBL_GRANT : ['GrantID', 'GrantName', 'Budget'],
+    // WORKORDER : ['WorkOrderID', 'WorkOrderSubmittedDate','WorkOrderDescription','WorkOrderStartDate','WorkOrderDueDate','WorkOrderClosedDate','WorkOrderNotes','ProjectName','EmployeeID_WORKORDER','CustomerID_WORKORDER','PriorityID_WORKORDER','StatusID_WORKORDER','GrantID_WORKORDER'],
+    WORKORDER : ['WorkOrderID', 'WorkOrderSubmittedDate','WorkOrderDescription','WorkOrderStartDate','WorkOrderDueDate','WorkOrderClosedDate','WorkOrderNotes','ProjectName'],
+    // ASSIGNEE : ['AssigneeID','EmployeeID_ASSIGNEE','WorkOrderID_ASSIGNEE'],
+    ASSIGNEE : ['AssigneeID'],
+    // TIMESHEET: ['TimeSheetID','TimeSheetDate','TimeWorkedHours','WorkPerformed','WorkOrderID_TIMESHEET','EmployeeID_TIMESHEET','EntryTypeID_TIMESHEET','BillingTypeID_TIMESHEET','TimeTypeID_TIMESHEET','ServiceTypeID_TIMESHEET','IPOID_TIMESHEET'],
+    TIMESHEET: ['TimeSheetID','TimeSheetDate','TimeWorkedHours','WorkPerformed'],
+    // WORKORDERCONTACT : ['WorkOrderContactID', 'ContactID_WORKORDERCONTACT', 'WorkOrderID_WORKORDERCONTACT'],
+    WORKORDERCONTACT : ['WorkOrderContactID'],
+    // WORKORDERGRANT : ['WorkOrderGrantID','WorkOrderID_WORKORDERGRANT','GrantID_WORKORDERGRANT']
+    WORKORDERGRANT : ['WorkOrderGrantID']
+}
+
+
+//EXCLUDED COMPANY BECAUSE OF SECOND-LEVEL JOINS
+const categoryToRelatedTables = {
+    "CUSTOMER" : ['CUSTOMER','DEPARTMENT'],
+    "EMPLOYEE" : ['EMPLOYEE','JOBTITLE','EMPLOYEETYPE','DEPARTMENT'],
+    "IPO" : ['IPO','IPOSTATUS'],
+    "IPORATE" : ['IPORATE','SERVICERATE','IPO'],
+    "TIMESHEET" : ['TIMESHEET','EMPLOYEE','WORKORDER','SERVICETYPE','ENTRYTYPE','TIMETYPE','BILLINGTYPE'],
+    "WORKORDER": ['WORKORDER','WORKORDERSTATUS','WORKORDERPRIORITY'],
+    "ASSIGNEE": ['ASSIGNEE','EMPLOYEE','WORKORDER'],
+    "WORKORDERCONTACT" : ['WORKORDERCONTACT','WORKORDER','CONTACT'],
+    "WORKORDERGRANT": ['WORKORDERGRANT','WORKORDER','TBL_GRANT']
+}
 
 
 
@@ -143,6 +193,7 @@ const pageSummary = document.getElementById("page-summary");
 const selector = document.getElementById("selector");
 const sortCriteria = document.getElementById('sort-criteria');
 const sortOptions = document.getElementById('sort-options');
+const tableSelection = document.getElementById('table-selection');
 
 
 
@@ -153,11 +204,13 @@ let selectStatement;
 let joinsTxt;
 let whereTxt;
 let sqlQuery;
-let startingTable = "TIMESHEET";
+let startingTable = 'EMPLOYEE';
 let columns = [];
 let sqlData = {};
 let startingSlice = 0;
 let currentPage = 1;
+let startPage = 1;
+let totalPages = 0;
 
 
 let whereHTML = selector.innerHTML;
@@ -168,14 +221,22 @@ async function buildQuery(event) {
     event.preventDefault(); 
     clearAll();
 
-    //Gathers information
     attributes = getCheckedAttributes(); //gets all values of checked boxes
     populateSortOptions(); //should be generated as elements are selected, not how it is currently
     tables = getCheckedClasses(); //all tables involved (className)
 
+    console.log(tableSelection.value);
+    //Gathers information
+    if (tableSelection.value)
+        startingTable = tableSelection.value;
+    else
+        console.log("No table selected");
+        // return;
+
+
     //Builds Query
-    selectStatement = buildSelect(startingTable, attributes); //starting table and all values of checked boxes
-    joinTxt = buildJoins(startingTable, tables);
+    selectStatement = buildSelect(attributes); //starting table and all values of checked boxes
+    joinTxt = buildJoins(tables);
     whereTxt = buildWhere();
     orderTxt = buildOrderBy();
     sqlQuery = selectStatement + `FROM ${startingTable}\n ` + joinTxt + whereTxt + orderTxt;
@@ -184,7 +245,7 @@ async function buildQuery(event) {
     //Sends Query and returns Results
     try {
         sqlData = await getResults(sqlQuery);
-        renderResults(sqlData);
+        renderResults(sqlData, 1);
     } catch {
         alert("Query is invalid");
     }
@@ -193,6 +254,7 @@ async function buildQuery(event) {
 
 //sends query to database
 async function getResults(code) {
+    document.body.style.cursor = "wait";
     const response = await fetch("/", {
         method: 'POST',
         headers: {
@@ -200,16 +262,21 @@ async function getResults(code) {
         },
         body: code,})
     const data = await response.json()
+    document.body.style.cursor = null;
     return data
 };
 
 
 
-function renderResults(data) {
-    let limit = 50;
+function renderResults(data, page) {
+
+    results.innerHTML = "";
+
+    let limit = 25;
+    startingSlice = (limit * page) - limit
     let count = startingSlice + 1;
 
-    const totalPages = Math.ceil(data.recordset.length / limit);
+    totalPages = Math.ceil(data.recordset.length / limit);
 
     //creates headers:
     let header = results.createTHead();
@@ -238,34 +305,83 @@ function renderResults(data) {
         count++;
     }
 
+    // currentPage = (currentPage === 0) ? "1" : currentPage
     pageSummary.innerHTML = `Page ${currentPage} of ${totalPages}`
     paginate(totalPages)
 }
 
 
 function paginate(totalPages) {
+    pagination.innerHTML = "";
     const maxPages = 10;
     let countPages = 0;
 
-    pagination.innerHTML = "<li><button type='button'>«</button></li>"
+    const prevContainer = document.createElement('li');
+    const prevBtn = document.createElement('button');
+    const nextContainer = document.createElement('li');
+    const nextBtn = document.createElement('button');
 
+    prevBtn.setAttribute("type","button");
+    prevBtn.textContent = "«"
+    prevBtn.addEventListener('click', ()=> {
+        startPage -= 10;
+        currentPage = startPage;
+        renderResults(sqlData, startPage);
+    })
+
+    prevContainer.appendChild(prevBtn)
+    pagination.appendChild(prevContainer);
+
+    //turns totalPages into an iterable array //could slice the array here rather than iterate through entire
     for (page of Array(totalPages).keys()) {
-        if (countPages < maxPages) {
-            pagination.innerHTML += `
-            <li><button id="page-${page+1}" type='button'>${page+1}</button></li>
-            `
-            // console.log(document.getElementById(`page-${page+1}`))
-            let pageBtn = document.getElementById(`page-${page+1}`)
+        page += startPage;
+        if (countPages < maxPages && page <= totalPages) {
 
-            pageBtn.addEventListener("click", function(){ console.log("click worked")}) // NOT WORKING, MAY HAVE TO USE EVENT DELEGATION
-            // document.getElementById(`page-${page+1}`).param = 'test param'
-            // console.log(document.getElementById(`page-${page+1}`).param)
+            const pageContainer = document.createElement('li');
+            const pageBtn = document.createElement('button');
+
+            pageBtn.setAttribute("type","button");
+            pageBtn.setAttribute("value",page);
+            pageBtn.textContent = `${page}`
+            pageBtn.addEventListener('click', ()=> {
+                currentPage = parseInt(pageBtn.value);
+                renderResults(sqlData, pageBtn.value);
+            }) 
+        
+
+            pageContainer.appendChild(pageBtn)
+            pagination.appendChild(pageContainer);
+
+            if ((page) === currentPage) {
+                pageBtn.setAttribute("aria-current","page");
+            }
+        } else {
+            if (page > totalPages) {
+                nextBtn.disabled = true;
+                nextBtn.style.cursor = "not-allowed";
+            }
+            break;
         }
         countPages ++;
     }
-    document.getElementById(`page-${currentPage}`).setAttribute("aria-current","page");
 
-    pagination.innerHTML += "<li><button type='button'>»</button></li>"
+    nextBtn.setAttribute("type","button");
+    nextBtn.textContent = "»"
+    nextBtn.addEventListener('click', ()=> {
+
+        startPage += 10;
+        currentPage = startPage;
+        renderResults(sqlData, startPage);
+    })
+
+    nextContainer.appendChild(nextBtn)
+    pagination.appendChild(nextContainer);
+
+    if (startPage === 1) {
+        prevBtn.disabled = true;
+        prevBtn.style.cursor = "not-allowed";
+    }
+
 }
 
 
@@ -279,7 +395,7 @@ function clearAll() {
 }
 
 
-
+//gets ATTRIBUTES
 function getCheckedAttributes(){
     const checks = timesheetForm.querySelectorAll('input[type="checkbox"]');
     let checked = [];
@@ -291,7 +407,7 @@ function getCheckedAttributes(){
 }
 
 
-//gets classes of checked boxes, excludes duplicates
+//gets classes of checked boxes, excludes duplicates (TABLES)
 function getCheckedClasses(){
     const checks = timesheetForm.querySelectorAll('input[type="checkbox"]');
     let checkedClasses = [];
@@ -307,7 +423,7 @@ function getCheckedClasses(){
 
 // BUILD QUERY FUNCTIONS: //
 //FIX: should only apply startingTable to attributes that ARE IN starting table
-function buildSelect(startingTable, attributes) {
+function buildSelect(attributes) {
     let selectStatement = "SELECT ";
 
     if (attributes.length === 0)
@@ -322,13 +438,33 @@ function buildSelect(startingTable, attributes) {
     return selectStatement.slice(0, -2) + " \n"; //deletes comma from last attribute
 }
 
-function buildJoins(startingTable, checkedClasses) {
+// function buildFrom() {
+//     categoryArr = document.getElementById('selector').getElementsByTagName('select');
+//     inputArr = document.getElementsByClassName('where');
+//     if (inputArr[0].value != "") {
+//         whereTxt = "WHERE " 
+//         for(let i = 0; i < optionArr.length; i++) {
+//             if (i === optionArr.length - 1)
+//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
+//             else
+//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
+//         }
+//     }
+//     else {
+//         whereTxt = ""
+//     }
+//     return whereTxt;
+// }
+
+
+function buildJoins(checkedClasses) {
     for (const table of checkedClasses) {
+        console.log(table);
         if (table != startingTable) {
             joinsTxt += 
             `LEFT OUTER JOIN ${table}
-            ON ${startingTable}.${primaryKeys[table]} = ${table}.${primaryKeys[table]}
-            `
+            ON ${primaryKeys[table]} = ${primaryKeys[table]}_${startingTable}
+            ` //FIX
         }
     }
     return joinsTxt;
@@ -343,7 +479,7 @@ function buildWhere() {
             if (i === optionArr.length - 1)
                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
             else
-                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n`
+                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
         }
     }
     else {
@@ -354,6 +490,7 @@ function buildWhere() {
 
 function buildOrderBy() {
     let orderTxt = ""
+    console.log(sortCriteria.value);
     if (sortCriteria.value)
         orderTxt += `ORDER BY ${sortCriteria.value} ${sortOptions.value}`
     return orderTxt
@@ -363,12 +500,12 @@ function buildOrderBy() {
 
 
 function addInputField() {
-    console.log("addinput called")
+
     whereHTML += `
         <div class="where-condition">
                 <select>
-                    <option value="FirstName">FirstName</option>
-                    <option value="LastName">LastName</option>
+                    <option value="EmpFirstName">EmpFirstName</option>
+                    <option value="EmpLastName">EmpLastName</option>
                     <option value="WorkOrderID">WorkOrderID</option>
                 </select>
                 <input type="text" class="where" id="where" name="where" />
@@ -380,32 +517,103 @@ function addInputField() {
 }
 
 
+
+
+
 function removeInputField() {
     document.getElementById('selector').removeChild(selector.lastElementChild)
 }
 
 
+function createTableCategories() {
+
+    let categoriesHTML = "";
 
 
-
-
-function createCheckboxes(dbAttributes) {
-    let checkboxHTML = ""
-    for (let attribute in dbAttributes) {
-        checkboxHTML += `
-        <input
-            type="checkbox"
-            id="${attribute}"
-            name="${attribute}"
-            value="${attribute}"
-            class="${dbAttributes[attribute]}" />
-        <label for="${attribute}">${attribute}</label>
+   for (let table of Object.keys(categoryToRelatedTables)) {
+        categoriesHTML += `
+        <option value="${table}">${table}</option>
         `
     }
+
+
+    // for (let table of Object.keys(primaryKeys)) {
+    //     categoriesHTML += `
+    //     <option value="${table}">${table}</option>
+    //     `
+    // }
+    tableSelection.innerHTML += categoriesHTML;
+    tableSelection.addEventListener('change', function() {
+        tableForm.innerHTML = "";
+        createCheckboxes();
+     });
+}
+
+createTableCategories();
+
+
+// function createCheckboxes() {
+//     let checkboxHTML = ""
+//     for (let attribute in dbAttributes) {
+//         checkboxHTML += `
+//         <input
+//             type="checkbox"
+//             id="${attribute}"
+//             name="${attribute}"
+//             value="${attribute}"
+//             class="${dbAttributes[attribute]}" />
+//         <label for="${attribute}">${attribute}</label>
+//         `
+//     }
+//     tableForm.innerHTML += checkboxHTML;
+// }
+
+// createCheckboxes();
+
+
+
+function createCheckboxes() {
+    let checkboxHTML = ""
+
+
+    for (table of categoryToRelatedTables[tableSelection.value]) {
+        for (attribute of tableToAttributes[table]) {
+            checkboxHTML += `
+            <input
+                type="checkbox"
+                id="${attribute}"
+                name="${attribute}"
+                value="${attribute}"
+                class="${dbAttributes[attribute]}" 
+                checked />
+            <label for="${attribute}">${attribute}</label>
+            `
+        }
+    }
+
+
+    //get selected category/table
+    //iterate through array value on this key
+
+    // for (let attribute in dbAttributes) {
+    //     checkboxHTML += `
+    //     <input
+    //         type="checkbox"
+    //         id="${attribute}"
+    //         name="${attribute}"
+    //         value="${attribute}"
+    //         class="${dbAttributes[attribute]}" />
+    //     <label for="${attribute}">${attribute}</label>
+    //     `
+    // }
     tableForm.innerHTML += checkboxHTML;
 }
 
-createCheckboxes(dbAttributes);
+
+
+
+
+
 
 
 function populateSortOptions() {
@@ -415,7 +623,11 @@ function populateSortOptions() {
             <option value="${item}">${item}</option>
             `
         }
-    }
-    console.log(document.getElementById('sort-options').value);
+    };
 }
 
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+
+getKeyByValue()
