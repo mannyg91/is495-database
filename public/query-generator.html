@@ -9,11 +9,12 @@
     
 </head>
 <body>
-    <h1>SQL Query Generator</h1>
+    <!-- <h1>SQL Query Generator</h1> -->
     <form id="timesheet-form">
-        <h2>Select What You Would Like to Include:</h2>
+        <!-- <h2>Select What You Would Like to Include:</h2> -->
 
         <div>
+            <h3>Category:</h3>
             <select id="table-selection">
                 <option value=""></option>
             </select>
@@ -28,15 +29,14 @@
 
 
 
-        <h4>WHERE:</h4>
+        <h4>Filter By:</h4>
         <div class="selector" id="selector">
             <div class="where-condition">
                 
                     <select id="where-options">
                         <option value=""></option> 
-                        <option value="FirstName">FirstName</option>
-                        <option value="LastName">LastName</option>
-                        <option value="WorkOrderID">WorkOrderID</option>
+
+
                     </select>
     
                     <input type="text" class="where" id="where" name="where" />
@@ -49,18 +49,6 @@
         </div>
         
 
-        <div class="orderby" id="orderby">
-            <select id="sort-criteria">
-                <option value=""></option>
-            </select>
-            <select id="sort-options">
-                <option value=""></option>                  
-                <option value="ASC">Ascending</option>
-                <option value="DESC">Descending</option>
-            </select>
-        </div>
-
-
 
 
 
@@ -71,11 +59,11 @@
 
     </form>
 
-    <form id="search-bar">
+    <!-- <form id="search-bar">
         <span class='search-icon'></span>
         <input id="search-input" type="text">
         <button id="search-btn" type="submit">Search</button>
-    </form>
+    </form> -->
 
     <div class="code-container">
         <code id="sql-code">
@@ -89,6 +77,8 @@
         <ul id="pagination" class="pagination"></ul>
     </nav>
     <div id="page-summary"></div>
+
+
 
     <div id="edit-warning">
         Would you like to edit this cell? Changes can be overwritten, but not reversed.

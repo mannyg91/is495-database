@@ -191,9 +191,9 @@ const results = document.getElementById('results');
 const pagination = document.getElementById('pagination');
 const pageSummary = document.getElementById("page-summary");
 const selector = document.getElementById("selector");
-const sortCriteria = document.getElementById('sort-criteria');
-const sortOptions = document.getElementById('sort-options');
 const tableSelection = document.getElementById('table-selection');
+const whereOptions = document.getElementById('where-options');
+
 
 
 
@@ -203,6 +203,8 @@ let tables;
 let selectStatement;
 let joinsTxt;
 let whereTxt;
+let orderTxt = "";
+let orderDirection = "ASC";
 let sqlQuery;
 let startingTable = 'EMPLOYEE';
 let columns = [];
@@ -217,15 +219,88 @@ let whereHTML = selector.innerHTML;
 submitBtn.addEventListener('click', buildQuery);
 
 
+// function refreshGUI() {
+
+// }
+
+// BUILD QUERY FUNCTIONS: //
+//FIX: should only apply startingTable to attributes that ARE IN starting table
+function buildSelect(attributes) {
+    let selectStatement = "SELECT ";
+
+    if (attributes.length === 0)
+        selectStatement += " *  ";
+
+    for(let i = 0; i < attributes.length; i++) {
+        // selectStatement += startingTable + "." + attributes[i] + ", ";
+        selectStatement += attributes[i] + ", ";
+        columns.push(attributes[i]);
+    }
+
+    return selectStatement.slice(0, -2) + " \n"; //deletes comma from last attribute
+}
+
+// function buildFrom() {
+//     categoryArr = document.getElementById('selector').getElementsByTagName('select');
+//     inputArr = document.getElementsByClassName('where');
+//     if (inputArr[0].value != "") {
+//         whereTxt = "WHERE " 
+//         for(let i = 0; i < optionArr.length; i++) {
+//             if (i === optionArr.length - 1)
+//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
+//             else
+//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
+//         }
+//     }
+//     else {
+//         whereTxt = ""
+//     }
+//     return whereTxt;
+// }
+
+
+function buildJoins(checkedClasses) {
+    for (const table of checkedClasses) {
+        if (table != startingTable) {
+            joinsTxt += 
+            `LEFT OUTER JOIN ${table}
+            ON ${primaryKeys[table]} = ${primaryKeys[table]}_${startingTable}
+            ` //FIX
+        }
+    }
+    return joinsTxt;
+}
+
+function buildWhere() {
+    optionArr = document.getElementById('selector').getElementsByTagName('select');
+    inputArr = document.getElementsByClassName('where');
+    if (inputArr[0].value != "") {
+        whereTxt = "WHERE " 
+        for(let i = 0; i < optionArr.length; i++) {
+            if (i === optionArr.length - 1)
+                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
+            else
+                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
+        }
+    }
+    else {
+        whereTxt = ""
+    }
+    return whereTxt;
+}
+
+
+
+
+
 async function buildQuery(event) {
     event.preventDefault(); 
     clearAll();
 
-    attributes = getCheckedAttributes(); //gets all values of checked boxes
-    populateSortOptions(); //should be generated as elements are selected, not how it is currently
-    tables = getCheckedClasses(); //all tables involved (className)
 
-    console.log(tableSelection.value);
+    attributes = getCheckedAttributes(); //gets all values of checked boxes
+    tables = getAttributeClasses(); //all tables involved (className)
+
     //Gathers information
     if (tableSelection.value)
         startingTable = tableSelection.value;
@@ -238,7 +313,6 @@ async function buildQuery(event) {
     selectStatement = buildSelect(attributes); //starting table and all values of checked boxes
     joinTxt = buildJoins(tables);
     whereTxt = buildWhere();
-    orderTxt = buildOrderBy();
     sqlQuery = selectStatement + `FROM ${startingTable}\n ` + joinTxt + whereTxt + orderTxt;
     sqlCode.textContent = sqlQuery;
     
@@ -250,7 +324,6 @@ async function buildQuery(event) {
         alert("Query is invalid");
     }
 };
-
 
 //sends query to database
 async function getResults(code) {
@@ -267,47 +340,68 @@ async function getResults(code) {
 };
 
 
-
 function renderResults(data, page) {
+    if (data.recordset.length === 0) {
+        clearAll();
+        results.innerHTML = `<div id="empty-results">No Results Found</div>`
+        return
+    } else {
+        results.innerHTML = "";
 
-    results.innerHTML = "";
+        let limit = 25;
+        startingSlice = (limit * page) - limit
+        let count = startingSlice + 1;
 
-    let limit = 25;
-    startingSlice = (limit * page) - limit
-    let count = startingSlice + 1;
+        totalPages = Math.ceil(data.recordset.length / limit);
 
-    totalPages = Math.ceil(data.recordset.length / limit);
-
-    //creates headers:
-    let header = results.createTHead();
-    let row = header.insertRow();
-    cell = row.insertCell();
-    cell.innerHTML = "#";
-    for (cellData in data.recordset[0])
-    {
+        //creates headers:
+        let header = results.createTHead();
+        let row = header.insertRow();
         cell = row.insertCell();
-        cell.innerHTML = cellData;
-    }
+        cell.innerHTML = "#";
 
-    //creates body:
-    let tbody = results.createTBody()
-    for (row of data.recordset.slice(startingSlice, startingSlice + limit)) {
-        let rows = tbody.insertRow()
 
-        cell = rows.insertCell();
-        cell.innerHTML = count;
-
-        for (cellData in row)
+        for (let cellData in data.recordset[0])
         {
-            cell = rows.insertCell();
-            cell.innerHTML = row[cellData]
-        }   
-        count++;
-    }
+            let cell = row.insertCell();
+            cell.innerHTML = cellData;
 
-    // currentPage = (currentPage === 0) ? "1" : currentPage
-    pageSummary.innerHTML = `Page ${currentPage} of ${totalPages}`
-    paginate(totalPages)
+            // cell.classList.toggle("test");
+
+            cell.addEventListener('click', (e) => {
+                console.log(cellData);
+                
+                
+                console.log(typeof(this));
+
+                orderDirection = orderDirection === "ASC" ? "DESC" : "ASC"
+
+                orderTxt = `ORDER BY ${cellData} ${orderDirection}`
+                buildQuery(event);
+                e.target.classList.toggle("test");
+            })
+        }
+
+        //creates body:
+        let tbody = results.createTBody()
+        for (row of data.recordset.slice(startingSlice, startingSlice + limit)) {
+            let rows = tbody.insertRow()
+
+            cell = rows.insertCell();
+            cell.innerHTML = count;
+
+            for (cellData in row)
+            {
+                cell = rows.insertCell();
+                cell.innerHTML = row[cellData]
+            }   
+            count++;
+        }
+
+        // currentPage = (currentPage === 0) ? "1" : currentPage
+        pageSummary.innerHTML = `Page ${currentPage} of ${totalPages}`
+        paginate(totalPages)
+    }
 }
 
 
@@ -348,7 +442,6 @@ function paginate(totalPages) {
                 renderResults(sqlData, pageBtn.value);
             }) 
         
-
             pageContainer.appendChild(pageBtn)
             pagination.appendChild(pageContainer);
 
@@ -385,14 +478,19 @@ function paginate(totalPages) {
 }
 
 
-
 function clearAll() {
     joinsTxt = "";
     whereTxt = "";
+    // orderTxt = "";
     sqlQuery = "";
+
     results.innerHTML = "";
-    sortCriteria.innerHTML = "";
+    pagination.innerHTML = "";
+    pageSummary.innerHTML = "";
 }
+
+
+
 
 
 //gets ATTRIBUTES
@@ -408,7 +506,7 @@ function getCheckedAttributes(){
 
 
 //gets classes of checked boxes, excludes duplicates (TABLES)
-function getCheckedClasses(){
+function getAttributeClasses(){
     const checks = timesheetForm.querySelectorAll('input[type="checkbox"]');
     let checkedClasses = [];
     for(let i = 0; i < checks.length; i++){
@@ -419,104 +517,58 @@ function getCheckedClasses(){
 }
 
 
-
-
-// BUILD QUERY FUNCTIONS: //
-//FIX: should only apply startingTable to attributes that ARE IN starting table
-function buildSelect(attributes) {
-    let selectStatement = "SELECT ";
-
-    if (attributes.length === 0)
-        selectStatement += " *  ";
-
-    for(let i = 0; i < attributes.length; i++) {
-        // selectStatement += startingTable + "." + attributes[i] + ", ";
-        selectStatement += attributes[i] + ", ";
-        columns.push(attributes[i]);
-    }
-
-    return selectStatement.slice(0, -2) + " \n"; //deletes comma from last attribute
-}
-
-// function buildFrom() {
-//     categoryArr = document.getElementById('selector').getElementsByTagName('select');
-//     inputArr = document.getElementsByClassName('where');
-//     if (inputArr[0].value != "") {
-//         whereTxt = "WHERE " 
-//         for(let i = 0; i < optionArr.length; i++) {
-//             if (i === optionArr.length - 1)
-//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
-//             else
-//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
+// function populateSortOptions(attributes) {
+//     if (attributes) {
+//         for (item of attributes) {
+//             sortCriteria.innerHTML += `
+//             <option value="${item}">${item}</option>
+//             `
 //         }
-//     }
-//     else {
-//         whereTxt = ""
-//     }
-//     return whereTxt;
+//     };
 // }
-
-
-function buildJoins(checkedClasses) {
-    for (const table of checkedClasses) {
-        console.log(table);
-        if (table != startingTable) {
-            joinsTxt += 
-            `LEFT OUTER JOIN ${table}
-            ON ${primaryKeys[table]} = ${primaryKeys[table]}_${startingTable}
-            ` //FIX
-        }
-    }
-    return joinsTxt;
-}
-
-function buildWhere() {
-    optionArr = document.getElementById('selector').getElementsByTagName('select');
-    inputArr = document.getElementsByClassName('where');
-    if (inputArr[0].value != "") {
-        whereTxt = "WHERE " 
-        for(let i = 0; i < optionArr.length; i++) {
-            if (i === optionArr.length - 1)
-                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
-            else
-                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
-        }
-    }
-    else {
-        whereTxt = ""
-    }
-    return whereTxt;
-}
-
-function buildOrderBy() {
-    let orderTxt = ""
-    console.log(sortCriteria.value);
-    if (sortCriteria.value)
-        orderTxt += `ORDER BY ${sortCriteria.value} ${sortOptions.value}`
-    return orderTxt
-}
 
 
 
 
 function addInputField() {
+    for (table of categoryToRelatedTables[tableSelection.value]) {
+        for (attribute of tableToAttributes[table]) {
+            whereOptions.innerHTML += `
+            <option value="${attribute}">${attribute}</option>
+            `
+        }
+    }
 
-    whereHTML += `
-        <div class="where-condition">
-                <select>
-                    <option value="EmpFirstName">EmpFirstName</option>
-                    <option value="EmpLastName">EmpLastName</option>
-                    <option value="WorkOrderID">WorkOrderID</option>
-                </select>
-                <input type="text" class="where" id="where" name="where" />
-                <button type="button" onclick="removeInputField()" class="minus-btn">-</button>
-                <button type="button" onclick="addInputField()" class="plus-btn">+</button>
-            <br>
-        </div>`
-    selector.innerHTML = whereHTML;
+
+
+
+    //build option values based on selected attributes
+    // console.log("addInputField launched")
+    // console.log("attribute:",attributes)
+    // whereOptions.innerHTML += `<option value=""></option>`
+    // if (attributes) {
+    //     for (item of attributes) {
+    //         whereOptions.innerHTML += `
+    //         <option value="${item}">${item}</option>
+    //         `
+    //     }
+    // };
+
+
+    // whereHTML += `
+    //     <div class="where-condition">
+    //             <select>
+    //                 <option value="EmpFirstName">EmpFirstName</option>
+    //                 <option value="EmpLastName">EmpLastName</option>
+    //                 <option value="WorkOrderID">WorkOrderID</option>
+    //             </select>
+    //             <input type="text" class="where" id="where" name="where" />
+    //             <button type="button" onclick="removeInputField()" class="minus-btn">-</button>
+    //             <button type="button" onclick="addInputField()" class="plus-btn">+</button>
+    //         <br>
+    //     </div>`
+    // selector.innerHTML = whereHTML;
 }
-
-
 
 
 
@@ -544,8 +596,11 @@ function createTableCategories() {
     // }
     tableSelection.innerHTML += categoriesHTML;
     tableSelection.addEventListener('change', function() {
+        console.log("tableSelection changed")
         tableForm.innerHTML = "";
+        whereOptions.innerHTML = "";
         createCheckboxes();
+        addInputField();
      });
 }
 
@@ -569,8 +624,6 @@ createTableCategories();
 // }
 
 // createCheckboxes();
-
-
 
 function createCheckboxes() {
     let checkboxHTML = ""
@@ -611,23 +664,8 @@ function createCheckboxes() {
 
 
 
+// function getKeyByValue(object, value) {
+//     return Object.keys(object).find(key => object[key] === value);
+//   }
 
-
-
-
-
-function populateSortOptions() {
-    if (attributes) {
-        for (item of attributes) {
-            sortCriteria.innerHTML = `
-            <option value="${item}">${item}</option>
-            `
-        }
-    };
-}
-
-function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-  }
-
-getKeyByValue()
+// getKeyByValue()
