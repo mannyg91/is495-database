@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  binggingtype.init({
+  billingtype.init({
 	  BillingTypeID: DataTypes.INTEGER,
 	  BillingType: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'binggingtype',
+    modelName: 'billingtype',
   });
-  return binggingtype;
+  return billingtype;
 };
