@@ -1,4 +1,4 @@
-﻿WorkOrderID,EmployeeID,CustomerID,PriorityID,StatusID,SubmittedDate,WorkOrderDescription,StartDate,DueDate,ClosedDate,Notes,ProjectName
+WorkOrderID,EmployeeID,CustomerID,PriorityID,StatusID,SubmittedDate,WorkOrderDescription,StartDate,DueDate,ClosedDate,Notes,ProjectName
 1698,105600,4038,1,5,1/1/2019,To track Family Medical Leave of Absence,1/1/2019,1/1/2020,2/3/2020,"Continuous WO, do not close",FMLA
 1699,105600,4038,1,5,1/1/2016, to track meetings under P&M,1/1/2016,12/31/2016,12/31/2016,WO to track meetings for P&M.,Meetings (P&M) FY16
 1700,105600,4038,1,5,1/1/2016, to track Annual Time,1/1/2016,12/31/2016,12/31/2016,WO to track Annual Time.,Annual Time FY16
