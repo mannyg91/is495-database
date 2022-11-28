@@ -40,6 +40,7 @@ function getDatabase(req, res, next) {
       }
       var request = new sql.Request();
       request.query(userQuery,function(err,recordSet) {
+          console.log(userQuery)
           if(err){
               console.log(err);
               next(err)

@@ -9,80 +9,104 @@
     
 </head>
 <body>
-    <!-- <h1>SQL Query Generator</h1> -->
-    <form id="timesheet-form">
-        <!-- <h2>Select What You Would Like to Include:</h2> -->
+    <div id="blur-container">
+        <header>
+            Test 
+        </header>
 
-        <div>
-            <h3>Category:</h3>
-            <select id="table-selection">
-                <option value=""></option>
-            </select>
-        </div>
-
-
-        <div id="timesheet-container" class="table-form">
-
-
-        </div>
-
-
-
-
-        <h4>Filter By:</h4>
-        <div class="selector" id="selector">
-            <div class="where-condition">
-                
-                    <select id="where-options">
-                        <option value=""></option> 
-
-
-                    </select>
+        <form>
     
-                    <input type="text" class="where" id="where" name="where" />
+            <div class="selector" id="selector">
+                <div>
+                    <h4>Category:</h4>
 
-                    <button type="button" onclick="removeInputField()" class="minus-btn">-</button>
-                    <button type="button" onclick="addInputField()" class="plus-btn">+</button>
+                    <select id="table-selection">
+                        <option value=""></option>
+                    </select>
 
-                <br>
+                </div>
+
+                
+                <div class="where-condition" id="where-condition">
+            
+                    <h4>Filter By:</h4>
+                        <select id="where-options">
+                            <option value=""></option> 
+                        </select>
+
+                        <input type="text" class="where" id="where" name="where" />
+
+                        <button type="button" onclick="removeInputField()" class="minus-btn">-</button>
+                        <button type="button" onclick="addInputField()" class="plus-btn">+</button>
+
+                </div>
+
+                <div class="submit">
+                    <button id="submit-btn" type="submit">Get Records</button>
+                    <button class="standard-btn" type="button">View SQL</button>
+                    <button id="edit-btn" class="standard-btn" type="button">Edit Mode</button>
+                </div>
             </div>
-        </div>
+
+
+
+
+            <div id="checkbox-container">
+
+            </div>
+
+
+
+        </form>
+
+        <!-- <form id="search-bar">
+            <span class='search-icon'></span>
+            <input id="search-input" type="text">
+            <button id="search-btn" type="submit">Search</button>
+        </form> -->
+
+
+
+        <main>
+            <div class="fixed-table">
+                <table class="results" id="results">
+                </table>
+            </div>
+
+
+            <nav id="pagination-bar">
+                <ul id="pagination" class="pagination"></ul>
+                <div id="results-per-page-container">
+                    rows per page
+                    <select id="results-per-page">
+                        <option value="10">10</option> 
+                        <option value="25">25</option> 
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>  
+                        <option value="250">250</option> 
+                        <option value="500">500</option>  
+                    </select>
+                </div>
+            </nav>
+            <div id="page-summary"></div>
+        </main>
+
+
         
-
-
-
-
-
-        <div class="submit">
-          <button id="submit-btn" type="submit">Get Records</button>
+        <div class="code-container">
+            <h4>SQL Code:</h4>
+            <code id="sql-code">
+            </code>
         </div>
-
-    </form>
-
-    <!-- <form id="search-bar">
-        <span class='search-icon'></span>
-        <input id="search-input" type="text">
-        <button id="search-btn" type="submit">Search</button>
-    </form> -->
-
-    <div class="code-container">
-        <code id="sql-code">
-        </code>
     </div>
 
-    <table class="results" id="results">
-    </table>
-
-    <nav id="pagination-bar">
-        <ul id="pagination" class="pagination"></ul>
-    </nav>
-    <div id="page-summary"></div>
 
 
 
-    <div id="edit-warning">
-        Would you like to edit this cell? Changes can be overwritten, but not reversed.
-        <button type="button">Yes</button><button type="button">No</button>
+
+    <div id="edit-warning" class="window">
+        <span>Are you sure you want to enter edit mode? Any changes will modify database entries and cannot be undone.</span>
+        <div class="two-buttons"><button id="edit-yes" type="button">Yes</button><button id="edit-no" type="button">Cancel</button></div>
     </div>
 
 

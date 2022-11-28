@@ -6,7 +6,13 @@
 
 
 body {
-    margin: 25px 25px;
+    margin: 0;
+}
+
+header {
+    background: rgb(90, 72, 255);
+    height: 50px;
+    box-shadow: 0px 1px 3px rgb(105, 105, 105);
 }
 
 h1 {
@@ -22,8 +28,18 @@ h3 {
     font-size: 18px;
 }
 
-.table-form {
+h4 {
+    font-size: 16px;
+    font-weight: 500;
     padding: 5px 0px;
+}
+
+#checkbox-container {
+    margin: 15px;
+    padding: 5px;
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    background: #f5f5f5;
 }
 
 select {
@@ -36,7 +52,11 @@ button {
     border: 1px solid #D1D5DB;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
     border-radius: 3px;
+    font-size: 13px;
+    padding: 2px 15px;
 }
+
+
 
 button:hover {
     cursor: pointer;
@@ -54,14 +74,36 @@ label {
 
 
 .code-container {
-    /* display: none; */
-    margin: 15px 0px;
-    border: 1px solid #D1D5DB;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    display: none;
+    /* margin: auto;
+    padding: 10px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed; */
+    margin: 25px;
+    max-height: 200px;
+    padding: 5px;
+    width: 500px;
+    border: 1px solid #c1c1c1;
+    /* box-shadow: 0px 0px 50px 5px rgb(185, 185, 185); */
     border-radius: 6px;
-    background-color: rgb(242, 249, 253);
+    background: rgb(236, 247, 255);
+    color: rgb(0, 0, 0);
     white-space: pre-line;
     font-weight: 300;
+    font-size: 13px;
+}
+
+
+
+/* form, table{
+    filter: blur(1px);
+} */
+
+form {
+    margin: 5px 25px;
 }
 
 form label {
@@ -75,16 +117,31 @@ button {
 }
 
 .submit {
-    padding: 20px 20px;
+    /* padding: 30px 20px; */
+    /* padding-top: 30px; */
+    padding: 32px 20px 5px 20px;
+}
+
+#submit-btn, .standard-btn {
+    font-size: 13px;
+    padding: 2px 15px;
 }
 
 .where-condition {
     padding: 2px 0px;
 }
 
+.selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 60px;
+}
+
 .selector * {
     margin: .1px 3px;
 }
+
 
 
 /* Search Bar */
@@ -137,6 +194,11 @@ button {
 
 
 
+/* Table Scroll */
+.tableFixHead          { overflow: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+
 /* Results Table */
 #empty-results {
     display: flex;
@@ -149,7 +211,6 @@ button {
     background: whitesmoke;
 }
 
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -159,11 +220,18 @@ table {
     border-radius: 6px;
 }
 
-th, td {
+td {
     text-align: center;
     padding: 6px;
     max-width: 150px;
     border: 1px solid lightgray;
+}
+
+thead td {
+    text-align: center;
+    padding: 6px;
+    max-width: 150px;
+    border: none;
 }
   
 tr:nth-child(even) {
@@ -171,30 +239,43 @@ tr:nth-child(even) {
 }
 
 td:nth-child(1) {
-    background-color: rgb(106, 106, 106);
-    color: white;
+    background-color: rgb(235,235,235);
+    color: gray;
     width: 0;
     padding: 0px 12px;
+    border: none;
 }
 
 thead {
     background: rgb(90, 72, 255);
     color: white;
     font-weight: 800;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); */
+    position: sticky; 
+    top: 0; 
+    z-index: 1; 
+    box-shadow: 0px 1px 3px rgb(105, 105, 105);
 }
 
-/* td:hover {
-    border: 2px solid gray;
-    background-color: white;
-    cursor: crosshair;
-    
 
-} */
+.fixed-table {
+    overflow: auto;
+    max-height: 650px;
+}
 
 
 
-.headerSortDown:after,
+
+
+
+
+
+
+
+
+
+/* Sort Graphic */
+/* .headerSortDown:after,
 .headerSortUp:after {
   content: ' ';
   position: relative;
@@ -223,6 +304,9 @@ thead {
     border: 1px green solid;
 }
 
+ */
+
+
 
 
 
@@ -241,8 +325,8 @@ nav {
     display: flex;
     justify-content: center;
     border-top: 1px solid #eee;
-    margin-top: 1em;
-    padding-top: .5em;
+    padding-top: 1em;
+    width: 100%;
 }
 
 .pagination {
@@ -250,6 +334,7 @@ nav {
     margin: 0;
     padding: 0;
     display: flex;
+
 }
 
 .pagination li {
@@ -281,4 +366,83 @@ nav {
     text-align: center;
     font-size: 12px;
     padding: 20px;
+}
+
+
+
+/* footer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: green;
+} */
+
+#results-per-page-container {
+    position: absolute;
+    right: 100px;
+    font-size: 12px;
+}
+
+.window {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    height: 100px;
+    width: 300px;
+    border-radius: 6px;
+    background-color: white;
+    border: 1px solid #D1D5DB;
+    padding: 40px;
+    box-shadow: 0px 2px 5px rgb(100, 100, 100);
+    
+}
+
+#edit-warning {
+    display: none;
+}
+
+
+
+.two-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* main, form, header {
+    filter: blur(4px);
+}
+ */
+
+/* .edit {
+    font-weight: 600;
+} */
+
+
+.edit:hover {
+    border: 2px solid gray;
+    background-color: rgb(255, 251, 201);
+    cursor: cell;
+}
+
+
+
+.blur {
+    filter: blur(50px);
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(99, 99, 99, .2); /* Black background with opacity */
+    z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
 }

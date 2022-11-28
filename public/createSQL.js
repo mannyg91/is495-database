@@ -1,4 +1,5 @@
 
+
 const primaryKeys = {
     JOBTITLE : 'JobTitleID',
     EMPLOYEETYPE : 'EmployeeTypeID',
@@ -183,8 +184,7 @@ const categoryToRelatedTables = {
 
 
 
-const timesheetForm = document.getElementById('timesheet-form');
-const tableForm = document.getElementById('timesheet-container');
+const tableForm = document.getElementById('checkbox-container');
 const submitBtn = document.getElementById('submit-btn');
 const sqlCode = document.getElementById('sql-code');
 const results = document.getElementById('results');
@@ -193,6 +193,25 @@ const pageSummary = document.getElementById("page-summary");
 const selector = document.getElementById("selector");
 const tableSelection = document.getElementById('table-selection');
 const whereOptions = document.getElementById('where-options');
+const resultsPerPageOptions = document.getElementById('results-per-page');
+const editBtn = document.getElementById('edit-btn');
+const editWarning = document.getElementById('edit-warning');
+const editYes = document.getElementById('edit-yes');
+const editNo = document.getElementById('edit-no');
+const blurContainer = document.getElementById('blur-container');
+
+resultsPerPageOptions.addEventListener('change', function() {
+
+    resultsPerPage = parseInt(resultsPerPageOptions.value);
+
+    // let startingSlice = 0;
+    // let currentPage = 1;
+    // let startPage = 1;
+    // let totalPages = 0;
+
+    renderResults(sqlData, 1);
+
+ });
 
 
 
@@ -206,17 +225,112 @@ let whereTxt;
 let orderTxt = "";
 let orderDirection = "ASC";
 let sqlQuery;
-let startingTable = 'EMPLOYEE';
+let startingTable = 'CUSTOMER';
 let columns = [];
 let sqlData = {};
 let startingSlice = 0;
 let currentPage = 1;
 let startPage = 1;
 let totalPages = 0;
+let resultsPerPage = 50;
+let editing = false;
 
 
 let whereHTML = selector.innerHTML;
 submitBtn.addEventListener('click', buildQuery);
+submitBtn.click();
+
+editBtn.addEventListener('click', editMode)
+
+function editMode() {
+    tableData = document.getElementById('table-data');
+
+    if (editing === false) {
+
+        editWarning.style.display = "flex"
+        blurContainer.classList.add("blur");
+
+        editYes.addEventListener('click', ()=>{
+            editing = true;
+            editWarning.style.display = "none";
+            blurContainer.classList.remove("blur");
+
+            const cells = document.querySelectorAll("td");
+
+            editBtn.textContent = "Exit Edit Mode"
+            editBtn.style.fontWeight = "500";
+            for (let cell of cells) {
+                cell.classList.add("edit");
+            }
+
+            tableData.addEventListener("click", getCell);
+                
+        });
+
+        editNo.addEventListener('click', ()=>{
+            blurContainer.classList.remove("blur");
+            editWarning.style.display = "none";
+        });
+
+    } else {
+        const cells = document.querySelectorAll("td")
+        editBtn.textContent = "Enter Edit Mode" 
+        editBtn.style.fontWeight = "400";
+        for (let cell of cells) {
+            cell.classList.remove("edit");
+        }
+
+        tableData.removeEventListener("click", getCell);
+        editing = false;
+    }
+
+}
+
+//when a cell is clicked, pull the column name, pull primary key with value
+//UPDATE TABLENAME SET COLUMNNAME = "new info" WHERE primary key = primary key value
+
+
+
+
+
+async function insertData(event) {
+    event.preventDefault(); 
+    clearAll();
+
+
+
+    sqlQuery = "" //row here
+    sqlCode.textContent = sqlQuery;
+    
+    //Sends Query and returns Results
+    try {
+        sqlData = await getResults(sqlQuery);
+        renderResults(sqlData, 1);
+    } catch {
+        alert("Query is invalid");
+    }
+};
+
+
+
+function transformAttributeFormat(attribute) {
+
+    let newAttribute = attribute;
+    if (attribute.includes("Date")) {
+        newAttribute = `convert(varchar, ${attribute}, 101)  as '${attribute}'`;
+        const index = attributes.indexOf(attribute);
+        if (index !== -1) {
+            attributes[index] = newAttribute;
+        }
+    }
+
+    // } elif (attribute.includes("phone")) {
+
+    // } elif (attribute.includes("budget")) {
+
+    // }
+
+}
 
 
 // function refreshGUI() {
@@ -226,12 +340,16 @@ submitBtn.addEventListener('click', buildQuery);
 // BUILD QUERY FUNCTIONS: //
 //FIX: should only apply startingTable to attributes that ARE IN starting table
 function buildSelect(attributes) {
+
     let selectStatement = "SELECT ";
 
     if (attributes.length === 0)
         selectStatement += " *  ";
 
     for(let i = 0; i < attributes.length; i++) {
+
+        transformAttributeFormat(attributes[i]);
+
         // selectStatement += startingTable + "." + attributes[i] + ", ";
         selectStatement += attributes[i] + ", ";
         columns.push(attributes[i]);
@@ -272,7 +390,7 @@ function buildJoins(checkedClasses) {
 }
 
 function buildWhere() {
-    optionArr = document.getElementById('selector').getElementsByTagName('select');
+    optionArr = document.getElementById('where-condition').getElementsByTagName('select');
     inputArr = document.getElementsByClassName('where');
     if (inputArr[0].value != "") {
         whereTxt = "WHERE " 
@@ -288,8 +406,6 @@ function buildWhere() {
     }
     return whereTxt;
 }
-
-
 
 
 
@@ -341,6 +457,8 @@ async function getResults(code) {
 
 
 function renderResults(data, page) {
+
+
     if (data.recordset.length === 0) {
         clearAll();
         results.innerHTML = `<div id="empty-results">No Results Found</div>`
@@ -348,11 +466,10 @@ function renderResults(data, page) {
     } else {
         results.innerHTML = "";
 
-        let limit = 25;
-        startingSlice = (limit * page) - limit
+        startingSlice = (resultsPerPage * page) - resultsPerPage
         let count = startingSlice + 1;
 
-        totalPages = Math.ceil(data.recordset.length / limit);
+        totalPages = Math.ceil(data.recordset.length / resultsPerPage);
 
         //creates headers:
         let header = results.createTHead();
@@ -384,7 +501,10 @@ function renderResults(data, page) {
 
         //creates body:
         let tbody = results.createTBody()
-        for (row of data.recordset.slice(startingSlice, startingSlice + limit)) {
+        tbody.setAttribute('id','table-data');
+
+        for (row of data.recordset.slice(startingSlice, startingSlice + resultsPerPage)) {
+
             let rows = tbody.insertRow()
 
             cell = rows.insertCell();
@@ -404,8 +524,15 @@ function renderResults(data, page) {
     }
 }
 
+function getCell(e) {
+    console.log(e.target.textContent);
+
+}
+
 
 function paginate(totalPages) {
+
+
     pagination.innerHTML = "";
     const maxPages = 10;
     let countPages = 0;
@@ -461,7 +588,6 @@ function paginate(totalPages) {
     nextBtn.setAttribute("type","button");
     nextBtn.textContent = "»"
     nextBtn.addEventListener('click', ()=> {
-
         startPage += 10;
         currentPage = startPage;
         renderResults(sqlData, startPage);
@@ -495,7 +621,7 @@ function clearAll() {
 
 //gets ATTRIBUTES
 function getCheckedAttributes(){
-    const checks = timesheetForm.querySelectorAll('input[type="checkbox"]');
+    const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checked = [];
     for(let i = 0; i < checks.length; i++){
         if(checks[i].checked)
@@ -507,7 +633,7 @@ function getCheckedAttributes(){
 
 //gets classes of checked boxes, excludes duplicates (TABLES)
 function getAttributeClasses(){
-    const checks = timesheetForm.querySelectorAll('input[type="checkbox"]');
+    const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checkedClasses = [];
     for(let i = 0; i < checks.length; i++){
         if(checks[i].checked && !checkedClasses.includes(checks[i].className))
@@ -596,7 +722,6 @@ function createTableCategories() {
     // }
     tableSelection.innerHTML += categoriesHTML;
     tableSelection.addEventListener('change', function() {
-        console.log("tableSelection changed")
         tableForm.innerHTML = "";
         whereOptions.innerHTML = "";
         createCheckboxes();
@@ -669,3 +794,4 @@ function createCheckboxes() {
 //   }
 
 // getKeyByValue()
+
