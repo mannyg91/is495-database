@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     CustomerID: DataTypes.INTEGER,
     PriorityID: DataTypes.INTEGER,
     StatusID: DataTypes.INTEGER,
-    SubmittedDate: DataTypes.DATE,
+    SubmittedDate: DataTypes.STRING,
     WorkOrderDescription: DataTypes.STRING,
-    StartDate: DataTypes.DATE,
-    DueDate: DataTypes.DATE,
-    ClosedDate: DataTypes.DATE,
+    StartDate: DataTypes.STRING,
+    DueDate: DataTypes.STRING,
+    ClosedDate: DataTypes.STRING,
     Notes: DataTypes.STRING,
     ProjectName: DataTypes.STRING
   }, {
