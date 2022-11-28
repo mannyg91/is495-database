@@ -6,8 +6,9 @@ models.sequelize.sync().then(function (){
 }).catch(function (err){
     console.log(" > there was an issue synchronizing the database", err);
 });
-app.get('/', function (req, res){
-    res.send("Welcome to Agile-Alpha solutions!");
+app.get('/', async function (req, res){
+    	const customers = await models.customer.findAll();
+	res.send("<pre>" + JSON.stringify(customers, undefined, 4) + "</pre>");
 });
 app.listen(3000,function(){
     console.log("> express server has started");

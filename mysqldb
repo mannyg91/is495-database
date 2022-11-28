@@ -1,0 +1,15 @@
+# Grant 
+# Workorder
+# Employee
+# Customer
+
+sequelize model:generate --name Grant --attributes WorkOrderGrantID:integer, WorkOrderID:integer, GrantID:string
+ 
+
+# planeModel:string,totalSeats:integer
+
+# sequelize model:generate --name Customer --attributes name:string,email:string
+
+# sequelize model:generate --name FlightSchedule --attributes originAirport:string,destinationAirport:string,departureTime:date
+
+# sequelize model:generate --name BoardingTicket --attributes seat:string
