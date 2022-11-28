@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   ipo.init({
     IPOID: DataTypes.INTEGER,
     IPODATE: DataTypes.DATE,
-    CreationDatee: DataTypes.DATE,
+    CreationDate: DataTypes.DATE,
     PaymentDate: DataTypes.DATE,
-    IPOStatus: DataTypes.INTEGER
+    IPOStatus: DataTypes.INTEGER,
+    IPOStatusID: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'ipo',
