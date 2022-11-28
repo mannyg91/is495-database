@@ -14,13 +14,13 @@ module.exports = {
      * Example:
      */
 
-       await queryInterface.bulkInsert('workordergrants',[
+       await queryInterface.bulkInsert('workorderstatuses',[
 """
 
 print(header)
 
 
-with open('IS495DB-WORKORDERGRANT-BCK.csv',newline='\n') as csvfile:
+with open('IS495DB-WORKORDERSTATUS-BCK.csv',newline='\n') as csvfile:
     csv_reader = csv.DictReader(csvfile,delimiter=',')
     for row in csv_reader:
         print(row)
@@ -44,7 +44,7 @@ tail = """
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('workordergrants', null, {});
+     await queryInterface.bulkDelete('workorderstatuses', null, {});
   }
 }; """
 print(tail)
