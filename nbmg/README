@@ -70,7 +70,9 @@ npm install -g sequelize-cli
 // this monitors changes and we can then run nodemon index.js
 npm install -g nodemon
 
-sequelize db:migrate
+// sequelize actions 
+cd Agile-Alpha/nbmg
+sequelize db:migrate --debug
 
 
 // fill up the table with sample data using sequelize module
