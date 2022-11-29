@@ -47,8 +47,13 @@ git clone https://github.com/GreenEyeCoder/Agile-Alpha
 // installing modules in npm
 npm install express sequelize mysql2
 npm install --location=global sequelize
+npm install -g sequelize-cli
 
+// this monitors changes and we can then run nodemon index.js
+npm install -g nodemon
 
-
+// fill up the table with sample data using sequelize module
+// make sure you run this command in the directory ../Agile-Alpha/nbmg
+sequelize db:seed:all
 
 
