@@ -57,4 +57,7 @@ npm install -g nodemon
 // make sure you run this command in the directory ../Agile-Alpha/nbmg
 sequelize db:seed:all --debug
 
+// Have to make modify some files, so instructions for authentation 
+// on github assuming your a developer
+sudo apt install gh
 
