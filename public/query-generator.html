@@ -10,8 +10,7 @@
 </head>
 <body>
     <div id="blur-container">
-        <header>
-            Test 
+        <header> 
         </header>
 
         <form>
@@ -43,9 +42,14 @@
 
                 <div class="submit">
                     <button id="submit-btn" type="submit">Get Records</button>
-                    <button class="standard-btn" type="button">View SQL</button>
+                    <button id="sql-btn" class="standard-btn" type="button">View SQL</button>
                     <button id="edit-btn" class="standard-btn" type="button">Edit Mode</button>
                 </div>
+            </div>
+
+            <div id="code-container">
+                <code id="sql-code">
+                </code>
             </div>
 
 
@@ -93,11 +97,7 @@
 
 
         
-        <div class="code-container">
-            <h4>SQL Code:</h4>
-            <code id="sql-code">
-            </code>
-        </div>
+
     </div>
 
 
@@ -107,6 +107,11 @@
     <div id="edit-warning" class="window">
         <span>Are you sure you want to enter edit mode? Any changes will modify database entries and cannot be undone.</span>
         <div class="two-buttons"><button id="edit-yes" type="button">Yes</button><button id="edit-no" type="button">Cancel</button></div>
+    </div>
+
+    <div id="edit-confirmation" class="window">
+        <span>Would you like to confirm your changes?</span>
+        <div class="two-buttons"><button id="changes-yes" type="button">Yes</button><button id="changes-no" type="button">Cancel</button></div>
     </div>
 
 

@@ -194,11 +194,16 @@ const selector = document.getElementById("selector");
 const tableSelection = document.getElementById('table-selection');
 const whereOptions = document.getElementById('where-options');
 const resultsPerPageOptions = document.getElementById('results-per-page');
+const sqlBtn = document.getElementById('sql-btn');
 const editBtn = document.getElementById('edit-btn');
 const editWarning = document.getElementById('edit-warning');
 const editYes = document.getElementById('edit-yes');
 const editNo = document.getElementById('edit-no');
+const editConfirmation = document.getElementById('edit-confirmation');
+const changesYes = document.getElementById('changes-yes');
+const changesNo = document.getElementById('changes-no');
 const blurContainer = document.getElementById('blur-container');
+const codeContainer = document.getElementById('code-container');
 
 resultsPerPageOptions.addEventListener('change', function() {
 
@@ -234,16 +239,30 @@ let startPage = 1;
 let totalPages = 0;
 let resultsPerPage = 50;
 let editing = false;
+let editingCell = false;
+// let lastCell;
 
 
 let whereHTML = selector.innerHTML;
 submitBtn.addEventListener('click', buildQuery);
 submitBtn.click();
 
+
+sqlBtn.addEventListener('click', ()=>{
+    if (codeContainer.style.display === "none") {
+        codeContainer.style.display = "flex";
+    } else {
+        codeContainer.style.display = "none";
+    }
+})
+sqlBtn.click();
+
+
 editBtn.addEventListener('click', editMode)
 
 function editMode() {
     tableData = document.getElementById('table-data');
+    // buildQuery(event); //need to fix
 
     if (editing === false) {
 
@@ -270,9 +289,11 @@ function editMode() {
         editNo.addEventListener('click', ()=>{
             blurContainer.classList.remove("blur");
             editWarning.style.display = "none";
+            editing = false;
         });
 
     } else {
+        editing = false;
         const cells = document.querySelectorAll("td")
         editBtn.textContent = "Enter Edit Mode" 
         editBtn.style.fontWeight = "400";
@@ -281,9 +302,7 @@ function editMode() {
         }
 
         tableData.removeEventListener("click", getCell);
-        editing = false;
     }
-
 }
 
 //when a cell is clicked, pull the column name, pull primary key with value
@@ -313,16 +332,29 @@ async function insertData(event) {
 
 
 
-function transformAttributeFormat(attribute) {
+function transformDataFormat(cell) {
 
-    let newAttribute = attribute;
-    if (attribute.includes("Date")) {
-        newAttribute = `convert(varchar, ${attribute}, 101)  as '${attribute}'`;
-        const index = attributes.indexOf(attribute);
-        if (index !== -1) {
-            attributes[index] = newAttribute;
-        }
+
+    if (cell.dataset.attribute.includes("Date") && cell.textContent != "" ) {
+        let formattedData = new Date(cell.textContent).toISOString().slice(0,10)
+        cell.textContent = formattedData;
     }
+
+
+    // if (data.dataset.attribute.includes("Date")) {
+    //     console.log("cell content includes date content")
+    //     data = new Date(data.toString()).toISOString().slice(0,10)
+    //     console.log(data);
+    // }
+
+    // let newData = attribute;
+    // if (attribute.includes("Date")) {
+    //     newAttribute = `convert(varchar, ${attribute}, 101)  as '${attribute}'`;
+    //     const index = attributes.indexOf(attribute);
+    //     if (index !== -1) {
+    //         attributes[index] = newAttribute;
+    //     }
+    // }
 
     // } elif (attribute.includes("phone")) {
 
@@ -348,7 +380,12 @@ function buildSelect(attributes) {
 
     for(let i = 0; i < attributes.length; i++) {
 
-        transformAttributeFormat(attributes[i]);
+        // TRANSFORMATION SHOULD HAPPEN CLIENT-SIDE NOT SERVER-SIDE
+        // if (!editing) { 
+        //     console.log("not editing")
+        //     transformAttributeFormat(attributes[i]);
+        // }
+            
 
         // selectStatement += startingTable + "." + attributes[i] + ", ";
         selectStatement += attributes[i] + ", ";
@@ -473,23 +510,17 @@ function renderResults(data, page) {
 
         //creates headers:
         let header = results.createTHead();
-        let row = header.insertRow();
-        cell = row.insertCell();
+        let headerRow = header.insertRow();
+        cell = headerRow.insertCell();
         cell.innerHTML = "#";
 
 
         for (let cellData in data.recordset[0])
         {
-            let cell = row.insertCell();
+            let cell = headerRow.insertCell();
             cell.innerHTML = cellData;
 
-            // cell.classList.toggle("test");
-
             cell.addEventListener('click', (e) => {
-                console.log(cellData);
-                
-                
-                console.log(typeof(this));
 
                 orderDirection = orderDirection === "ASC" ? "DESC" : "ASC"
 
@@ -502,9 +533,10 @@ function renderResults(data, page) {
         //creates body:
         let tbody = results.createTBody()
         tbody.setAttribute('id','table-data');
+        
 
         for (row of data.recordset.slice(startingSlice, startingSlice + resultsPerPage)) {
-
+            let rowCount = 1;
             let rows = tbody.insertRow()
 
             cell = rows.insertCell();
@@ -513,8 +545,16 @@ function renderResults(data, page) {
             for (cellData in row)
             {
                 cell = rows.insertCell();
-                cell.innerHTML = row[cellData]
-            }   
+                cell.dataset.attribute = headerRow.children[rowCount].textContent;
+                cell.textContent = row[cellData];
+
+
+
+                transformDataFormat(cell);
+    
+
+                rowCount++;
+            }  
             count++;
         }
 
@@ -525,7 +565,43 @@ function renderResults(data, page) {
 }
 
 function getCell(e) {
-    console.log(e.target.textContent);
+    // if (!lastCell) {
+    //     lastCell = e.target.innerHTML;
+    // }
+
+
+    editingCell = true;
+    const originalCell = e.target
+    const originalContent = e.target.textContent
+    console.log(originalContent);
+
+
+    e.target.innerHTML = `<input type="text" class="edit-result" value=${e.target.textContent}>`
+    currentInput = e.target.firstChild;
+
+    if (editingCell) {
+        tableData = document.getElementById('table-data');
+        tableData.removeEventListener("click", getCell);
+        tableData.addEventListener("click", (e) => {
+
+            if (e.target != currentInput) {
+                editConfirmation.style.display = "flex"
+                changesYes.addEventListener('click', ()=>{
+                    editConfirmation.style.display = "none";
+                    //run query
+                })
+                changesNo.addEventListener('click',()=> {
+                    editConfirmation.style.display = "none";
+                    console.log(originalContent);
+                    console.log(currentInput);
+                    currentInput.remove();
+                    originalCell.textContent = originalContent;
+                })
+            }
+        })
+    
+    }
+
 
 }
 
@@ -664,36 +740,6 @@ function addInputField() {
             `
         }
     }
-
-
-
-
-    //build option values based on selected attributes
-    // console.log("addInputField launched")
-    // console.log("attribute:",attributes)
-    // whereOptions.innerHTML += `<option value=""></option>`
-    // if (attributes) {
-    //     for (item of attributes) {
-    //         whereOptions.innerHTML += `
-    //         <option value="${item}">${item}</option>
-    //         `
-    //     }
-    // };
-
-
-    // whereHTML += `
-    //     <div class="where-condition">
-    //             <select>
-    //                 <option value="EmpFirstName">EmpFirstName</option>
-    //                 <option value="EmpLastName">EmpLastName</option>
-    //                 <option value="WorkOrderID">WorkOrderID</option>
-    //             </select>
-    //             <input type="text" class="where" id="where" name="where" />
-    //             <button type="button" onclick="removeInputField()" class="minus-btn">-</button>
-    //             <button type="button" onclick="addInputField()" class="plus-btn">+</button>
-    //         <br>
-    //     </div>`
-    // selector.innerHTML = whereHTML;
 }
 
 
@@ -722,10 +768,13 @@ function createTableCategories() {
     // }
     tableSelection.innerHTML += categoriesHTML;
     tableSelection.addEventListener('change', function() {
+        
         tableForm.innerHTML = "";
         whereOptions.innerHTML = "";
+        orderTxt = "";
         createCheckboxes();
         addInputField();
+        submitBtn.click();
      });
 }
 
