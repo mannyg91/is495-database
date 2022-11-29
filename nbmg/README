@@ -45,7 +45,7 @@ nvm install v19
 git clone https://github.com/GreenEyeCoder/Agile-Alpha
 
 // installing modules in npm
-npm install express sequelize mysql2
+npm install -g express sequelize mysql2
 npm install --location=global sequelize
 npm install -g sequelize-cli
 
