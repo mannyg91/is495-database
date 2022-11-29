@@ -282,7 +282,7 @@ function editMode() {
                 cell.classList.add("edit");
             }
 
-            tableData.addEventListener("click", getCell);
+            tableData.addEventListener("click", getCell); //click a cell to turn into text field
                 
         });
 
@@ -546,6 +546,12 @@ function renderResults(data, page) {
             {
                 cell = rows.insertCell();
                 cell.dataset.attribute = headerRow.children[rowCount].textContent;
+                cell.dataset.table = dbAttributes[headerRow.children[rowCount].textContent]
+
+                
+                //need to pull the primary key from the attribute (to ensure you have the correct one)
+                //how do I get corresponding ID? get ID?
+
                 cell.textContent = row[cellData];
 
 
@@ -564,46 +570,85 @@ function renderResults(data, page) {
     }
 }
 
+function getID(cell) {
+
+    let cellRow = cell.parentElement.children;
+    let primaryKeyAttribute = primaryKeys[cell.dataset.table];
+
+    for (let item of cellRow) {
+        if (item.dataset.attribute === primaryKeyAttribute) {
+            return item.textContent
+        }  
+    }
+}
+
+
+
+
 function getCell(e) {
     // if (!lastCell) {
     //     lastCell = e.target.innerHTML;
     // }
 
 
-    editingCell = true;
     const originalCell = e.target
     const originalContent = e.target.textContent
-    console.log(originalContent);
+    // console.log(originalCell);
+    // console.log(originalCell.dataset.attribute);
+    // console.log(originalContent);
 
-
+    //turns into text field
     e.target.innerHTML = `<input type="text" class="edit-result" value=${e.target.textContent}>`
     currentInput = e.target.firstChild;
+    console.log(currentInput);
 
-    if (editingCell) {
-        tableData = document.getElementById('table-data');
-        tableData.removeEventListener("click", getCell);
-        tableData.addEventListener("click", (e) => {
 
-            if (e.target != currentInput) {
-                editConfirmation.style.display = "flex"
-                changesYes.addEventListener('click', ()=>{
-                    editConfirmation.style.display = "none";
-                    //run query
-                })
-                changesNo.addEventListener('click',()=> {
-                    editConfirmation.style.display = "none";
-                    console.log(originalContent);
-                    console.log(currentInput);
-                    currentInput.remove();
-                    originalCell.textContent = originalContent;
-                })
-            }
-        })
+    tableData = document.getElementById('table-data');
+    tableData.removeEventListener("click", getCell); //no longer needs to call getCell
+
+    //creates an event listener for clicking outside the box
+    tableData.addEventListener("click", function confirmation(e) {
+        if (e.target != currentInput) {
+            editConfirmation.style.display = "flex"
+            changesYes.addEventListener('click', ()=>{
+                editConfirmation.style.display = "none";
+                console.log(currentInput.value);
+                updateRecord(originalCell, currentInput.value)
+            })
+            changesNo.addEventListener('click',()=> {
+                editConfirmation.style.display = "none";
+                console.log(originalContent);
+                console.log(currentInput);
+                currentInput.remove();
+                originalCell.textContent = originalContent;
+                tableData.addEventListener("click", getCell);
+            })
+        }
+        // e.target.removeEventListener("click", getCell);
+    })
     
-    }
-
 
 }
+
+
+
+function updateRecord(cell, newValue) {
+
+    console.log(cell)
+
+    let primaryKeyID = getID(cell);
+    let attribute = cell.dataset.attribute;
+    let table = cell.dataset.table;
+    let primaryKey = primaryKeys[table];
+
+    let updateQuery = `UPDATE ${table} SET ${attribute} = '${newValue}' WHERE ${primaryKey} = '${primaryKeyID}'`;
+    console.log(updateQuery);
+
+}
+
+
+
+
 
 
 function paginate(totalPages) {
