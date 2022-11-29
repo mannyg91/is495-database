@@ -72,7 +72,10 @@ npm install -g nodemon
 
 // sequelize actions 
 cd Agile-Alpha/nbmg
-sequelize db:migrate --debug
+
+node index.js
+
+// note find out why nodejs is not populating tables;
 
 
 // fill up the table with sample data using sequelize module
