@@ -11,9 +11,9 @@ sudo apt install mysql-server
 sudo mysql  
 
 // preform database operations
-CREATE DATABASE database_development
-CREATE DATABASE database_test
-CREATE DATABASE database_production
+CREATE DATABASE database_development;
+CREATE DATABASE database_test;
+CREATE DATABASE database_production;
 
 CREATE USER 'nbmg'@'localhost' IDENTIFIED BY 'agile-alpha-2022';
 // Remote user
