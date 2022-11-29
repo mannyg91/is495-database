@@ -76,6 +76,8 @@ cd Agile-Alpha/nbmg
 node index.js
 
 // *********** NOTE FIND OUT WHY NODEJS IS NOT POPULATING TABLES ***********
+// *********** How to sequelize a existing db structure?         *********** 
+
 
 
 // fill up the table with sample data using sequelize module
