@@ -9,10 +9,22 @@ sudo mysql
 CREATE DATABASE database_development
 CREATE DATABASE database_test
 CREATE DATABASE database_production
+
 CREATE USER 'nbmg'@'localhost' IDENTIFIED BY 'agile-alpha-2022';
+// Remote user
+CREATE USER 'nbmg'@'%' IDENTIFIED BY 'agile-alpha-2022';
+
+
 GRANT ALL PRIVILEGES ON database_development.* TO 'nbmg'@'localhost';
 GRANT ALL PRIVILEGES ON database_test.* TO 'nbmg'@'localhost';
 GRANT ALL PRIVILEGES ON database_production.* TO 'nbmg'@'localhost';
+
+// If you want remote access to your databases
+
+GRANT ALL PRIVILEGES ON database_development.* TO 'nbmg'@'%';
+GRANT ALL PRIVILEGES ON database_test.* TO 'nbmg'@'%';
+GRANT ALL PRIVILEGES ON database_production.* TO 'nbmg'@'%';
+
 FLUSH PRIVILEGES;
 EXIT
 
@@ -30,5 +42,13 @@ source ~/.bashrc
 nvm install v19
 
 // Configuring Sequelize with an Express application
+git clone https://github.com/GreenEyeCoder/Agile-Alpha
+
+// installing modules in npm
+npm install express sequelize mysql2
+npm install --location=global sequelize
+
+
+
 
 
