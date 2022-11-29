@@ -40,16 +40,23 @@ EXIT
 // https://sequelize.org/docs/v6/getting-started/
 // reference: https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-22-04
 
+// get into the bash terminal
+bash
+
 sudo apt update
 sudo apt upgrade
 sudo apt install nodejs
 sudo apt install npm
+sudo apt install curl 
 
 // Installing Node Using the Node Version Manager
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 source ~/.bashrc
+
+export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
 nvm install v19
 
 // Configuring Sequelize with an Express application
