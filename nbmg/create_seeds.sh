@@ -14,8 +14,9 @@ sequelize seed:generate --name initial-assignee
 sequelize seed:generate --name initial-department
 sequelize seed:generate --name initial-customer
 sequelize seed:generate --name initial-workorderpriority
-sequelize seed:generate --name initial-employee
+sequelize seed:generate --name initial-employeetype
 sequelize seed:generate --name initial-ipostatus
 sequelize seed:generate --name initial-ipo
 sequelize seed:generate --name initial-workorderstatus
 sequelize seed:generate --name initial-workordergrant
+sequelize seed:generate --name initial-employee

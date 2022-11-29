@@ -9,3 +9,5 @@ GRANT ALL PRIVILEGES ON database_test.* TO 'nbmg'@'localhost';
 GRANT ALL PRIVILEGES ON database_production.* TO 'nbmg'@'localhost';
 FLUSH PRIVILEGES;
 
+
+// https://sequelize.org/docs/v6/getting-started/

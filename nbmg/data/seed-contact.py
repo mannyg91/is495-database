@@ -1,4 +1,9 @@
-'use strict';
+#!/usr/bin/python3
+
+import csv
+
+header = """
+'use strict\';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -7,6 +12,24 @@ module.exports = {
      * Add seed commands here.
      *
      * Example:
+     */
+
+       await queryInterface.bulkInsert('contacts',[
+"""
+
+print(header)
+
+
+with open('CONTACT.csv',newline='\n') as csvfile:
+    csv_reader = csv.DictReader(csvfile,delimiter=',')
+    for row in csv_reader:
+        print(row)
+        print(',')
+
+tail = """
+  ],{});
+
+     /*
      * await queryInterface.bulkInsert('People', [{
      *   name: 'John Doe',
      *   isBetaMember: false
@@ -21,5 +44,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+     await queryInterface.bulkDelete('contacts', null, {});
   }
-};
+}; """
+print(tail)
