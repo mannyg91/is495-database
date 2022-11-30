@@ -78,8 +78,7 @@ node index.js
 
 // *********** NOTE FIND OUT WHY NODEJS IS NOT POPULATING TABLES ***********
 // *********** How to sequelize a existing db structure?         *********** 
-// https://github.com/sequelize/sequelize-auto
-
+// https://github.com/sequelize/sequelize-auto  ----> error while installing
 
 
 
