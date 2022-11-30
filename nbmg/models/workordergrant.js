@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   workordergrant.init({
     WorkOrderGrantID: DataTypes.INTEGER,
     WorkOrderID: DataTypes.INTEGER,
-    GrantID: DataTypes.INTEGER
+    GrantID: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'workordergrant',

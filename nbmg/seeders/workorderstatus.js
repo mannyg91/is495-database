@@ -1,9 +1,5 @@
-#!/usr/bin/python3
 
-import csv
-
-header = """
-'use strict\';
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -14,19 +10,19 @@ module.exports = {
      * Example:
      */
 
-       await queryInterface.bulkInsert('assignees',[
-"""
+       await queryInterface.bulkInsert('workorderstatuses',[
 
-print(header)
+{'StatusID': '1', 'StatusType': 'Assigned'}
+,
+{'StatusID': '2', 'StatusType': 'Unassigned'}
+,
+{'StatusID': '3', 'StatusType': 'Pending'}
+,
+{'StatusID': '4', 'StatusType': 'Completed'}
+,
+{'StatusID': '5', 'StatusType': 'Closed'}
+,
 
-
-with open('IS495DB-ASSIGNEE-BCK.csv',newline='\n') as csvfile:
-    csv_reader = csv.DictReader(csvfile,delimiter=',')
-    for row in csv_reader:
-        print(row)
-        print(',')
-
-tail = """
   ],{});
 
      /*
@@ -44,7 +40,6 @@ tail = """
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('assignees', null, {});
+     await queryInterface.bulkDelete('workorderstatuses', null, {});
   }
-}; """
-print(tail)
+}; 

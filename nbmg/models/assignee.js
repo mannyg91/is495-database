@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   assignee.init({
   	AssigneeID: DataTypes.INTEGER,
 	EmployeeID: DataTypes.INTEGER,
-	WorOrderID: DataTypes.INTEGER
+	WorkOrderID: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'assignee',

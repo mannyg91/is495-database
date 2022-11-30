@@ -14,13 +14,13 @@ module.exports = {
      * Example:
      */
 
-       await queryInterface.bulkInsert('assignees',[
+       await queryInterface.bulkInsert('departments',[
 """
 
 print(header)
 
 
-with open('IS495DB-ASSIGNEE-BCK.csv',newline='\n') as csvfile:
+with open('IS495DB-DEPARTMENT-BCK.csv',newline='\n') as csvfile:
     csv_reader = csv.DictReader(csvfile,delimiter=',')
     for row in csv_reader:
         print(row)
@@ -44,7 +44,7 @@ tail = """
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('assignees', null, {});
+     await queryInterface.bulkDelete('departments', null, {});
   }
 }; """
 print(tail)
