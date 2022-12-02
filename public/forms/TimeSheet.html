@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Add/Update TimeSheet Form</title>
+
+    <style>
+
+        body {
+            background-color: wheat;
+            font-family: 'Times New Roman';
+            width: 1024px;
+            margin: 75px;
+        }
+
+        h1 {
+            color: maroon;
+        }
+
+        label {
+            width: auto;
+            display: inline-grid;
+        }
+
+        input {
+            margin: 7px 7px 7px 0px;
+        }
+
+        table, th, td {
+            border-style: solid;
+            border-color: darkgreen;
+            border-width: 2px;
+            text-align: right;
+            padding: 2px 2px 2px 2px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Add/Update TimeSheet Form</h1>
+    <form>
+        <div>
+            <label>Employee: <input name="EmpFullName" type="text" placeholder="Drop Down List to pick Employee that is Entering Time" size="30" required></label> <!--May need to create a FullName that will pull the EmployeeID??-->
+            <label>Work Order: <input name="ProjectName" type="text" placeholder="Drop Down List to pick Project" size="30" required></label>
+            <label>Billing Type: <input name="BillingType" type="text" placeholder="Drop Down List to pick Billing Type" size="30" required></label>
+            <label>Entry Type: <input name="EntryType" type="text" placeholder="Drop Down List to pick Entry Type" size="30" required></label>
+        </div>
+        <div>
+            <label>Time Type: <input name="TimeType" type="text" placeholder="Drop Down List to pick Time Type" size="30" required></label>
+            <label>Service Type: <input name="ServiceType" type="text" placeholder="Drop Down List to pick Service Type" size="30" required></label>
+            <label>Time Sheet Date: <input name="TimeSheetDate" type="date" required></label>
+            <label>Time Worked: <input name="TimeWorkedHours" type="number" min=".25" max="20" step=".25" placeholder="Enter Hours in 1/4 hour increments" size="40" required></label>
+        </div>
+        <div>
+            <label>Work Performed: <textarea name="WorkPerformed" rows="5" cols="136" placeholder="Enter a Description of the work performed"></textarea></label>
+        </div>
+        <br />
+        <button type="submit">Add Record</button>
+        <button type="button">Search Records</button>
+        <button type="button">Delete Record</button>
+        <button type="reset">Reset Form</button>
+        <div>
+            <br />
+            <label>TimeSheetID: <input type="text" name="TimeSheetID" size="30" placeholder="To be hidden once connected"></label>
+            <label>WorkOrderID_TIMESHEET: <input type="text" name="WorkOrderID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
+            <label>EmployeeID_TIMESHEET: <input type="text" name="EmployeeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
+            <label>EntryTypeID_TIMESHEET: <input type="text" name="EntryTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
+            <label>BillingTypeID_TIMESHEET: <input type="text" name="BillingTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
+            <label>TimeTypeID_TIMESHEET: <input type="text" name="TimeTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
+            <label>ServiceTypeID_TIMESHEET: <input type="text" name="ServiceTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
+            <label>IPOID_TIMESHEET: <input type="text" name="IPOID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
+        </div>
+    </form>
+</body>
+</html>

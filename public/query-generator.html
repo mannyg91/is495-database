@@ -10,7 +10,47 @@
 </head>
 <body>
     <div id="blur-container">
-        <header> 
+        
+        <header>
+            <div class="logo-container">
+                <img id="logo" src="./assets/logo.png">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Reports</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Forms</a>
+                        <div class="dropdown-content">
+                            <a href="./forms/BillingType.html">Billing Type</a>
+                            <a href="./forms/Company.html">Company</a>
+                            <a href="./forms/Contact.html">Contact</a>
+                            <a href="./forms/Customer">Customer</a>
+                            <a href="./forms/Department.html">Department</a>
+                            <a href="./forms/EmployeeForm.html">Employee</a>
+                            <a href="./forms/EmployeeType.html">Employee Type</a>
+                            <a href="./forms/EntryType.html">Entry Type</a>
+                            <a href="./forms/IPO.html">IPO</a>
+                            <a href="./forms/IPOStatus.html">IPO Status</a>
+                            <a href="./forms/JobTitle.html">Job Title</a>
+                            <a href="./forms/ServiceRate.html">Service Rate</a>
+                            <a href="./forms/ServiceType.html">Service Type</a>
+                            <a href="./forms/TBL_Grant.html">Grant</a>
+                            <a href="./forms/TimeSheet.html">Timesheet</a>
+                            <a href="./forms/TimeType.html">Timesheet Type</a>
+                            <a href="./forms/WorkOrder.html">Work Order</a>
+                            <a href="./forms/WorkOrderPriority.html">Work Order Priority</a>
+                            <a href="./forms/WorkOrderStatus.html">Work Order Status</a>
+
+                        </div>
+                    
+            
+                    </li>
+                </ul>
+            </nav>
+            <!-- <div id="login">
+                <a href="">Login</a>
+            </div> -->
         </header>
 
         <form>
@@ -43,6 +83,7 @@
                 <div class="submit">
                     <button id="submit-btn" type="submit">Get Records</button>
                     <button id="sql-btn" class="standard-btn" type="button">View SQL</button>
+                    <button class="standard-btn" type="button">Print</button>
                     <button id="edit-btn" class="standard-btn" type="button">Edit Mode</button>
                 </div>
             </div>
@@ -114,9 +155,11 @@
         <div class="two-buttons"><button id="changes-yes" type="button">Yes</button><button id="changes-no" type="button">Cancel</button></div>
     </div>
 
+    <footer>
+        <span>©2022 Agile-Alpha </span>
+    </footer>
 
 
-
-    <script src="./createSQL.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

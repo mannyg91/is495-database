@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Time Type Form</title>
+
+    <style>
+
+        body {
+            background-color: wheat;
+            font-family: 'Times New Roman';
+            width: 1024px;
+            margin: 75px;
+        }
+
+        h1 {
+            color: maroon;
+        }
+
+        label {
+            width: 100px;
+            display: inline-grid;
+        }
+
+        input {
+            margin: 7px 7px 7px 0px;
+        }
+
+        table, th, td {
+            border-style: solid;
+            border-color: darkgreen;
+            border-width: 2px;
+            text-align: right;
+            padding: 2px 2px 2px 2px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Add/Update Time Type Form</h1>
+    <form>
+        <div>
+            <label>Time Type: <input name="TimeType" type="text" placeholder="Enter Time Type" size="25" required></label>
+        </div>
+        <div>
+            <label>Category: <input name="Category" type="text" placeholder="Enter a category" size="25" required></label>
+        </div>
+        <button type="submit">Add Record</button>
+        <button type="button">Search Records</button>
+        <button type="button">Delete Record</button>
+        <button type="reset">Reset Form</button>
+        <div>
+            <br />
+            <label>TimeTypeID: <input type="text" name="TimeTypeID" size="30" placeholder="To be hidden once connected"></label>
+        </div>
+
+    </form>
+</body>
+</html>

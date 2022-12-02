@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Add/Update Work Order Form</title>
+
+    <style>
+
+        body {
+            background-color: wheat;
+            font-family: 'Times New Roman';
+            width: 1024px;
+            margin: 75px;
+        }
+
+        h1 {
+            color: maroon;
+        }
+
+        label {
+            width: auto;
+            display: inline-grid;
+        }
+
+        input {
+            margin: 7px 7px 7px 0px;
+        }
+
+        table, th, td {
+            border-style: solid;
+            border-color: darkgreen;
+            border-width: 2px;
+            text-align: right;
+            padding: 2px 2px 2px 2px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Add/Update Work Order Form</h1>
+    <form>
+        <div>
+            <label>Project Name: <input name="ProjectName" type="text" size="147" placeholder="Enter the Project Name Here" required></label>
+        </div>
+        <div>
+            <label>Submitted Date: <input name="WorkOrderSubmittedDate" type="date" required></label>
+            <label>Start Date: <input name="WorkOrderStartDate" type="date" required></label>
+            <label>Due Date: <input name="WorkOrderDueDate" type="date" required></label>
+            <label>Closed Date: <input name="WorkOrderClosedDate" type="date" required></label>
+            <label>Grant Name: <input name="GrantName" type="text" size="71" placeholder="Drop down to select Grant Name" required></label>
+        </div>
+        <div>
+            <label>Budget Amount: <input name="Budget" type="number" placeholder="Should autofill $ from TBL_Grant"></label>
+            <label>Assignee(s): <input name="Assignee" type="text" placeholder="Drop down multiselect list of Employees???" size="35"></label>
+            <label>Status Type: <input name="StatusType" type="text" placeholder="Drop down list for Status" size="35"></label>
+            <label>Priority Type: <input name="PriorityType" type="text" placeholder="Drop down list for Priority" size="35"></label>
+        </div>
+        <div>
+            <label>Contact: <input name="WorkOrderContact" type="text" placeholder="Drop down multiselect list of Contacts???" size="147"></label>
+        </div>
+        <div>
+            <label>Work Order Description: <textarea name="WorkOrderDescription" rows="3" cols="136"></textarea></label>
+        </div>
+        <br />
+        <div>
+            <label>Work Order Notes: <textarea name="WorkOrderNotes" rows="10" cols="136"></textarea></label>
+        </div>
+        <br />
+        <button type="submit">Add Record</button>
+        <button type="button">Search Records</button>
+        <button type="button">Delete Record</button>
+        <button type="reset">Reset Form</button>
+        <div>
+            <br />
+            <label>WorkOrderID: <input type="text" name="WorkOrderID" size="30" placeholder="To be hidden once connected"></label>
+            <label>EmployeeID_WORKORDER: <input type="text" name="EmployeeID_WORKORDER" size="30" placeholder="To be hidden once connected"></label>
+            <label>CustomerID_WORKORDER: <input type="text" name="CustomerID_WORKORDER" size="30" placeholder="To be hidden once connected"></label>
+            <label>PriorityID_WORKORDER: <input type="text" name="PriorityID_WORKORDER" size="30" placeholder="To be hidden once connected"></label>
+            <label>StatusID_WORKORDER: <input type="text" name="StautsID_WORKORDER" size="30" placeholder="To be hidden once connected"></label>
+            <label>GrantID_WORKORDER: <input type="text" name="GrantID_WORKORDER" size="30" placeholder="To be hidden once connected"></label>
+        </div>
+    </form>
+</body>
+</html>

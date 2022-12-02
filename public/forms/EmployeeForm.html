@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Add/Update Employee Form</title>
+
+    <style>
+
+        body {
+            background-color: wheat;
+            font-family: 'Times New Roman';
+            width: 1024px;
+            margin: 75px;
+        }
+
+        h1 {
+            color: maroon;
+        }
+
+        label {
+            width: 240px;
+            display: inline-grid;
+        }
+
+        input {
+            margin: 7px 7px 7px 0px;
+        }
+
+        table, th, td {
+            border-style: solid;
+            border-color: darkgreen;
+            border-width: 2px;
+            text-align: right;
+            padding: 2px 2px 2px 2px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: auto;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Add/Update Employee Form</h1>
+    <form>
+        <div>
+            <label>First Name: <input name="EmpFirstName" type="text" placeholder="Enter First Name" size="25" required></label>
+            <label>Last Name: <input name="EmpLastName" type="text" placeholder="Enter Last Name" size="25" required></label>
+            <label>Department: <input name="DepartmentName" type="text" size="25" placeholder="Drop Down to pick Department"></label>
+        </div>
+        <div>
+            <label>Email: <input type="email" name="EmpEmail" size="25" placeholder="Email Address" required></label>
+            <label>Job Title: <input type="text" name="JobTitle" size="25" placeholder="Enter Employee Title"></label>
+            <label>Phone: <input type="tel" name="EmpPhone" size="25" placeholder="Enter work phone #"></label>
+        </div>
+        <div>
+            <label>Address: <input type="text" name="EmpAddress" size="103" placeholder="Enter work Address"></label>
+        </div>
+        <div>
+            <label>City: <input type="text" name="EmpCity" size="25" placeholder="City"></label>
+            <label>State: <input type="text" name="EmpState" maxlength="2" size="25" placeholder="State"></label>
+            <label>Zip Code: <input type="text" name="EmpZipCode" maxlength="5" size="25" placeholder="Zip Code"></label>
+        </div>
+        <div>
+            <label>Employee Type: <input type="text" name="EmployeeType" size="103" placeholder="Drop Down to pick Employment Type" required></label>
+        </div>
+        <button type="submit">Add Record</button>
+        <button type="button">Search Records</button>
+        <button type="button">Delete Record</button>
+        <button type="reset">Reset Form</button>
+        <div>
+            <br />
+            <label>EmployeeID: <input type="text" name="EmployeeID" size="10" placeholder="To be hidden once connected"></label>
+            <label>DepartmentID_EMPLOYEE: <input type="text" name="DepartmentID_EMPLOYEE" size="10" placeholder="To be hidden once connected"></label>
+            <label>JobTitleID_EMPLOYEE: <input type="text" name="JobTitleID_EMPLOYEE" size="10" placeholder="To be hidden once connected"></label>
+            <label>EmployeeTypeID_EMPLOYEE: <input type="text" name="EmployeeTypeID_EMPLOYEE" size="10" placeholder="To be hidden once connected"></label>
+        </div>
+    </form>
+</body>
+</html>
