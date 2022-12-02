@@ -39,14 +39,21 @@ const forms = {
     // WORKORDERGRANT : 'WorkOrderGrantID',
     WORKORDERPRIORITY : 'PriorityID',
     WORKORDERSTATUS : 'StatusID',
-}
+};
+
 
 const formContainer = document.querySelector('.form-container');
-const next = document.querySelector('.carousel-next');
-const prev = document.querySelector('.carousel-prev');
+const prev = document.getElementById('carousel-prev');
+const next = document.getElementById('carousel-next');
+
+console.log(prev);
+console.log(next);
+
 
 next.addEventListener('click', nextCarousel);
 prev.addEventListener('click', prevCarousel);
+
+
 
 const formsLength = Object.keys(forms).length
 let currentIndex = 0;
@@ -54,9 +61,9 @@ let currentIndex = 0;
 const statusMessages = formContainer.innerHTML
 
 
-//should be initialized to whatever the person clicks in the drop-down menu
-formContainer.innerHTML = Object.values(forms)[0] + statusMessages;
 
+// //should be initialized to whatever the person clicks in the drop-down menu
+formContainer.innerHTML = Object.values(forms)[0] + statusMessages;
 
 
 function buildCarousel(dictionary, index) {
@@ -64,9 +71,12 @@ function buildCarousel(dictionary, index) {
 }
 
 function nextCarousel() {
+    console.log("next");
     if (currentIndex < formsLength) {
+        console.log("if");
         currentIndex++;
     } else {
+        console.log("else");
         currentIndex = 0;
     }
     console.log(currentIndex);
@@ -74,12 +84,24 @@ function nextCarousel() {
 }
 
 function prevCarousel() {
+    console.log("prev");
     if (currentIndex >= 0) {
+        console.log("if prev");
         currentIndex--;
     } else {
+        console.log("else prev");
         currentIndex = formsLength;
     }
     buildCarousel(forms, currentIndex);
 }
+
+
+
+//need to know the last id in a given table
+
+
+
+
+
 
 

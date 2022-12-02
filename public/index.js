@@ -481,12 +481,16 @@ async function buildQuery(event) {
 //sends query to database
 async function getResults(code) {
     document.body.style.cursor = "wait";
+
+    //response is the product of sending request with "code"
     const response = await fetch("/", {
         method: 'POST',
         headers: {
         'Content-Type': 'text/plain'
         },
         body: code,})
+    
+    //the data we use will be this response in json
     const data = await response.json()
     document.body.style.cursor = null;
     return data
