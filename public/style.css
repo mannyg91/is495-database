@@ -9,7 +9,7 @@ body {
     margin: 0;
 }
 
-#blur-container {
+#main-container {
     min-height: calc(100vh - 70px);
 }
 
@@ -94,14 +94,19 @@ footer {
 
 /* drop-down */
 li a, .dropbtn {
-    text-align: center;
-    padding: 14px 16px;
+
     text-decoration: none;
   }
   
 li a:hover, .dropdown:hover .dropbtn {
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     color: black;
+    height: 105%;
+    border: 1px solid rgb(234, 234, 234);
+    z-index: 2;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(74, 74, 74, 0.2);
   }
   
   
@@ -122,11 +127,15 @@ li a:hover, .dropdown:hover .dropbtn {
     display: block;
     text-align: left;
     color: black;
+
   }
   
 .dropdown-content a:hover {
     background-color: rgb(28 50 96);
     color: white;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
 }
   
 .dropdown:hover .dropdown-content {
@@ -524,14 +533,10 @@ td:has(.edit-result) {
 
 
 .blur {
-    filter: blur(50px);
-    position: fixed; /* Sit on top of the page content */
+    filter: blur(70px);
+    position: block; /* Sit on top of the page content */
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(99, 99, 99, .2); /* Black background with opacity */
+    background-color: rgba(24, 24, 24, 0.1); /* Black background with opacity */
     z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
 }

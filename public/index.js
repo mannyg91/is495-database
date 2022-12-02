@@ -202,7 +202,7 @@ const editNo = document.getElementById('edit-no');
 const editConfirmation = document.getElementById('edit-confirmation');
 const changesYes = document.getElementById('changes-yes');
 const changesNo = document.getElementById('changes-no');
-const blurContainer = document.getElementById('blur-container');
+const mainContainer = document.getElementById('main-container');
 const codeContainer = document.getElementById('code-container');
 
 resultsPerPageOptions.addEventListener('change', function() {
@@ -267,12 +267,12 @@ function editMode() {
     if (editing === false) {
 
         editWarning.style.display = "flex"
-        blurContainer.classList.add("blur");
+        mainContainer.classList.add("blur");
 
         editYes.addEventListener('click', ()=>{
             editing = true;
             editWarning.style.display = "none";
-            blurContainer.classList.remove("blur");
+            mainContainer.classList.remove("blur");
 
             const cells = document.querySelectorAll("td");
 
@@ -287,7 +287,7 @@ function editMode() {
         });
 
         editNo.addEventListener('click', ()=>{
-            blurContainer.classList.remove("blur");
+            mainContainer.classList.remove("blur");
             editWarning.style.display = "none";
             editing = false;
         });
