@@ -1,0 +1,115 @@
+
+input {
+    border: 1px solid #D1D5DB;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+label {
+    color: rgb(60, 60, 60);
+}
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 8px;
+    background-color: rgb(245, 245, 245);
+    color: rgb(0, 0, 0);
+    border: 1px solid #D1D5DB;
+    padding: 40px;
+    box-shadow: 0px 2px 5px rgb(100, 100, 100);
+}
+
+.form-container span {
+    padding-top: 35px;
+    word-wrap: break-word;
+    max-width: 300px;
+    margin: auto;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    height: fit-content;
+    width: 300px;
+    border-radius: 6px;
+    background-color: white;
+    border: 1px solid #D1D5DB;
+    padding: 40px;
+}
+
+
+
+
+form label {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.form-btns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+button {
+    font-size: 12px;
+    margin: 0px;
+}
+
+
+.submit-msg {
+    color: rgb(122, 122, 122);
+}
+
+
+
+
+
+
+/* carousel */
+.carousel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    justify-content: center;
+    gap: 200px;
+    z-index: -1;
+}
+
+
+
+.carousel-prev,
+.carousel-next {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: #555;
+    background-size: 1.3rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
+
+/* put these images locally */
+.carousel-prev {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,50 80,100 80,0' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+.carousel-next {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
+}
+
