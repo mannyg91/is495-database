@@ -2,26 +2,64 @@ const forms = {
     // ASSIGNEE : 'AssigneeID',
     BILLINGTYPE : `
                     <h2>Add Billing Type Form</h2>
-                        <form>
-                            <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="40" required></label>
-                            <div class="form-btns">
-                                <button type="submit">Add Record</button>
-                                <button type="reset">Reset Form</button>
-                            </div>
-                        </form> 
+                    <form>
+                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
+                        <div class="form-btns">
+                            <button type="submit">Add Record</button>
+                            <button type="reset">Reset Form</button>
+                        </div>
+                    </form> 
                     `,
     COMPANY : `
                 <h2>Add Company Name Form</h2>
-                    <form>
-                        <label>Company Name: <input name="CompanyName" type="text" placeholder="Enter Company Name Here" size="100"></label>
+                <form>
+                    <label>Company Name: <input name="CompanyName" type="text" placeholder="Enter Company Name Here" size="35"></label>
                     <div class="form-btns">
                         <button type="submit">Add Record</button>
                         <button type="reset">Reset Form</button>
                     </div>
-                    </form>
+                </form>
                 `,
-    WORKORDERCONTACT : 'WorkOrderContactID',
-    CUSTOMER : 'CustomerID',
+    WORKORDERCONTACT : `    
+                <h2>Add/Update Contact Form</h2>
+                <form>
+                    <label>First Name: <input name="ContactFirstName" type="text" placeholder="Enter First Name" size="30" required></label>
+                    <label>Last Name: <input name="ContactLastName" type="text" placeholder="Enter Last Name" size="30" required></label>
+                    <label>Email: <input type="email" name="ContactEmail" size="30" placeholder="Email Address" required></label>
+                    <label>Phone: <input type="tel" name="ContactPhone" size="30" placeholder="Enter work phone #"></label>
+                    <div class="form-btns">
+                        <button type="submit">Add Record</button>
+                        <button type="reset">Reset Form</button>
+                    <div>
+                </form>`,
+    CUSTOMER : `    
+                <h2>Add/Update Customer Form</h2>
+                <form>
+                    <div>
+                        <label>First Name: <input name="CustFirstName" type="text" placeholder="Enter First Name" size="25" required></label>
+                        <label>Last Name: <input name="CustLastName" type="text" placeholder="Enter Last Name" size="25" required></label>
+                        <label>Department: <input name="DepartmentID" type="text" size="25" placeholder="Drop down to select Department"></label>
+                    </div>
+                    <div>
+                        <label>Company: <input type="text" name="CompanyName" size="25" placeholder="Drop down to select Company" required></label>
+                        <label>Email: <input type="email" name="CustEmail" size="25" placeholder="Email Address" required></label>
+                        <label>Phone: <input type="tel" name="CustPhone" size="25" placeholder="Enter work phone #"></label>
+                    </div>
+                    <div>
+                        <label>Address: <input type="text" name="CustAddress" size="40" placeholder="Enter work Address"></label>
+                    </div>
+                    <div>
+                        <label>City: <input type="text" name="CustCity" size="25" placeholder="City"></label>
+                        <label>State: <input type="text" name="CustState" maxlength="2" size="25" placeholder="State"></label>
+                        <label>Zip Code: <input type="text" name="EmpZipCode" maxlength="5" size="25" placeholder="Zip Code"></label>
+                    </div>
+                    <div class="form-btns">
+                    <button type="submit">Add Record</button>
+                    <button type="button">Search Records</button>
+                    <button type="button">Delete Record</button>
+                    <button type="reset">Reset Form</button>
+                    </div>
+                </form>`,
     DEPARTMENT : 'DepartmentID',
     EMPLOYEE : 'EmployeeID',
     EMPLOYEETYPE : 'EmployeeTypeID',
