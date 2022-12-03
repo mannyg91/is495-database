@@ -3,50 +3,92 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Add Company Name Form</title>
-
-    <style>
-
-        body {
-            background-color: wheat;
-            font-family: 'Times New Roman';
-            width: 1024px;
-            margin: 75px;
-        }
-
-        h1 {
-            color: maroon;
-        }
-
-        label {
-            width: auto;
-            display: inline-grid;
-        }
-
-        input {
-            margin: 7px 7px 7px 0px;
-        }
-
-        table, th, td {
-            border-style: solid;
-            border-color: darkgreen;
-            border-width: 2px;
-            text-align: right;
-            padding: 2px 2px 2px 2px;
-        }
-
-        table {
-            border-collapse: collapse;
-            margin: auto;
-        }
-    </style>
+    <title>Forms</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./forms.css">
 
 </head>
 <body>
+
+
+    <header>
+        <div class="logo-container">
+            <img id="logo" src="../assets/logo.png">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../">Home</a></li> <!-- not working-->
+                <li><a href="">Reports</a></li>
+                <li class="dropdown">
+                    <a href="./forms.html" class="dropbtn">Forms</a>
+                    <div class="dropdown-content">
+                        <a href="./BillingType.html">Billing Type</a>
+                        <a href="./Company.html">Company</a>
+                        <a href="./Contact.html">Contact</a>
+                        <a href="./Customer">Customer</a>
+                        <a href="./Department.html">Department</a>
+                        <a href="./EmployeeForm.html">Employee</a>
+                        <a href="./EmployeeType.html">Employee Type</a>
+                        <a href="./EntryType.html">Entry Type</a>
+                        <a href="./TBL_Grant.html">Grant</a>
+                        <a href="./IPO.html">IPO</a>
+                        <a href="./IPOStatus.html">IPO Status</a>
+                        <a href="./JobTitle.html">Job Title</a>
+                        <a href="./ServiceRate.html">Service Rate</a>
+                        <a href="./ServiceType.html">Service Type</a>
+                        <a href="./TimeSheet.html">Timesheet</a>
+                        <a href="./TimeType.html">Timesheet Type</a>
+                        <a href="./WorkOrder.html">Work Order</a>
+                        <a href="./WorkOrderPriority.html">Work Order Priority</a>
+                        <a href="./WorkOrderStatus.html">Work Order Status</a>
+
+                    </div>
+                
+        
+                </li>
+            </ul>
+        </nav>
+        <!-- <div id="login">
+            <a href="">Login</a>
+        </div> -->
+    </header>
     
-    <form>
+    <div id="main-container">
+
+        <a href="BillingType.html" style="justify-self: end;">
+            <button type="button" id="carousel-prev"></button>
+        </a>
+
+        <section class="carousel">
+
+                <div class="form-container">
+                    <h2>Add Company Name Form</h2>
+                    <form>
+                        <label>Company Name: <input name="CompanyName" type="text" placeholder="Enter Company Name Here" size="35"></label>
+                        <div class="form-btns">
+                            <button type="submit">Add Record</button>
+                            <button type="reset">Reset Form</button>
+                        </div>
+                    </form>
+                    <span class="submit-msg" id="success">Your record was successfully added.</span>
+                    <span class="submit-msg" id="fail">Your record failed to be added. Please double-check your text fields.</span>
+                </div>
+        
+        </section>
+
+        <a href=".Company.html">
+            <button type="button" id="carousel-next"></button>
+        </a>
+        
 
 
-    </form>
+    </div>
+    <footer>
+        <span>©2022 Agile-Alpha </span>
+    </footer>
+
+
 </body>
 </html>
+
+<!-- grantID needs to be manually added in (cant be auto incremented, it is a string)-->

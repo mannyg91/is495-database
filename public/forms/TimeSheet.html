@@ -3,79 +3,92 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Add/Update TimeSheet Form</title>
-
-    <style>
-
-        body {
-            background-color: wheat;
-            font-family: 'Times New Roman';
-            width: 1024px;
-            margin: 75px;
-        }
-
-        h1 {
-            color: maroon;
-        }
-
-        label {
-            width: auto;
-            display: inline-grid;
-        }
-
-        input {
-            margin: 7px 7px 7px 0px;
-        }
-
-        table, th, td {
-            border-style: solid;
-            border-color: darkgreen;
-            border-width: 2px;
-            text-align: right;
-            padding: 2px 2px 2px 2px;
-        }
-
-        table {
-            border-collapse: collapse;
-            margin: auto;
-        }
-    </style>
+    <title>Forms</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./forms.css">
 
 </head>
 <body>
-    <h1>Add/Update TimeSheet Form</h1>
-    <form>
-        <div>
-            <label>Employee: <input name="EmpFullName" type="text" placeholder="Drop Down List to pick Employee that is Entering Time" size="30" required></label> <!--May need to create a FullName that will pull the EmployeeID??-->
-            <label>Work Order: <input name="ProjectName" type="text" placeholder="Drop Down List to pick Project" size="30" required></label>
-            <label>Billing Type: <input name="BillingType" type="text" placeholder="Drop Down List to pick Billing Type" size="30" required></label>
-            <label>Entry Type: <input name="EntryType" type="text" placeholder="Drop Down List to pick Entry Type" size="30" required></label>
+
+
+    <header>
+        <div class="logo-container">
+            <img id="logo" src="../assets/logo.png">
         </div>
-        <div>
-            <label>Time Type: <input name="TimeType" type="text" placeholder="Drop Down List to pick Time Type" size="30" required></label>
-            <label>Service Type: <input name="ServiceType" type="text" placeholder="Drop Down List to pick Service Type" size="30" required></label>
-            <label>Time Sheet Date: <input name="TimeSheetDate" type="date" required></label>
-            <label>Time Worked: <input name="TimeWorkedHours" type="number" min=".25" max="20" step=".25" placeholder="Enter Hours in 1/4 hour increments" size="40" required></label>
-        </div>
-        <div>
-            <label>Work Performed: <textarea name="WorkPerformed" rows="5" cols="136" placeholder="Enter a Description of the work performed"></textarea></label>
-        </div>
-        <br />
-        <button type="submit">Add Record</button>
-        <button type="button">Search Records</button>
-        <button type="button">Delete Record</button>
-        <button type="reset">Reset Form</button>
-        <div>
-            <br />
-            <label>TimeSheetID: <input type="text" name="TimeSheetID" size="30" placeholder="To be hidden once connected"></label>
-            <label>WorkOrderID_TIMESHEET: <input type="text" name="WorkOrderID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
-            <label>EmployeeID_TIMESHEET: <input type="text" name="EmployeeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
-            <label>EntryTypeID_TIMESHEET: <input type="text" name="EntryTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
-            <label>BillingTypeID_TIMESHEET: <input type="text" name="BillingTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
-            <label>TimeTypeID_TIMESHEET: <input type="text" name="TimeTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
-            <label>ServiceTypeID_TIMESHEET: <input type="text" name="ServiceTypeID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
-            <label>IPOID_TIMESHEET: <input type="text" name="IPOID_TIMESHEET" size="30" placeholder="To be hidden once connected"></label>
-        </div>
-    </form>
+        <nav>
+            <ul>
+                <li><a href="../">Home</a></li> <!-- not working-->
+                <li><a href="">Reports</a></li>
+                <li class="dropdown">
+                    <a href="./forms.html" class="dropbtn">Forms</a>
+                    <div class="dropdown-content">
+                        <a href="./BillingType.html">Billing Type</a>
+                        <a href="./Company.html">Company</a>
+                        <a href="./Contact.html">Contact</a>
+                        <a href="./Customer">Customer</a>
+                        <a href="./Department.html">Department</a>
+                        <a href="./EmployeeForm.html">Employee</a>
+                        <a href="./EmployeeType.html">Employee Type</a>
+                        <a href="./EntryType.html">Entry Type</a>
+                        <a href="./TBL_Grant.html">Grant</a>
+                        <a href="./IPO.html">IPO</a>
+                        <a href="./IPOStatus.html">IPO Status</a>
+                        <a href="./JobTitle.html">Job Title</a>
+                        <a href="./ServiceRate.html">Service Rate</a>
+                        <a href="./ServiceType.html">Service Type</a>
+                        <a href="./TimeSheet.html">Timesheet</a>
+                        <a href="./TimeType.html">Timesheet Type</a>
+                        <a href="./WorkOrder.html">Work Order</a>
+                        <a href="./WorkOrderPriority.html">Work Order Priority</a>
+                        <a href="./WorkOrderStatus.html">Work Order Status</a>
+
+                    </div>
+                
+        
+                </li>
+            </ul>
+        </nav>
+        <!-- <div id="login">
+            <a href="">Login</a>
+        </div> -->
+    </header>
+    
+    <div id="main-container">
+
+        <a href="WorkOrderStatus.html" style="justify-self: end;">
+            <button type="button" id="carousel-prev"></button>
+        </a>
+
+        <section class="carousel">
+
+                <div class="form-container">
+                    <h2>Add Billing Type Form</h2>
+                    <form>
+                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
+                        <div class="form-btns">
+                            <button type="submit">Add Record</button>
+                            <button type="reset">Reset Form</button>
+                        </div>
+                    </form> 
+                    <span class="submit-msg" id="success">Your record was successfully added.</span>
+                    <span class="submit-msg" id="fail">Your record failed to be added. Please double-check your text fields.</span>
+                </div>
+        
+        </section>
+
+        <a href=".Company.html">
+            <button type="button" id="carousel-next"></button>
+        </a>
+        
+
+
+    </div>
+    <footer>
+        <span>©2022 Agile-Alpha </span>
+    </footer>
+
+
 </body>
 </html>
+
+<!-- grantID needs to be manually added in (cant be auto incremented, it is a string)-->

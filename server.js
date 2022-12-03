@@ -71,6 +71,10 @@ app.listen(port, () => {
 
 
 
+// app.get('/forms.html', (req,res) => {
+//   res.sendFile(__dirname + '/public/' + '/forms.html')
+
+// })
 
 
 
