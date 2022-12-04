@@ -1,5 +1,4 @@
 
-
 const primaryKeys = {
     JOBTITLE : 'JobTitleID',
     EMPLOYEETYPE : 'EmployeeTypeID',
@@ -196,6 +195,7 @@ const whereOptions = document.getElementById('where-options');
 const resultsPerPageOptions = document.getElementById('results-per-page');
 const sqlBtn = document.getElementById('sql-btn');
 const editBtn = document.getElementById('edit-btn');
+const exportBtn = document.getElementById('export-btn');
 const editWarning = document.getElementById('edit-warning');
 const editYes = document.getElementById('edit-yes');
 const editNo = document.getElementById('edit-no');
@@ -206,7 +206,6 @@ const mainContainer = document.getElementById('main-container');
 const codeContainer = document.getElementById('code-container');
 
 resultsPerPageOptions.addEventListener('change', function() {
-
     resultsPerPage = parseInt(resultsPerPageOptions.value);
 
     // let startingSlice = 0;
@@ -215,7 +214,6 @@ resultsPerPageOptions.addEventListener('change', function() {
     // let totalPages = 0;
 
     renderResults(sqlData, 1);
-
  });
 
 
@@ -239,7 +237,11 @@ let startPage = 1;
 let totalPages = 0;
 let resultsPerPage = 50;
 let editing = false;
+
 let editingCell = false;
+let activeCell;
+let originalCell;
+let originalContent;
 // let lastCell;
 
 
@@ -258,10 +260,45 @@ sqlBtn.addEventListener('click', ()=>{
 sqlBtn.click();
 
 
-editBtn.addEventListener('click', editMode)
+editBtn.addEventListener('click', editMode);
+exportBtn.addEventListener('click', exportCSV);
+
+
+
+//can refactor this to simplify
+function exportCSV() {
+    // const csvData = json2csv.parse(data.recordset.slice(startingSlice, startingSlice + resultsPerPage));
+    const csvData = json2csv.parse(sqlData.recordset.slice(startingSlice, startingSlice + resultsPerPage));
+
+    let filename = `${startingTable}.csv`
+
+    const element = document.createElement("a");
+    element.setAttribute("href", `data:text/csv;charset=utf-8,${csvData}`);
+    element.style.display = "none";
+    element.setAttribute("download", filename);
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+
+}
+
+
+
+
+
+//if not currently editing (editing false)..calls edit mode.. displays edit warning and blurs screen
+//--which adds an event listener for the yes or no option
+//----if yes.. edit warning is removed, edit class is added to all cells, click listener added to cells that calls getCell()
+//----if no.. warning removed, editing set to false
+
+//if currently editing (Editing true)... editing set to false, "enter edit mode" toggled, edit class removed from all cells, clicking cell event listener removed
+
+
+
+//can probably put blur outside of if and else
 
 function editMode() {
-    tableData = document.getElementById('table-data');
+    const tableData = document.getElementById('table-data');
     // buildQuery(event); //need to fix
 
     if (editing === false) {
@@ -282,15 +319,15 @@ function editMode() {
                 cell.classList.add("edit");
             }
 
-            tableData.addEventListener("click", getCell); //click a cell to turn into text field
+            tableData.addEventListener("click", getCell, { once: true }); //click a cell to turn into text field
                 
-        });
+        }, { once: true });
 
         editNo.addEventListener('click', ()=>{
             mainContainer.classList.remove("blur");
             editWarning.style.display = "none";
             editing = false;
-        });
+        }, { once: true });
 
     } else {
         editing = false;
@@ -300,8 +337,6 @@ function editMode() {
         for (let cell of cells) {
             cell.classList.remove("edit");
         }
-
-        tableData.removeEventListener("click", getCell);
     }
 }
 
@@ -471,6 +506,7 @@ async function buildQuery(event) {
     
     //Sends Query and returns Results
     try {
+        console.log(sqlQuery);
         sqlData = await getResults(sqlQuery);
         renderResults(sqlData, 1);
     } catch {
@@ -589,55 +625,73 @@ function getID(cell) {
 
 
 
+//assumes edit mode is active, getCell only active once at first
+//gets content 
+//focuses input on the created text box
+
+//gets tableData (idk why this needs to happen again)
+
+//creates event listener for clicking outside of the cell (once)
+//creates parameter of original content (may be problematic)
+//
+
+
 function getCell(e) {
-    // if (!lastCell) {
-    //     lastCell = e.target.innerHTML;
-    // }
-
-
-    const originalCell = e.target
-    const originalContent = e.target.textContent
-    // console.log(originalCell);
-    // console.log(originalCell.dataset.attribute);
-    // console.log(originalContent);
+    originalCell = e.target  
+    originalContent = e.target.textContent
 
     //turns into text field
-    e.target.innerHTML = `<input type="text" class="edit-result" value=${e.target.textContent}>`
-    currentInput = e.target.firstChild;
-    console.log(currentInput);
-
+    activeCell = e.target;
+    activeCell.innerHTML = `<input type="text" value=${e.target.textContent}>`
+    currentInput = activeCell.firstChild;
+    currentInput.focus();
 
     tableData = document.getElementById('table-data');
-    tableData.removeEventListener("click", getCell); //no longer needs to call getCell
 
-    //creates an event listener for clicking outside the box
-    tableData.addEventListener("click", function confirmation(e) {
-        if (e.target != currentInput) {
-            editConfirmation.style.display = "flex"
-            changesYes.addEventListener('click', ()=>{
-                editConfirmation.style.display = "none";
-                console.log(currentInput.value);
-                updateRecord(originalCell, currentInput.value)
-            })
-            changesNo.addEventListener('click',()=> {
-                editConfirmation.style.display = "none";
-                console.log(originalContent);
-                console.log(currentInput);
-                currentInput.remove();
-                originalCell.textContent = originalContent;
-                tableData.addEventListener("click", getCell);
-            })
-        }
-        // e.target.removeEventListener("click", getCell);
-    })
-    
+    // tableData.removeEventListener("click", getCell); 
+
+    //creates an event listener for clicking outside the cell
+    currentInput.addEventListener("focusout", cellEditConfirmation, { once: true }); //secondary click
+    currentInput.originalContentParam = originalContent;
+}
+
+
+
+
+function cellEditConfirmation(e) {
+    originalContent = e.currentTarget.originalContentParam;
+    editConfirmation.style.display = "flex";
+
+    changesYes.addEventListener('click', yesConfirmation , { once: true })
+    changesNo.addEventListener('click', noConfirmation, { once: true })
+
+
+    function yesConfirmation() {
+        changesNo.removeEventListener('click', noConfirmation);
+        editConfirmation.style.display = "none";
+        console.log(currentInput.value);
+        updateRecord(originalCell, currentInput.value);
+        activeCell.innerHTML = currentInput.value;  
+        tableData.addEventListener("click", getCell, { once : true});
+    }
+
+    function noConfirmation() {
+        changesYes.removeEventListener('click', yesConfirmation);
+        editConfirmation.style.display = "none";
+        console.log(originalContent);
+        currentInput.remove();
+        originalCell.textContent = originalContent;
+        tableData.addEventListener("click", getCell, { once : true});
+    }
+
 
 }
 
 
 
 function updateRecord(cell, newValue) {
-
+    // changesYes.removeEventListener('click', yesConfirmation);
+    // changesNo.removeEventListener('click', noConfirmation);
     console.log(cell)
 
     let primaryKeyID = getID(cell);
@@ -647,9 +701,14 @@ function updateRecord(cell, newValue) {
 
     let updateQuery = `UPDATE ${table} SET ${attribute} = '${newValue}' WHERE ${primaryKey} = '${primaryKeyID}'`;
     console.log(updateQuery);
-
+    //run on database
+    try {
+        sqlData = getResults(updateQuery);
+        // renderResults(sqlData, 1);
+    } catch {
+        alert("Query is invalid");
+    }
 }
-
 
 
 
@@ -849,7 +908,7 @@ createTableCategories();
 // createCheckboxes();
 
 function createCheckboxes() {
-    let checkboxHTML = ""
+    let checkboxHTML = "";
 
 
     for (table of categoryToRelatedTables[tableSelection.value]) {

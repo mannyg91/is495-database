@@ -187,11 +187,13 @@ button {
     padding: 2px 15px;
 }
 
-
-
 button:hover {
     cursor: pointer;
+    border: 2px solid gray;
 }
+
+
+
 
 input {
     border: 1px solid #D1D5DB;
@@ -539,4 +541,23 @@ td:has(.edit-result) {
     height: 100%; /* Full height (cover the whole page) */
     background-color: rgba(24, 24, 24, 0.1); /* Black background with opacity */
     z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
+}
+
+
+
+
+td input:focus {
+    height: 101%;
+    width: 98%;
+    padding: 3px 0px;
+    margin: 0;
+    outline: none;
+    border: 2px solid rgb(255, 132, 0);
+    background-color: rgb(255, 251, 201);
+    text-align: center;
+}
+
+td:has(> input) {
+    padding: 0;
+    margin: 0;
 }
