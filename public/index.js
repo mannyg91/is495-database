@@ -1,211 +1,210 @@
 
 const primaryKeys = {
-    JOBTITLE : 'JobTitleID',
-    EMPLOYEETYPE : 'EmployeeTypeID',
-    COMPANY : 'CompanyID',
-    SERVICETYPE : 'ServiceTypeID',
-    ENTRYTYPE : 'EntryTypeID',
-    TIMETYPE : 'TimeTypeID',
-    BILLINGTYPE : 'BillingTypeID',
-    WORKORDERSTATUS : 'StatusID',
-    WORKORDERPRIORITY : 'PriorityID',
-    CONTACT : 'ContactID',
-    TBL_GRANT : 'GrantID',
-    SERVICERATE : 'ServiceRateID',
-    IPOSTATUS : 'IPOStatusID',
-    DEPARTMENT : 'DepartmentID',
-    CUSTOMER : 'CustomerID',
-    EMPLOYEE : 'EmployeeID',
-    IPO : 'IPOID',
-    IPORATE : 'IPORateID',
-    WORKORDER : 'WorkOrderID',
-    ASSIGNEE : 'AssigneeID',
-    TIMESHEET : 'TimesheetID',
-    WORKORDERCONTACT : 'WorkOrderContactID',
-    WORKORDERGRANT : 'WorkOrderGrantID'
+    JOBTITLE : "JobTitleID",
+    EMPLOYEETYPE : "EmployeeTypeID",
+    COMPANY : "CompanyID",
+    SERVICETYPE : "ServiceTypeID",
+    ENTRYTYPE : "EntryTypeID",
+    TIMETYPE : "TimeTypeID",
+    BILLINGTYPE : "BillingTypeID",
+    WORKORDERSTATUS : "StatusID",
+    WORKORDERPRIORITY : "PriorityID",
+    CONTACT : "ContactID",
+    TBL_GRANT : "GrantID",
+    SERVICERATE : "ServiceRateID",
+    IPOSTATUS : "IPOStatusID",
+    DEPARTMENT : "DepartmentID",
+    CUSTOMER : "CustomerID",
+    EMPLOYEE : "EmployeeID",
+    IPO : "IPOID",
+    IPORATE : "IPORateID",
+    WORKORDER : "WorkOrderID",
+    ASSIGNEE : "AssigneeID",
+    TIMESHEET : "TimesheetID",
+    WORKORDERCONTACT : "WorkOrderContactID",
+    WORKORDERGRANT : "WorkOrderGrantID"
 }
 
-
 const dbAttributes = {
-    JobTitleID : 'JOBTITLE',
-    JobTitle : 'JOBTITLE',
-    EmployeeTypeID : 'EMPLOYEETYPE',
-    EmployeeType : 'EMPLOYEETYPE',
-    CompanyID : 'COMPANY',
-    CompanyName : 'COMPANY',
-    ServiceTypeID : 'SERVICETYPE', 
-    ServiceType : 'SERVICETYPE',
-    ServiceDescription : 'SERVICETYPE',
-    EntryTypeID : 'ENTRYTYPE',
-    EntryType : 'ENTRYTYPE', 
-    Billable : 'ENTRYTYPE', 
-    TimeTypeID : 'TIMETYPE',
-    TimeType : 'TIMETYPE', 
-    Category : 'TIMETYPE', 
-    BillingTypeID : 'BILLINGTYPE',
-    BillingType : 'BILLINGTYPE',
-    StatusID : 'WORKORDERSTATUS',
-    StatusType : 'WORKORDERSTATUS',
-    PriorityID : 'WORKORDERPRIORITY',
-    PriorityType : 'WORKORDERPRIORITY',
-    ContactID : 'CONTACT',
-    ContactFirstName : 'CONTACT', 
-    ContactLastName : 'CONTACT',
-    ContactEmail : 'CONTACT',
-    ContactPhone : 'CONTACT',
-    ServiceRateID : 'SERVICERATE',
-    RateStartDate : 'SERVICERATE', 
-    RateEndDate : 'SERVICERATE',
-    FiscalYear : 'SERVICERATE', 
-    ServiceRate : 'SERVICERATE',
-    IPOStatusID : 'IPOSTATUS',
-    IPOStatus : 'IPOSTATUS',
-    DepartmentID : 'DEPARTMENT',
-    DepartmentName : 'DEPARTMENT',
-    CompanyID_DEPARTMENT : 'DEPARTMENT', 
-    CustomerID : 'CUSTOMER',
-    CustFirstName : 'CUSTOMER',
-    CustLastName : 'CUSTOMER',
-    DepartmentID_CUSTOMER : 'CUSTOMER', 
-    CustEmail : 'CUSTOMER',
-    CustPhone : 'CUSTOMER',
-    CustAddress : 'CUSTOMER',
-    CustCity : 'CUSTOMER',
-    CustState : 'CUSTOMER',
-    CustZip : 'CUSTOMER', 
-    EmployeeID : 'EMPLOYEE',
-    EmpFirstName : 'EMPLOYEE',
-    EmpLastName : 'EMPLOYEE',
-    DepartmentID_EMPLOYEE : 'EMPLOYEE',
-    EmpEmail : 'EMPLOYEE',
-    JobTitleID_EMPLOYEE : 'EMPLOYEE',
-    EmpPhone : 'EMPLOYEE',
-    EmpAddress : 'EMPLOYEE',
-    EmpCity : 'EMPLOYEE',
-    EmpState : 'EMPLOYEE',
-    EmpZipCode : 'EMPLOYEE',
-    EmployeeTypeID_EMPLOYEE : 'EMPLOYEE',
-    IPOID : 'IPO',
-    IPODate : 'IPO',
-    IPOCreationDate : 'IPO',
-    IPOStatusID_IPO : 'IPO', 
-    IPOPaymentDate : 'IPO',
-    IPORateID : 'IPORATE',
-    ServiceRateID_IPORATE : 'IPORATE',
-    IPOID_IPORATE : 'IPORATE',
-    GrantID : 'TBL_GRANT',
-    GrantName : 'TBL_GRANT',
-    Budget : 'TBL_GRANT',
-    WorkOrderID : 'WORKORDER',
-    EmployeeID_WORKORDER : 'WORKORDER',
-    CustomerID_WORKORDER : 'WORKORDER',
-    PriorityID_WORKORDER : 'WORKORDER',
-    StatusID_WORKORDER : 'WORKORDER',
-    WorkOrderSubmittedDate : 'WORKORDER',
-    WorkOrderDescription : 'WORKORDER',
-    WorkOrderStartDate : 'WORKORDER',
-    WorkOrderDueDate : 'WORKORDER',
-    WorkOrderClosedDate : 'WORKORDER',
-    WorkOrderNotes : 'WORKORDER', 
-    GrantID_WORKORDER : 'WORKORDER',
-    ProjectName : 'WORKORDER', 
-    AssigneeID : 'ASSIGNEE',
-    EmployeeID_ASSIGNEE : 'ASSIGNEE',
-    WorkOrderID_ASSIGNEE : 'ASSIGNEE',
-    TimeSheetID : 'TIMESHEET',
-    WorkOrderID_TIMESHEET : 'TIMESHEET',
-    EmployeeID_TIMESHEET : 'TIMESHEET',
-    EntryTypeID_TIMESHEET : 'TIMESHEET',
-    BillingTypeID_TIMESHEET : 'TIMESHEET',
-    TimeTypeID_TIMESHEET : 'TIMESHEET',
-    ServiceTypeID_TIMESHEET : 'TIMESHEET',
-    IPOID_TIMESHEET : 'TIMESHEET',
-    TimeSheetDate : 'TIMESHEET',
-    TimeWorkedHours : 'TIMESHEET',
-    WorkPerformed : 'TIMESHEET',
-    WorkOrderContactID : 'WORKORDERCONTACT',
-    ContactID_WORKORDERCONTACT : 'WORKORDERCONTACT',
-    WorkOrderID_WORKORDERCONTACT : 'WORKORDERCONTACT',
-    WorkOrderGrantID : 'WORKORDERGRANT',
-    WorkOrderID_WORKORDERGRANT : 'WORKORDERGRANT',
-    GrantID_WORKORDERGRANT : 'WORKORDERGRANT'
+    JobTitleID : "JOBTITLE",
+    JobTitle : "JOBTITLE",
+    EmployeeTypeID : "EMPLOYEETYPE",
+    EmployeeType : "EMPLOYEETYPE",
+    CompanyID : "COMPANY",
+    CompanyName : "COMPANY",
+    ServiceTypeID : "SERVICETYPE",
+    ServiceType : "SERVICETYPE",
+    ServiceDescription : "SERVICETYPE",
+    EntryTypeID : "ENTRYTYPE",
+    EntryType : "ENTRYTYPE",
+    Billable : "ENTRYTYPE",
+    TimeTypeID : "TIMETYPE",
+    TimeType : "TIMETYPE",
+    Category : "TIMETYPE",
+    BillingTypeID : "BILLINGTYPE",
+    BillingType : "BILLINGTYPE",
+    StatusID : "WORKORDERSTATUS",
+    StatusType : "WORKORDERSTATUS",
+    PriorityID : "WORKORDERPRIORITY",
+    PriorityType : "WORKORDERPRIORITY",
+    ContactID : "CONTACT",
+    ContactFirstName : "CONTACT",
+    ContactLastName : "CONTACT",
+    ContactEmail : "CONTACT",
+    ContactPhone : "CONTACT",
+    ServiceRateID : "SERVICERATE",
+    RateStartDate : "SERVICERATE",
+    RateEndDate : "SERVICERATE",
+    FiscalYear : "SERVICERATE",
+    ServiceRate : "SERVICERATE",
+    IPOStatusID : "IPOSTATUS",
+    IPOStatus : "IPOSTATUS",
+    DepartmentID : "DEPARTMENT",
+    DepartmentName : "DEPARTMENT",
+    CompanyID_DEPARTMENT : "DEPARTMENT",
+    CustomerID : "CUSTOMER",
+    CustFirstName : "CUSTOMER",
+    CustLastName : "CUSTOMER",
+    DepartmentID_CUSTOMER : "CUSTOMER",
+    CustEmail : "CUSTOMER",
+    CustPhone : "CUSTOMER",
+    CustAddress : "CUSTOMER",
+    CustCity : "CUSTOMER",
+    CustState : "CUSTOMER",
+    CustZip : "CUSTOMER",
+    EmployeeID : "EMPLOYEE",
+    EmpFirstName : "EMPLOYEE",
+    EmpLastName : "EMPLOYEE",
+    DepartmentID_EMPLOYEE : "EMPLOYEE",
+    EmpEmail : "EMPLOYEE",
+    JobTitleID_EMPLOYEE : "EMPLOYEE",
+    EmpPhone : "EMPLOYEE",
+    EmpAddress : "EMPLOYEE",
+    EmpCity : "EMPLOYEE",
+    EmpState : "EMPLOYEE",
+    EmpZipCode : "EMPLOYEE",
+    EmployeeTypeID_EMPLOYEE : "EMPLOYEE",
+    IPOID : "IPO",
+    IPODate : "IPO",
+    IPOCreationDate : "IPO",
+    IPOStatusID_IPO : "IPO",
+    IPOPaymentDate : "IPO",
+    IPORateID : "IPORATE",
+    ServiceRateID_IPORATE : "IPORATE",
+    IPOID_IPORATE : "IPORATE",
+    GrantID : "TBL_GRANT",
+    GrantName : "TBL_GRANT",
+    Budget : "TBL_GRANT",
+    WorkOrderID : "WORKORDER",
+    EmployeeID_WORKORDER : "WORKORDER",
+    CustomerID_WORKORDER : "WORKORDER",
+    PriorityID_WORKORDER : "WORKORDER",
+    StatusID_WORKORDER : "WORKORDER",
+    WorkOrderSubmittedDate : "WORKORDER",
+    WorkOrderDescription : "WORKORDER",
+    WorkOrderStartDate : "WORKORDER",
+    WorkOrderDueDate : "WORKORDER",
+    WorkOrderClosedDate : "WORKORDER",
+    WorkOrderNotes : "WORKORDER",
+    GrantID_WORKORDER : "WORKORDER",
+    ProjectName : "WORKORDER",
+    AssigneeID : "ASSIGNEE",
+    EmployeeID_ASSIGNEE : "ASSIGNEE",
+    WorkOrderID_ASSIGNEE : "ASSIGNEE",
+    TimeSheetID : "TIMESHEET",
+    WorkOrderID_TIMESHEET : "TIMESHEET",
+    EmployeeID_TIMESHEET : "TIMESHEET",
+    EntryTypeID_TIMESHEET : "TIMESHEET",
+    BillingTypeID_TIMESHEET : "TIMESHEET",
+    TimeTypeID_TIMESHEET : "TIMESHEET",
+    ServiceTypeID_TIMESHEET : "TIMESHEET",
+    IPOID_TIMESHEET : "TIMESHEET",
+    TimeSheetDate : "TIMESHEET",
+    TimeWorkedHours : "TIMESHEET",
+    WorkPerformed : "TIMESHEET",
+    WorkOrderContactID : "WORKORDERCONTACT",
+    ContactID_WORKORDERCONTACT : "WORKORDERCONTACT",
+    WorkOrderID_WORKORDERCONTACT : "WORKORDERCONTACT",
+    WorkOrderGrantID : "WORKORDERGRANT",
+    WorkOrderID_WORKORDERGRANT : "WORKORDERGRANT",
+    GrantID_WORKORDERGRANT : "WORKORDERGRANT"
 };
 
 const tableToAttributes = {
-    JOBTITLE : ['JobTitleID','JobTitle'],
-    EMPLOYEETYPE : ['EmployeeTypeID', 'EmployeeType'],
-    COMPANY : ['CompanyID','CompanyName'],
-    SERVICETYPE : ['ServiceTypeID','ServiceType','ServiceDescription'],
-    ENTRYTYPE : ['EntryTypeID', 'EntryType', 'Billable'],
-    TIMETYPE : ['TimeTypeID', 'TimeType', 'Category'],
-    BILLINGTYPE : ['BillingTypeID', 'BillingType'],
-    WORKORDERSTATUS : ['StatusID','StatusType'],
-    WORKORDERPRIORITY : ['PriorityID', 'PriorityType'],
-    CONTACT : ['ContactID','ContactFirstName','ContactLastName','ContactEmail','ContactPhone'],
-    SERVICERATE : ['ServiceRateID','RateStartDate','RateEndDate','FiscalYear','ServiceRate'],
-    IPOSTATUS : ['IPOStatusID', 'IPOStatus'],
-    // DEPARTMENT : ['DepartmentID', 'DepartmentName','CompanyID_DEPARTMENT'],
-    DEPARTMENT : ['DepartmentID', 'DepartmentName'],
-    // CUSTOMER : ['CustomerID','CustFirstName','CustLastName','CustEmail','CustPhone','CustAddress','CustCity','CustState','CustZip','DepartmentID_CUSTOMER'],
-    CUSTOMER : ['CustomerID','CustFirstName','CustLastName','CustEmail','CustPhone','CustAddress','CustCity','CustState','CustZip'],
-    // EMPLOYEE : ['EmployeeID','EmpFirstName','EmpLastName','EmpEmail','EmpPhone','EmpAddress','EmpCity','EmpState','EmpZipCode','DepartmentID_EMPLOYEE','JobTitleID_EMPLOYEE','EmployeeTypeID_EMPLOYEE'],
-    EMPLOYEE : ['EmployeeID','EmpFirstName','EmpLastName','EmpEmail','EmpPhone','EmpAddress','EmpCity','EmpState','EmpZipCode'],
-    // IPO : ['IPOID','IPODate','IPOCreationDate','IPOPaymentDate','IPOStatusID_IPO'],
-    IPO : ['IPOID','IPODate','IPOCreationDate','IPOPaymentDate'],
-    // IPORATE : ['IPORateID', 'ServiceRateID_IPORATE','IPOID_IPORATE'],
-    IPORATE : ['IPORateID'],
-    TBL_GRANT : ['GrantID', 'GrantName', 'Budget'],
-    // WORKORDER : ['WorkOrderID', 'WorkOrderSubmittedDate','WorkOrderDescription','WorkOrderStartDate','WorkOrderDueDate','WorkOrderClosedDate','WorkOrderNotes','ProjectName','EmployeeID_WORKORDER','CustomerID_WORKORDER','PriorityID_WORKORDER','StatusID_WORKORDER','GrantID_WORKORDER'],
-    WORKORDER : ['WorkOrderID', 'WorkOrderSubmittedDate','WorkOrderDescription','WorkOrderStartDate','WorkOrderDueDate','WorkOrderClosedDate','WorkOrderNotes','ProjectName'],
-    // ASSIGNEE : ['AssigneeID','EmployeeID_ASSIGNEE','WorkOrderID_ASSIGNEE'],
-    ASSIGNEE : ['AssigneeID'],
-    // TIMESHEET: ['TimeSheetID','TimeSheetDate','TimeWorkedHours','WorkPerformed','WorkOrderID_TIMESHEET','EmployeeID_TIMESHEET','EntryTypeID_TIMESHEET','BillingTypeID_TIMESHEET','TimeTypeID_TIMESHEET','ServiceTypeID_TIMESHEET','IPOID_TIMESHEET'],
-    TIMESHEET: ['TimeSheetID','TimeSheetDate','TimeWorkedHours','WorkPerformed'],
-    // WORKORDERCONTACT : ['WorkOrderContactID', 'ContactID_WORKORDERCONTACT', 'WorkOrderID_WORKORDERCONTACT'],
-    WORKORDERCONTACT : ['WorkOrderContactID'],
-    // WORKORDERGRANT : ['WorkOrderGrantID','WorkOrderID_WORKORDERGRANT','GrantID_WORKORDERGRANT']
-    WORKORDERGRANT : ['WorkOrderGrantID']
+    JOBTITLE : ["JobTitleID","JobTitle"],
+    EMPLOYEETYPE : ["EmployeeTypeID","EmployeeType"],
+    COMPANY : ["CompanyID","CompanyName"],
+    SERVICETYPE : ["ServiceTypeID","ServiceType","ServiceDescription"],
+    ENTRYTYPE : ["EntryTypeID","EntryType","Billable"],
+    TIMETYPE : ["TimeTypeID","TimeType","Category"],
+    BILLINGTYPE : ["BillingTypeID","BillingType"],
+    WORKORDERSTATUS : ["StatusID","StatusType"],
+    WORKORDERPRIORITY : ["PriorityID","PriorityType"],
+    CONTACT : ["ContactID","ContactFirstName","ContactLastName","ContactEmail","ContactPhone"],
+    SERVICERATE : ["ServiceRateID","RateStartDate","RateEndDate","FiscalYear","ServiceRate"],
+    IPOSTATUS : ["IPOStatusID","IPOStatus"],
+    // DEPARTMENT : ["DepartmentID","DepartmentName","CompanyID_DEPARTMENT"],
+    DEPARTMENT : ["DepartmentID","DepartmentName"],
+    // CUSTOMER : ["CustomerID","CustFirstName","CustLastName","CustEmail","CustPhone","CustAddress","CustCity","CustState","CustZip","DepartmentID_CUSTOMER"],
+    CUSTOMER : ["CustomerID","CustFirstName","CustLastName","CustEmail","CustPhone","CustAddress","CustCity","CustState","CustZip"],
+    // EMPLOYEE : ["EmployeeID","EmpFirstName","EmpLastName","EmpEmail","EmpPhone","EmpAddress","EmpCity","EmpState","EmpZipCode","DepartmentID_EMPLOYEE","JobTitleID_EMPLOYEE","EmployeeTypeID_EMPLOYEE"],
+    EMPLOYEE : ["EmployeeID","EmpFirstName","EmpLastName","EmpEmail","EmpPhone","EmpAddress","EmpCity","EmpState","EmpZipCode"],
+    // IPO : ["IPOID","IPODate","IPOCreationDate","IPOPaymentDate","IPOStatusID_IPO"],
+    IPO : ["IPOID","IPODate","IPOCreationDate","IPOPaymentDate"],
+    // IPORATE : ["IPORateID","ServiceRateID_IPORATE","IPOID_IPORATE"],
+    IPORATE : ["IPORateID"],
+    TBL_GRANT : ["GrantID","GrantName","Budget"],
+    // WORKORDER : ["WorkOrderID","WorkOrderSubmittedDate","WorkOrderDescription","WorkOrderStartDate","WorkOrderDueDate","WorkOrderClosedDate","WorkOrderNotes","ProjectName","EmployeeID_WORKORDER","CustomerID_WORKORDER","PriorityID_WORKORDER","StatusID_WORKORDER","GrantID_WORKORDER"],
+    WORKORDER : ["WorkOrderID","WorkOrderSubmittedDate","WorkOrderDescription","WorkOrderStartDate","WorkOrderDueDate","WorkOrderClosedDate","WorkOrderNotes","ProjectName"],
+    // ASSIGNEE : ["AssigneeID","EmployeeID_ASSIGNEE","WorkOrderID_ASSIGNEE"],
+    ASSIGNEE : ["AssigneeID"],
+    // TIMESHEET: ["TimeSheetID","TimeSheetDate","TimeWorkedHours","WorkPerformed","WorkOrderID_TIMESHEET","EmployeeID_TIMESHEET","EntryTypeID_TIMESHEET","BillingTypeID_TIMESHEET","TimeTypeID_TIMESHEET","ServiceTypeID_TIMESHEET","IPOID_TIMESHEET"],
+    TIMESHEET: ["TimeSheetID","TimeSheetDate","TimeWorkedHours","WorkPerformed"],
+    // WORKORDERCONTACT : ["WorkOrderContactID","ContactID_WORKORDERCONTACT","WorkOrderID_WORKORDERCONTACT"],
+    WORKORDERCONTACT : ["WorkOrderContactID"],
+    // WORKORDERGRANT : ["WorkOrderGrantID","WorkOrderID_WORKORDERGRANT","GrantID_WORKORDERGRANT"]
+    WORKORDERGRANT : ["WorkOrderGrantID"]
 }
 
 
 //EXCLUDED COMPANY BECAUSE OF SECOND-LEVEL JOINS
 const categoryToRelatedTables = {
-    "CUSTOMER" : ['CUSTOMER','DEPARTMENT'],
-    "EMPLOYEE" : ['EMPLOYEE','JOBTITLE','EMPLOYEETYPE','DEPARTMENT'],
-    "IPO" : ['IPO','IPOSTATUS'],
-    "IPORATE" : ['IPORATE','SERVICERATE','IPO'],
-    "TIMESHEET" : ['TIMESHEET','EMPLOYEE','WORKORDER','SERVICETYPE','ENTRYTYPE','TIMETYPE','BILLINGTYPE'],
-    "WORKORDER": ['WORKORDER','WORKORDERSTATUS','WORKORDERPRIORITY'],
-    "ASSIGNEE": ['ASSIGNEE','EMPLOYEE','WORKORDER'],
-    "WORKORDERCONTACT" : ['WORKORDERCONTACT','WORKORDER','CONTACT'],
-    "WORKORDERGRANT": ['WORKORDERGRANT','WORKORDER','TBL_GRANT']
+    "CUSTOMER" : ["CUSTOMER","DEPARTMENT"],
+    "EMPLOYEE" : ["EMPLOYEE","JOBTITLE","EMPLOYEETYPE","DEPARTMENT"],
+    "IPO" : ["IPO","IPOSTATUS"],
+    "IPORATE" : ["IPORATE","SERVICERATE","IPO"],
+    "TIMESHEET" : ["TIMESHEET","EMPLOYEE","WORKORDER","SERVICETYPE","ENTRYTYPE","TIMETYPE","BILLINGTYPE"],
+    "WORKORDER": ["WORKORDER","WORKORDERSTATUS","WORKORDERPRIORITY"],
+    "ASSIGNEE": ["ASSIGNEE","EMPLOYEE","WORKORDER"],
+    "WORKORDERCONTACT" : ["WORKORDERCONTACT","WORKORDER","CONTACT"],
+    "WORKORDERGRANT": ["WORKORDERGRANT","WORKORDER","TBL_GRANT"]
 }
 
 
 
-const tableForm = document.getElementById('checkbox-container');
-const submitBtn = document.getElementById('submit-btn');
-const sqlCode = document.getElementById('sql-code');
-const results = document.getElementById('results');
-const pagination = document.getElementById('pagination');
+const tableForm = document.getElementById("checkbox-container");
+const submitBtn = document.getElementById("submit-btn");
+const sqlCode = document.getElementById("sql-code");
+const results = document.getElementById("results");
+const pagination = document.getElementById("pagination");
 const pageSummary = document.getElementById("page-summary");
 const selector = document.getElementById("selector");
-const tableSelection = document.getElementById('table-selection');
-const whereOptions = document.getElementById('where-options');
-const resultsPerPageOptions = document.getElementById('results-per-page');
-const sqlBtn = document.getElementById('sql-btn');
-const editBtn = document.getElementById('edit-btn');
-const exportBtn = document.getElementById('export-btn');
-const editWarning = document.getElementById('edit-warning');
-const editYes = document.getElementById('edit-yes');
-const editNo = document.getElementById('edit-no');
-const editConfirmation = document.getElementById('edit-confirmation');
-const changesYes = document.getElementById('changes-yes');
-const changesNo = document.getElementById('changes-no');
-const mainContainer = document.getElementById('main-container');
-const codeContainer = document.getElementById('code-container');
+const tableSelection = document.getElementById("table-selection");
+const whereOptions = document.getElementById("where-options");
+const resultsPerPageOptions = document.getElementById("results-per-page");
+const sqlBtn = document.getElementById("sql-btn");
+const editBtn = document.getElementById("edit-btn");
+const exportBtn = document.getElementById("export-btn");
+const editWarning = document.getElementById("edit-warning");
+const editYes = document.getElementById("edit-yes");
+const editNo = document.getElementById("edit-no");
+const editConfirmation = document.getElementById("edit-confirmation");
+const changesYes = document.getElementById("changes-yes");
+const changesNo = document.getElementById("changes-no");
+const mainContainer = document.getElementById("main-container");
+const codeContainer = document.getElementById("code-container");
 
-resultsPerPageOptions.addEventListener('change', function() {
+resultsPerPageOptions.addEventListener("change", function() {
     resultsPerPage = parseInt(resultsPerPageOptions.value);
 
     // let startingSlice = 0;
@@ -228,7 +227,7 @@ let whereTxt;
 let orderTxt = "";
 let orderDirection = "ASC";
 let sqlQuery;
-let startingTable = 'CUSTOMER';
+let startingTable = "CUSTOMER";
 let columns = [];
 let sqlData = {};
 let startingSlice = 0;
@@ -246,11 +245,11 @@ let originalContent;
 
 
 let whereHTML = selector.innerHTML;
-submitBtn.addEventListener('click', buildQuery);
+submitBtn.addEventListener("click", buildQuery);
 submitBtn.click();
 
 
-sqlBtn.addEventListener('click', ()=>{
+sqlBtn.addEventListener("click", ()=>{
     if (codeContainer.style.display === "none") {
         codeContainer.style.display = "flex";
     } else {
@@ -260,8 +259,8 @@ sqlBtn.addEventListener('click', ()=>{
 sqlBtn.click();
 
 
-editBtn.addEventListener('click', editMode);
-exportBtn.addEventListener('click', exportCSV);
+editBtn.addEventListener("click", editMode);
+exportBtn.addEventListener("click", exportCSV);
 
 
 
@@ -298,7 +297,7 @@ function exportCSV() {
 //can probably put blur outside of if and else
 
 function editMode() {
-    const tableData = document.getElementById('table-data');
+    const tableData = document.getElementById("table-data");
     // buildQuery(event); //need to fix
 
     if (editing === false) {
@@ -306,7 +305,7 @@ function editMode() {
         editWarning.style.display = "flex"
         mainContainer.classList.add("blur");
 
-        editYes.addEventListener('click', ()=>{
+        editYes.addEventListener("click", ()=>{
             editing = true;
             editWarning.style.display = "none";
             mainContainer.classList.remove("blur");
@@ -323,7 +322,7 @@ function editMode() {
                 
         }, { once: true });
 
-        editNo.addEventListener('click', ()=>{
+        editNo.addEventListener("click", ()=>{
             mainContainer.classList.remove("blur");
             editWarning.style.display = "none";
             editing = false;
@@ -384,7 +383,7 @@ function transformDataFormat(cell) {
 
     // let newData = attribute;
     // if (attribute.includes("Date")) {
-    //     newAttribute = `convert(varchar, ${attribute}, 101)  as '${attribute}'`;
+    //     newAttribute = `convert(varchar, ${attribute}, 101)  as "${attribute}"`;
     //     const index = attributes.indexOf(attribute);
     //     if (index !== -1) {
     //         attributes[index] = newAttribute;
@@ -431,15 +430,15 @@ function buildSelect(attributes) {
 }
 
 // function buildFrom() {
-//     categoryArr = document.getElementById('selector').getElementsByTagName('select');
-//     inputArr = document.getElementsByClassName('where');
+//     categoryArr = document.getElementById("selector").getElementsByTagName("select");
+//     inputArr = document.getElementsByClassName("where");
 //     if (inputArr[0].value != "") {
 //         whereTxt = "WHERE " 
 //         for(let i = 0; i < optionArr.length; i++) {
 //             if (i === optionArr.length - 1)
-//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
+//                 whereTxt += `${optionArr[i].value} = "${inputArr[i].value}"\n`
 //             else
-//                 whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
+//                 whereTxt += `${optionArr[i].value} = "${inputArr[i].value}" AND\n` 
 //         }
 //     }
 //     else {
@@ -462,15 +461,15 @@ function buildJoins(checkedClasses) {
 }
 
 function buildWhere() {
-    optionArr = document.getElementById('where-condition').getElementsByTagName('select');
-    inputArr = document.getElementsByClassName('where');
+    optionArr = document.getElementById("where-condition").getElementsByTagName("select");
+    inputArr = document.getElementsByClassName("where");
     if (inputArr[0].value != "") {
         whereTxt = "WHERE " 
         for(let i = 0; i < optionArr.length; i++) {
             if (i === optionArr.length - 1)
-                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}'\n`
+                whereTxt += `${optionArr[i].value} = "${inputArr[i].value}"\n`
             else
-                whereTxt += `${optionArr[i].value} = '${inputArr[i].value}' AND\n` 
+                whereTxt += `${optionArr[i].value} = "${inputArr[i].value}" AND\n` 
         }
     }
     else {
@@ -520,9 +519,9 @@ async function getResults(code) {
 
     //response is the product of sending request with "code"
     const response = await fetch("/", {
-        method: 'POST',
+        method: "POST",
         headers: {
-        'Content-Type': 'text/plain'
+        "Content-Type": "text/plain"
         },
         body: code,})
     
@@ -560,7 +559,7 @@ function renderResults(data, page) {
             let cell = headerRow.insertCell();
             cell.innerHTML = cellData;
 
-            cell.addEventListener('click', (e) => {
+            cell.addEventListener("click", (e) => {
 
                 orderDirection = orderDirection === "ASC" ? "DESC" : "ASC"
 
@@ -572,7 +571,7 @@ function renderResults(data, page) {
 
         //creates body:
         let tbody = results.createTBody()
-        tbody.setAttribute('id','table-data');
+        tbody.setAttribute("id","table-data");
         
 
         for (row of data.recordset.slice(startingSlice, startingSlice + resultsPerPage)) {
@@ -646,7 +645,7 @@ function getCell(e) {
     currentInput = activeCell.firstChild;
     currentInput.focus();
 
-    tableData = document.getElementById('table-data');
+    tableData = document.getElementById("table-data");
 
     // tableData.removeEventListener("click", getCell); 
 
@@ -662,12 +661,12 @@ function cellEditConfirmation(e) {
     originalContent = e.currentTarget.originalContentParam;
     editConfirmation.style.display = "flex";
 
-    changesYes.addEventListener('click', yesConfirmation , { once: true })
-    changesNo.addEventListener('click', noConfirmation, { once: true })
+    changesYes.addEventListener("click", yesConfirmation , { once: true })
+    changesNo.addEventListener("click", noConfirmation, { once: true })
 
 
     function yesConfirmation() {
-        changesNo.removeEventListener('click', noConfirmation);
+        changesNo.removeEventListener("click", noConfirmation);
         editConfirmation.style.display = "none";
         console.log(currentInput.value);
         updateRecord(originalCell, currentInput.value);
@@ -676,7 +675,7 @@ function cellEditConfirmation(e) {
     }
 
     function noConfirmation() {
-        changesYes.removeEventListener('click', yesConfirmation);
+        changesYes.removeEventListener("click", yesConfirmation);
         editConfirmation.style.display = "none";
         console.log(originalContent);
         currentInput.remove();
@@ -690,8 +689,8 @@ function cellEditConfirmation(e) {
 
 
 function updateRecord(cell, newValue) {
-    // changesYes.removeEventListener('click', yesConfirmation);
-    // changesNo.removeEventListener('click', noConfirmation);
+    // changesYes.removeEventListener("click", yesConfirmation);
+    // changesNo.removeEventListener("click", noConfirmation);
     console.log(cell)
 
     let primaryKeyID = getID(cell);
@@ -699,7 +698,7 @@ function updateRecord(cell, newValue) {
     let table = cell.dataset.table;
     let primaryKey = primaryKeys[table];
 
-    let updateQuery = `UPDATE ${table} SET ${attribute} = '${newValue}' WHERE ${primaryKey} = '${primaryKeyID}'`;
+    let updateQuery = `UPDATE ${table} SET ${attribute} = "${newValue}" WHERE ${primaryKey} = "${primaryKeyID}"`;
     console.log(updateQuery);
     //run on database
     try {
@@ -721,14 +720,14 @@ function paginate(totalPages) {
     const maxPages = 10;
     let countPages = 0;
 
-    const prevContainer = document.createElement('li');
-    const prevBtn = document.createElement('button');
-    const nextContainer = document.createElement('li');
-    const nextBtn = document.createElement('button');
+    const prevContainer = document.createElement("li");
+    const prevBtn = document.createElement("button");
+    const nextContainer = document.createElement("li");
+    const nextBtn = document.createElement("button");
 
     prevBtn.setAttribute("type","button");
     prevBtn.textContent = "«"
-    prevBtn.addEventListener('click', ()=> {
+    prevBtn.addEventListener("click", ()=> {
         startPage -= 10;
         currentPage = startPage;
         renderResults(sqlData, startPage);
@@ -738,17 +737,20 @@ function paginate(totalPages) {
     pagination.appendChild(prevContainer);
 
     //turns totalPages into an iterable array //could slice the array here rather than iterate through entire
+
+    //iterates through range of total pages,
+    //
     for (page of Array(totalPages).keys()) {
         page += startPage;
         if (countPages < maxPages && page <= totalPages) {
 
-            const pageContainer = document.createElement('li');
-            const pageBtn = document.createElement('button');
+            const pageContainer = document.createElement("li");
+            const pageBtn = document.createElement("button");
 
             pageBtn.setAttribute("type","button");
             pageBtn.setAttribute("value",page);
             pageBtn.textContent = `${page}`
-            pageBtn.addEventListener('click', ()=> {
+            pageBtn.addEventListener("click", ()=> {
                 currentPage = parseInt(pageBtn.value);
                 renderResults(sqlData, pageBtn.value);
             }) 
@@ -767,11 +769,14 @@ function paginate(totalPages) {
             break;
         }
         countPages ++;
+        if (totalPages <= 10) {
+            nextBtn.disabled = true;
+        }
     }
 
     nextBtn.setAttribute("type","button");
     nextBtn.textContent = "»"
-    nextBtn.addEventListener('click', ()=> {
+    nextBtn.addEventListener("click", ()=> {
         startPage += 10;
         currentPage = startPage;
         renderResults(sqlData, startPage);
@@ -839,8 +844,13 @@ function getAttributeClasses(){
 
 
 
+//runs in the beginning
+function addWhereOptions() {
+    console.log(tableSelection.value)
+    console.log(categoryToRelatedTables)
+    console.log(categoryToRelatedTables[tableSelection.value])
+    
 
-function addInputField() {
     for (table of categoryToRelatedTables[tableSelection.value]) {
         for (attribute of tableToAttributes[table]) {
             whereOptions.innerHTML += `
@@ -852,9 +862,13 @@ function addInputField() {
 
 
 
-function removeInputField() {
-    document.getElementById('selector').removeChild(selector.lastElementChild)
-}
+// function removeInputField() {
+//     document.getElementById("selector").removeChild(selector.lastElementChild)
+// }
+
+// function addInputField() {
+
+// }
 
 
 function createTableCategories() {
@@ -875,13 +889,13 @@ function createTableCategories() {
     //     `
     // }
     tableSelection.innerHTML += categoriesHTML;
-    tableSelection.addEventListener('change', function() {
-        
+    tableSelection.addEventListener("change", function() {
+        currentPage = 1;
         tableForm.innerHTML = "";
         whereOptions.innerHTML = "";
         orderTxt = "";
         createCheckboxes();
-        addInputField();
+        addWhereOptions();
         submitBtn.click();
      });
 }
@@ -889,23 +903,6 @@ function createTableCategories() {
 createTableCategories();
 
 
-// function createCheckboxes() {
-//     let checkboxHTML = ""
-//     for (let attribute in dbAttributes) {
-//         checkboxHTML += `
-//         <input
-//             type="checkbox"
-//             id="${attribute}"
-//             name="${attribute}"
-//             value="${attribute}"
-//             class="${dbAttributes[attribute]}" />
-//         <label for="${attribute}">${attribute}</label>
-//         `
-//     }
-//     tableForm.innerHTML += checkboxHTML;
-// }
-
-// createCheckboxes();
 
 function createCheckboxes() {
     let checkboxHTML = "";

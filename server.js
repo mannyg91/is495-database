@@ -26,11 +26,11 @@ function getDatabase(req, res, next) {
       database: 'Agile-Alpha',
       server: 'DESKTOP-7T1COHN\\SQLEXPRESS',
       driver: 'msnodesqlv8',
+
       options:{
           trustedConnection:true
       }
   };
-
   sql.connect(config,function(err){
       if(err){
           console.log(err);
