@@ -90,6 +90,16 @@
                     <button id="export-btn" class="standard-btn" type="button">Export CSV</button>
                     <button id="edit-btn" class="standard-btn" type="button">Edit Mode</button>
                 </div>
+
+
+                <div class="saved-queries">
+                    <h4>Saved Queries:</h4>
+    
+                    <select id="saved-selection">
+                        <option value=""></option>
+                    </select>
+                </div>
+
             </div>
 
             <div id="code-container">
@@ -101,12 +111,18 @@
 
             </div>
 
+
+
         </form>
 
 
         <main>
             <div class="fixed-table">
                 <table class="results" id="results">
+                    <div id="initial">
+                        <img src="./assets/search.png">
+                        <span>Select a category to get records</span>
+                    </div>
                 </table>
             </div>
 

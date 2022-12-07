@@ -181,6 +181,32 @@ const categoryToRelatedTables = {
 }
 
 
+let presetQueries = {
+    "Summarized Time" : 'SELECT Timesheet, SUM(TimeWorkedHours) AS "Hours Worked" FROM TIMESHEET LEFT OUTER JOIN WORKORDER ON WorkorderID = WorkOrderID_TIMESHEET GROUP BY TimeSheetID',
+    "Grant Status": 'SELECT GrantID_WORKORDER, ProjectName, GrantName, Budget, StatusID_WORKORDER, FROM WORKORDER LEFT OUTER JOIN WORKORDER On StatusID_WORKORDER = StatusID LEFT OUTER JOIN WORKORDER ON GrantID_WORKORDER = GrantID LEFT OUTER JOIN WORKORDERGRANT ON WorkOrderGrantID = GrantID',
+    "Customer Contacts": 'SELECT WorkOrderID, ProjectName, CustFirstName, CustLastName, FROM WORKORDER LEFT OUTER JOIN CUSTOMER ON CustomerID_WORKORDER = WorkOrderID',
+    "Unbillable Entries": `SELECT TimeSheetID, WorkOrderID_TIMESHEET as 'WorkOrderID', EmployeeID_TIMESHEET as 'EmployeeID', EmpFirstName, EmpLastName, TimeSheetDate, TimeWorkedHours 'Hours Worked', EntryType, WorkPerformed,
+    CASE WHEN Billable = 1 THEN 'Yes' ELSE 'No' END AS Billable,
+    BillingType, TimeType, Category, ServiceType, ServiceDescription 
+    FROM TIMESHEET
+    LEFT OUTER JOIN IPO
+    ON IPOID_TIMESHEET = IPO.IPOID
+    LEFT OUTER JOIN SERVICETYPE
+    ON ServiceTypeID_TIMESHEET = SERVICETYPE.ServiceTypeID
+    LEFT OUTER JOIN ENTRYTYPE
+    ON EntryTypeID_TIMESHEET = ENTRYTYPE.EntryTypeID
+    LEFT OUTER JOIN TIMETYPE
+    ON TimeTypeID_TIMESHEET = TIMETYPE.TimeTypeID
+    LEFT OUTER JOIN BILLINGTYPE
+    ON BillingTypeID_TIMESHEET = BILLINGTYPE.BillingTypeID
+    LEFT OUTER JOIN WORKORDER
+    ON WorkOrderID_TIMESHEET = WORKORDER.WorkOrderID
+    LEFT OUTER JOIN EMPLOYEE
+    ON EmployeeID_TIMESHEET = EMPLOYEE.EmployeeID
+    WHERE Billable = 0`
+}
+
+
 
 const tableForm = document.getElementById("checkbox-container");
 const submitBtn = document.getElementById("submit-btn");
@@ -190,6 +216,7 @@ const pagination = document.getElementById("pagination");
 const pageSummary = document.getElementById("page-summary");
 const selector = document.getElementById("selector");
 const tableSelection = document.getElementById("table-selection");
+const savedSelection = document.getElementById('saved-selection');
 const whereOptions = document.getElementById("where-options");
 const resultsPerPageOptions = document.getElementById("results-per-page");
 const sqlBtn = document.getElementById("sql-btn");
@@ -203,6 +230,7 @@ const changesYes = document.getElementById("changes-yes");
 const changesNo = document.getElementById("changes-no");
 const mainContainer = document.getElementById("main-container");
 const codeContainer = document.getElementById("code-container");
+const initial = document.getElementById("initial");
 
 resultsPerPageOptions.addEventListener("change", function() {
     resultsPerPage = parseInt(resultsPerPageOptions.value);
@@ -246,7 +274,7 @@ let originalContent;
 
 let whereHTML = selector.innerHTML;
 submitBtn.addEventListener("click", buildQuery);
-submitBtn.click();
+// submitBtn.click();
 
 
 sqlBtn.addEventListener("click", ()=>{
@@ -466,10 +494,15 @@ function buildWhere() {
     if (inputArr[0].value != "") {
         whereTxt = "WHERE " 
         for(let i = 0; i < optionArr.length; i++) {
-            if (i === optionArr.length - 1)
-                whereTxt += `${optionArr[i].value} = "${inputArr[i].value}"\n`
-            else
-                whereTxt += `${optionArr[i].value} = "${inputArr[i].value}" AND\n` 
+            if (i === optionArr.length - 1) {
+                let whereValue = isNaN(inputArr[i].value) ? `'${inputArr[i].value}'` : inputArr[i].value;
+                whereTxt += `${optionArr[i].value} = ${whereValue}\n`
+            }
+
+            else {
+                whereTxt += `${optionArr[i].value} = ${whereValue} AND\n` 
+            }
+
         }
     }
     else {
@@ -478,7 +511,48 @@ function buildWhere() {
     return whereTxt;
 }
 
+function populatePresets() {
+    for (let preset of Object.keys(presetQueries)) {
+        console.log(preset);
+        savedSelection.innerHTML += `
+        <option value="${preset}">${preset}</option>
+        `
+    }
+    savedSelection.addEventListener("change", function() {
 
+        currentPage = 1;
+        tableForm.innerHTML = "";
+        whereOptions.innerHTML = "";
+        orderTxt = "";
+        // createCheckboxes();
+        // addWhereOptions();
+        presetQuery();
+     });
+    
+}
+
+populatePresets();
+
+
+
+
+async function presetQuery() {
+    clearAll();
+    if (savedSelection.value) {
+        sqlQuery = presetQueries[savedSelection.value];
+        sqlCode.textContent = sqlQuery;
+    }
+    else
+        console.log("No table selected");
+
+    try {
+        console.log(sqlQuery);
+        sqlData = await getResults(sqlQuery);
+        renderResults(sqlData, 1);
+    } catch {
+        alert("Query is invalid");
+    }
+}
 
 async function buildQuery(event) {
     event.preventDefault(); 
@@ -812,7 +886,7 @@ function clearAll() {
 function getCheckedAttributes(){
     const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checked = [];
-    for(let i = 0; i < checks.length; i++){
+    for(let i = 0; i < checks.length - 1; i++){
         if(checks[i].checked)
             checked.push(checks[i].value)
     }
@@ -824,7 +898,7 @@ function getCheckedAttributes(){
 function getAttributeClasses(){
     const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checkedClasses = [];
-    for(let i = 0; i < checks.length; i++){
+    for(let i = 0; i < checks.length - 1; i++){
         if(checks[i].checked && !checkedClasses.includes(checks[i].className))
             checkedClasses.push(checks[i].className)
     }
@@ -890,6 +964,7 @@ function createTableCategories() {
     // }
     tableSelection.innerHTML += categoriesHTML;
     tableSelection.addEventListener("change", function() {
+        initial.style.display = "none";
         currentPage = 1;
         tableForm.innerHTML = "";
         whereOptions.innerHTML = "";
@@ -907,7 +982,6 @@ createTableCategories();
 function createCheckboxes() {
     let checkboxHTML = "";
 
-
     for (table of categoryToRelatedTables[tableSelection.value]) {
         for (attribute of tableToAttributes[table]) {
             checkboxHTML += `
@@ -923,22 +997,26 @@ function createCheckboxes() {
         }
     }
 
+    checkboxHTML += `<input type="checkbox" onchange="selectDeselect()" id="select-all" checked />
+    <label>Select/Deselect All</label>`
+    // document.getElementById("select-all").addEventListener('change', selectDeselect);
 
-    //get selected category/table
-    //iterate through array value on this key
-
-    // for (let attribute in dbAttributes) {
-    //     checkboxHTML += `
-    //     <input
-    //         type="checkbox"
-    //         id="${attribute}"
-    //         name="${attribute}"
-    //         value="${attribute}"
-    //         class="${dbAttributes[attribute]}" />
-    //     <label for="${attribute}">${attribute}</label>
-    //     `
-    // }
     tableForm.innerHTML += checkboxHTML;
+}
+
+function selectDeselect() {
+    console.log("deslect called");
+    const selectAll = document.getElementById("select-all");
+    console.log(selectAll);
+    let inputs = document.getElementsByTagName('input');
+    console.log(inputs.length);
+    for( let i= 0; i < inputs.length; i++) {
+        if(inputs[i].type.toLowerCase() == 'checkbox')
+            if (selectAll.checked)
+                inputs[i].checked = true; 
+            else
+                inputs[i].checked = false;       
+    }
 }
 
 
