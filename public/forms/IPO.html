@@ -55,16 +55,21 @@
     
     <div id="main-container">
 
-        <a href="WorkOrderStatus.html" style="justify-self: end;">
+        <a href="TBL_Grant.html" style="justify-self: end;">
             <button type="button" id="carousel-prev"></button>
         </a>
 
         <section class="carousel">
 
                 <div class="form-container">
-                    <h2>Add Billing Type Form</h2>
+                    <h2>Add/Update IPO Form</h2>
                     <form>
-                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
+                        <div>
+                            <label>IPO Date: <input name="IPODate" type="date" size="25" required></label>
+                            <label>IPO Creation Date: <input name="IPOCreationDate" type="date" size="25" required></label>
+                            <label>IPO Status: <input name="IPOStatus" type="text" size="25" placeholder="Drop down list from IPO Status"></label>
+                            <label>IPO Payment Date: <input name="IPOPaymentDate" type="date" size="25" required></label>
+                        </div>
                         <div class="form-btns">
                             <button type="submit">Add Record</button>
                             <button type="reset">Reset Form</button>
@@ -76,7 +81,7 @@
         
         </section>
 
-        <a href=".Company.html">
+        <a href="IPOStatus.html">
             <button type="button" id="carousel-next"></button>
         </a>
         

@@ -55,28 +55,56 @@
     
     <div id="main-container">
 
-        <a href="WorkOrderStatus.html" style="justify-self: end;">
+        <a href="TimeType.html" style="justify-self: end;">
             <button type="button" id="carousel-prev"></button>
         </a>
 
         <section class="carousel">
 
                 <div class="form-container">
-                    <h2>Add Billing Type Form</h2>
+                    <h2>Add/Update Work Order Form</h2>
                     <form>
-                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
+                        <div>
+                            <label>Project Name: <input name="ProjectName" type="text" size="100" placeholder="Enter the Project Name Here" required></label>
+                        </div>
+                        <div>
+                            <label>Submitted Date: <input name="WorkOrderSubmittedDate" type="date" required></label>
+                            <label>Start Date: <input name="WorkOrderStartDate" type="date" required></label>
+                            <label>Due Date: <input name="WorkOrderDueDate" type="date" required></label>
+                            <label>Closed Date: <input name="WorkOrderClosedDate" type="date" required></label>
+                        </div>
+                        <div>
+                            <label>Grant Name: <input name="GrantName" type="text" size="71" placeholder="Drop down to select Grant Name" required></label>
+                            <label>Budget Amount: <input name="Budget" type="number" placeholder="Should autofill $ from TBL_Grant"></label>
+                        </div>
+                        <div>
+                            
+                            <label>Assignee(s): <input name="Assignee" type="text" placeholder="Drop down multiselect list of Employees???" size="25"></label>
+                            <label>Status Type: <input name="StatusType" type="text" placeholder="Drop down list for Status" size="25"></label>
+                            <label>Priority Type: <input name="PriorityType" type="text" placeholder="Drop down list for Priority" size="25"></label>
+                        </div>
+                        <div>
+                            <label>Contact: <input name="WorkOrderContact" type="text" placeholder="Drop down multiselect list of Contacts???" size="100"></label>
+                        </div>
+                
+                            <label class="text-area-label">Work Order Description:</label>
+                            <textarea name="WorkOrderDescription" rows="3" cols="100"></textarea>
+    
+                            <label class="text-area-label">Work Order Notes:</label>
+                            <textarea name="WorkOrderNotes" rows="7" cols="100"></textarea>
+
                         <div class="form-btns">
                             <button type="submit">Add Record</button>
                             <button type="reset">Reset Form</button>
                         </div>
-                    </form> 
+                    </form>
                     <span class="submit-msg" id="success">Your record was successfully added.</span>
                     <span class="submit-msg" id="fail">Your record failed to be added. Please double-check your text fields.</span>
                 </div>
         
         </section>
 
-        <a href=".Company.html">
+        <a href="WorkOrderPriority.html">
             <button type="button" id="carousel-next"></button>
         </a>
         

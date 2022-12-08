@@ -55,28 +55,48 @@
     
     <div id="main-container">
 
-        <a href="WorkOrderStatus.html" style="justify-self: end;">
+        <a href="Department.html" style="justify-self: end;">
             <button type="button" id="carousel-prev"></button>
         </a>
 
         <section class="carousel">
 
                 <div class="form-container">
-                    <h2>Add Billing Type Form</h2>
-                    <form>
-                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
-                        <div class="form-btns">
-                            <button type="submit">Add Record</button>
-                            <button type="reset">Reset Form</button>
-                        </div>
-                    </form> 
+                    <h2>Add/Update Employee Form</h2>
+                <form>
+                    <div>
+                        <label>First Name: <input name="EmpFirstName" type="text" placeholder="Enter First Name" size="25" required></label>
+                        <label>Last Name: <input name="EmpLastName" type="text" placeholder="Enter Last Name" size="25" required></label>
+                        <label>Department: <input name="DepartmentName" type="text" size="25" placeholder="Select Department"></label>
+                    </div>
+                    <div>
+                        <label>Email: <input type="email" name="EmpEmail" size="25" placeholder="Email Address" required></label>
+                        <label>Job Title: <input type="text" name="JobTitle" size="25" placeholder="Enter Employee Title"></label>
+                        <label>Phone: <input type="tel" name="EmpPhone" size="25" placeholder="Enter work phone #"></label>
+                    </div>
+                    <div>
+                        <label>Address: <input type="text" name="EmpAddress" size="88" placeholder="Enter work Address"></label>
+                    </div>
+                    <div>
+                        <label>City: <input type="text" name="EmpCity" size="25" placeholder="City"></label>
+                        <label>State: <input type="text" name="EmpState" size="25" placeholder="State"></label>
+                        <label>Zip Code: <input type="text" name="EmpZipCode" size="25" placeholder="Zip Code"></label>
+                    </div>
+                    <div>
+                        <label>Employee Type: <input type="text" name="EmployeeType" size="25" placeholder="Select Employment Type" required></label>
+                    </div>
+                    <div class="form-btns">
+                        <button type="submit">Add Record</button>
+                        <button type="reset">Reset Form</button>
+                    </div>
+                </form>
                     <span class="submit-msg" id="success">Your record was successfully added.</span>
                     <span class="submit-msg" id="fail">Your record failed to be added. Please double-check your text fields.</span>
                 </div>
         
         </section>
 
-        <a href=".Company.html">
+        <a href="EmployeeType.html">
             <button type="button" id="carousel-next"></button>
         </a>
         

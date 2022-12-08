@@ -55,28 +55,31 @@
     
     <div id="main-container">
 
-        <a href="WorkOrderStatus.html" style="justify-self: end;">
+        <a href="TimeSheet.html" style="justify-self: end;">
             <button type="button" id="carousel-prev"></button>
         </a>
 
         <section class="carousel">
 
                 <div class="form-container">
-                    <h2>Add Billing Type Form</h2>
+                    <h2>Add/Update Time Type Form</h2>
                     <form>
-                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
+                        <div>
+                            <label>Time Type: <input name="TimeType" type="text" placeholder="Enter Time Type" size="25" required></label>
+                            <label>Category: <input name="Category" type="text" placeholder="Enter a category" size="25" required></label>
+                        </div>
                         <div class="form-btns">
                             <button type="submit">Add Record</button>
                             <button type="reset">Reset Form</button>
                         </div>
-                    </form> 
+                    </form>
                     <span class="submit-msg" id="success">Your record was successfully added.</span>
                     <span class="submit-msg" id="fail">Your record failed to be added. Please double-check your text fields.</span>
                 </div>
         
         </section>
 
-        <a href=".Company.html">
+        <a href="WorkOrder.html">
             <button type="button" id="carousel-next"></button>
         </a>
         

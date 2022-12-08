@@ -55,28 +55,34 @@
     
     <div id="main-container">
 
-        <a href="WorkOrderStatus.html" style="justify-self: end;">
+        <a href="ServiceRate.html" style="justify-self: end;">
             <button type="button" id="carousel-prev"></button>
         </a>
 
         <section class="carousel">
 
                 <div class="form-container">
-                    <h2>Add Billing Type Form</h2>
+                    
+                    <h2>Add/Update Service Type Form</h2>
                     <form>
-                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
+            
+                        <label>Service Type: <input name="ServiceType" type="text" placeholder="Enter Service Type Here" size="50"></label>
+                        
+                        <label class="text-area-label">Service Description: </label>
+                        <textarea name="ServiceDescription" rows="5" placeholder="Enter Service Description (i.e. Type: Books - Description: Publication and Design) "></textarea>
+                        
                         <div class="form-btns">
                             <button type="submit">Add Record</button>
                             <button type="reset">Reset Form</button>
                         </div>
-                    </form> 
+                    </form>
                     <span class="submit-msg" id="success">Your record was successfully added.</span>
                     <span class="submit-msg" id="fail">Your record failed to be added. Please double-check your text fields.</span>
                 </div>
         
         </section>
 
-        <a href=".Company.html">
+        <a href="TimeSheet.html">
             <button type="button" id="carousel-next"></button>
         </a>
         

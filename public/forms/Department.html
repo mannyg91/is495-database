@@ -17,7 +17,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="../">Home</a></li> <!-- not working-->
+                <li><a href="../query-generator.html">Home</a></li> <!-- not working-->
                 <li><a href="">Reports</a></li>
                 <li class="dropdown">
                     <a href="./forms.html" class="dropbtn">Forms</a>
@@ -55,28 +55,29 @@
     
     <div id="main-container">
 
-        <a href="WorkOrderStatus.html" style="justify-self: end;">
+        <a href="Customer.html" style="justify-self: end;">
             <button type="button" id="carousel-prev"></button>
         </a>
 
         <section class="carousel">
 
                 <div class="form-container">
-                    <h2>Add Billing Type Form</h2>
+                    <h2>Add/Update Department Form</h2>
                     <form>
-                        <label>Billing Type: <input name="BillingType" type="text" placeholder="Enter Billing Type" size="35" required></label>
+                            <label>Company Name: <input type="text" name="CompanyName" size="50" placeholder="Drop down to select Company"></label>
+                            <label>Department Name: <input type="text" name="DepartmentName" size="50" placeholder="Enter the Department Name"></label>
                         <div class="form-btns">
                             <button type="submit">Add Record</button>
                             <button type="reset">Reset Form</button>
                         </div>
-                    </form> 
+                    </form>
                     <span class="submit-msg" id="success">Your record was successfully added.</span>
                     <span class="submit-msg" id="fail">Your record failed to be added. Please double-check your text fields.</span>
                 </div>
         
         </section>
 
-        <a href=".Company.html">
+        <a href="EmployeeForm.html">
             <button type="button" id="carousel-next"></button>
         </a>
         
