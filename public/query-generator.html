@@ -86,9 +86,15 @@
 
                 <div class="submit">
                     <button id="submit-btn" type="submit">Get Records</button>
+                </div>
+
+                <div class="submit">
+                    
+                    <button id="edit-btn" class="standard-btn" type="button">Edit Mode</button>
+                    <button id="save-btn" class="standard-btn" type="button">Save Query</button>
                     <button id="sql-btn" class="standard-btn" type="button">View SQL</button>
                     <button id="export-btn" class="standard-btn" type="button">Export CSV</button>
-                    <button id="edit-btn" class="standard-btn" type="button">Edit Mode</button>
+
                 </div>
 
 
@@ -158,6 +164,12 @@
     <div id="edit-confirmation" class="window">
         <span>Would you like to confirm your changes?</span>
         <div class="two-buttons"><button id="changes-yes" type="button">Yes</button><button id="changes-no" type="button">Cancel</button></div>
+    </div>
+
+    <div id="name-query" class="window">
+        <span>What would you like to name your saved query?</span>
+        <input type="text" class="save-name" id="save-name" name="save-name" />
+        <div class="two-buttons"><button id="save-confirm" type="button">Save</button><button id="save-cancel" type="button">Cancel</button></div>
     </div>
 
     <footer>
