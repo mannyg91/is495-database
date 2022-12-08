@@ -519,6 +519,10 @@ thead {
     gap: 15px;
 }
 
+#name-query {
+    display: none;
+}
+
 /* main, form, header {
     filter: blur(4px);
 }

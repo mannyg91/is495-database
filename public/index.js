@@ -221,6 +221,7 @@ const whereOptions = document.getElementById("where-options");
 const resultsPerPageOptions = document.getElementById("results-per-page");
 const sqlBtn = document.getElementById("sql-btn");
 const editBtn = document.getElementById("edit-btn");
+const saveBtn = document.getElementById("save-btn");
 const exportBtn = document.getElementById("export-btn");
 const editWarning = document.getElementById("edit-warning");
 const editYes = document.getElementById("edit-yes");
@@ -231,6 +232,32 @@ const changesNo = document.getElementById("changes-no");
 const mainContainer = document.getElementById("main-container");
 const codeContainer = document.getElementById("code-container");
 const initial = document.getElementById("initial");
+
+
+
+if (localStorage.getItem("presets"))
+    presetQueries = JSON.parse(window.localStorage.getItem("presets"));
+
+
+saveBtn.addEventListener("click", function() {
+    const nameQuery = document.getElementById('name-query');
+    const saveName = document.getElementById('save-name'); 
+    console.log(sqlQuery);
+    nameQuery.style.display = "flex";
+    document.getElementById('save-confirm').addEventListener('click', ()=> {
+        presetQueries[saveName.value] = sqlQuery;
+        window.localStorage.setItem("presets", JSON.stringify(presetQueries));
+        nameQuery.style.display = "none";
+        populatePresets();
+
+    })
+    document.getElementById('save-cancel').addEventListener('click', ()=> {
+        nameQuery.style.display = "none";
+    })
+
+})
+
+
 
 resultsPerPageOptions.addEventListener("change", function() {
     resultsPerPage = parseInt(resultsPerPageOptions.value);
@@ -512,6 +539,7 @@ function buildWhere() {
 }
 
 function populatePresets() {
+    savedSelection.innerHTML = "";
     for (let preset of Object.keys(presetQueries)) {
         console.log(preset);
         savedSelection.innerHTML += `
@@ -607,7 +635,7 @@ async function getResults(code) {
 
 
 function renderResults(data, page) {
-
+    initial.style.display = "none";
 
     if (data.recordset.length === 0) {
         clearAll();
@@ -964,7 +992,6 @@ function createTableCategories() {
     // }
     tableSelection.innerHTML += categoriesHTML;
     tableSelection.addEventListener("change", function() {
-        initial.style.display = "none";
         currentPage = 1;
         tableForm.innerHTML = "";
         whereOptions.innerHTML = "";
