@@ -1,7 +1,0 @@
-EntryTypeID,EntryType,Billable
-1,Regular Time,1
-2,Admin Time,0
-3,Match Time,0
-4,Write Off,0
-5,Adjustment,1
-6,Not Billed,1
