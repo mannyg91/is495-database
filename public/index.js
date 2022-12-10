@@ -800,7 +800,7 @@ function updateRecord(cell, newValue) {
     let table = cell.dataset.table;
     let primaryKey = primaryKeys[table];
 
-    let updateQuery = `UPDATE ${table} SET ${attribute} = "${newValue}" WHERE ${primaryKey} = "${primaryKeyID}"`;
+    let updateQuery = `UPDATE ${table} SET ${attribute} = '${newValue}' WHERE ${primaryKey} = '${primaryKeyID}'`;
     console.log(updateQuery);
     //run on database
     try {
