@@ -24,7 +24,7 @@ function getDatabase(req, res, next) {
   const sql = require("mssql/msnodesqlv8");
   var config= {
       database: 'Agile-Alpha',
-      server: 'LAPTOP-21LA9DSD\\SQLEXPRESS',
+      server: 'DESKTOP-7T1COHN\\SQLEXPRESS',
       driver: 'msnodesqlv8',
 
       options:{

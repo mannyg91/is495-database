@@ -273,6 +273,10 @@ resultsPerPageOptions.addEventListener("change", function() {
 
 
 
+//CAN TURN RELATED ATTRIBUTES INTO OBJECTS, AND POSSIBLY USE OBJECT DESTRUCTURING WHEN NEEDED.
+//query can be an object
+//results can be an object, with paginated related stuff
+
 
 let attributes;
 let tables;
@@ -283,7 +287,7 @@ let orderTxt = "";
 let orderDirection = "ASC";
 let sqlQuery;
 let startingTable = "CUSTOMER";
-let columns = [];
+
 let sqlData = {};
 let startingSlice = 0;
 let currentPage = 1;
@@ -466,22 +470,20 @@ function buildSelect(attributes) {
 
     if (attributes.length === 0)
         selectStatement += " *  ";
+    else
+        selectStatement += attributes.join()
 
-    for(let i = 0; i < attributes.length; i++) {
 
-        // TRANSFORMATION SHOULD HAPPEN CLIENT-SIDE NOT SERVER-SIDE
-        // if (!editing) { 
-        //     console.log("not editing")
-        //     transformAttributeFormat(attributes[i]);
-        // }
+    // // TRANSFORMATION SHOULD HAPPEN CLIENT-SIDE NOT SERVER-SIDE
+    // if (!editing) { 
+    //     console.log("not editing")
+    //     transformAttributeFormat(attributes[i]);
+    // }
             
 
-        // selectStatement += startingTable + "." + attributes[i] + ", ";
-        selectStatement += attributes[i] + ", ";
-        columns.push(attributes[i]);
-    }
 
-    return selectStatement.slice(0, -2) + " \n"; //deletes comma from last attribute
+
+    return selectStatement + " \n"; 
 }
 
 // function buildFrom() {
@@ -914,6 +916,7 @@ function clearAll() {
 function getCheckedAttributes(){
     const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checked = [];
+    //MIGHT BE ABLE TO USE MAP HERE INSTEAD
     for(let i = 0; i < checks.length - 1; i++){
         if(checks[i].checked)
             checked.push(checks[i].value)
@@ -926,6 +929,7 @@ function getCheckedAttributes(){
 function getAttributeClasses(){
     const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checkedClasses = [];
+    //MIGHT BE ABLE TO USE MAP HERE INSTEAD
     for(let i = 0; i < checks.length - 1; i++){
         if(checks[i].checked && !checkedClasses.includes(checks[i].className))
             checkedClasses.push(checks[i].className)
