@@ -119,26 +119,16 @@ const tableToAttributes = {
     CONTACT : ["ContactID","ContactFirstName","ContactLastName","ContactEmail","ContactPhone"],
     SERVICERATE : ["ServiceRateID","RateStartDate","RateEndDate","FiscalYear","ServiceRate"],
     IPOSTATUS : ["IPOStatusID","IPOStatus"],
-    // DEPARTMENT : ["DepartmentID","DepartmentName","CompanyID_DEPARTMENT"],
     DEPARTMENT : ["DepartmentID","DepartmentName"],
-    // CUSTOMER : ["CustomerID","CustFirstName","CustLastName","CustEmail","CustPhone","CustAddress","CustCity","CustState","CustZip","DepartmentID_CUSTOMER"],
     CUSTOMER : ["CustomerID","CustFirstName","CustLastName","CustEmail","CustPhone","CustAddress","CustCity","CustState","CustZip"],
-    // EMPLOYEE : ["EmployeeID","EmpFirstName","EmpLastName","EmpEmail","EmpPhone","EmpAddress","EmpCity","EmpState","EmpZipCode","DepartmentID_EMPLOYEE","JobTitleID_EMPLOYEE","EmployeeTypeID_EMPLOYEE"],
     EMPLOYEE : ["EmployeeID","EmpFirstName","EmpLastName","EmpEmail","EmpPhone","EmpAddress","EmpCity","EmpState","EmpZipCode"],
-    // IPO : ["IPOID","IPODate","IPOCreationDate","IPOPaymentDate","IPOStatusID_IPO"],
     IPO : ["IPOID","IPODate","IPOCreationDate","IPOPaymentDate"],
-    // IPORATE : ["IPORateID","ServiceRateID_IPORATE","IPOID_IPORATE"],
     IPORATE : ["IPORateID"],
     TBL_GRANT : ["GrantID","GrantName","Budget"],
-    // WORKORDER : ["WorkOrderID","WorkOrderSubmittedDate","WorkOrderDescription","WorkOrderStartDate","WorkOrderDueDate","WorkOrderClosedDate","WorkOrderNotes","ProjectName","EmployeeID_WORKORDER","CustomerID_WORKORDER","PriorityID_WORKORDER","StatusID_WORKORDER","GrantID_WORKORDER"],
     WORKORDER : ["WorkOrderID","WorkOrderSubmittedDate","WorkOrderDescription","WorkOrderStartDate","WorkOrderDueDate","WorkOrderClosedDate","WorkOrderNotes","ProjectName"],
-    // ASSIGNEE : ["AssigneeID","EmployeeID_ASSIGNEE","WorkOrderID_ASSIGNEE"],
     ASSIGNEE : ["AssigneeID"],
-    // TIMESHEET: ["TimeSheetID","TimeSheetDate","TimeWorkedHours","WorkPerformed","WorkOrderID_TIMESHEET","EmployeeID_TIMESHEET","EntryTypeID_TIMESHEET","BillingTypeID_TIMESHEET","TimeTypeID_TIMESHEET","ServiceTypeID_TIMESHEET","IPOID_TIMESHEET"],
     TIMESHEET: ["TimeSheetID","TimeSheetDate","TimeWorkedHours","WorkPerformed"],
-    // WORKORDERCONTACT : ["WorkOrderContactID","ContactID_WORKORDERCONTACT","WorkOrderID_WORKORDERCONTACT"],
     WORKORDERCONTACT : ["WorkOrderContactID"],
-    // WORKORDERGRANT : ["WorkOrderGrantID","WorkOrderID_WORKORDERGRANT","GrantID_WORKORDERGRANT"]
     WORKORDERGRANT : ["WorkOrderGrantID"]
 }
 
