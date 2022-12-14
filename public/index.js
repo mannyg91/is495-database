@@ -96,7 +96,6 @@ resultsPerPageOptions.addEventListener("change", function() {
 //results can be an object, with paginated related stuff
 
 
-let attributes;
 let selectStatement;
 let joinsTxt;
 let whereTxt;
@@ -113,17 +112,12 @@ let totalPages = 0;
 let resultsPerPage = 50;
 let editing = false;
 
-let editingCell = false;
 let activeCell;
 let originalCell;
 let originalContent;
-// let lastCell;
 
 
-let whereHTML = selector.innerHTML;
 submitBtn.addEventListener("click", buildQuery);
-// submitBtn.click();
-
 
 sqlBtn.addEventListener("click", ()=>{
     if (codeContainer.style.display === "none") {
@@ -741,17 +735,6 @@ function getAttributeClasses(){
 }
 
 
-// function populateSortOptions(attributes) {
-//     if (attributes) {
-//         for (item of attributes) {
-//             sortCriteria.innerHTML += `
-//             <option value="${item}">${item}</option>
-//             `
-//         }
-//     };
-// }
-
-
 
 //runs in the beginning
 function addWhereOptions() {
@@ -762,7 +745,6 @@ function addWhereOptions() {
         }).join("\r\n")
     }
 }
-
 
 
 // function removeInputField() {
@@ -777,13 +759,6 @@ function addWhereOptions() {
 function createTableCategories() {
 
     let categoriesHTML = "";
-
-
-//    for (let table of Object.keys(categoryToRelatedTables)) {
-//         categoriesHTML += `
-//         <option value="${table}">${table}</option>
-//         `
-//     }
 
     categoriesHTML += Object.keys(categoryToRelatedTables).map(table => `<option value="${table}">${table}</option>`).join('');
 
