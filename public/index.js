@@ -292,8 +292,8 @@ exportBtn.addEventListener("click", exportCSV);
 
 //can refactor this to simplify
 function exportCSV() {
-    // const csvData = json2csv.parse(data.recordset.slice(startingSlice, startingSlice + resultsPerPage));
-    const csvData = json2csv.parse(sqlData.recordset.slice(startingSlice, startingSlice + resultsPerPage));
+    // const csvData = json2csv.parse(data.slice(startingSlice, startingSlice + resultsPerPage));
+    const csvData = json2csv.parse(sqlData.slice(startingSlice, startingSlice + resultsPerPage));
 
     let filename = `${startingTable}.csv`
 
@@ -599,7 +599,7 @@ async function getResults(code) {
 function renderResults(data, page) {
     initial.style.display = "none";
 
-    if (data.recordset.length === 0) {
+    if (data.length === 0) {
         clearAll();
         results.innerHTML = `<div id="empty-results">No Results Found</div>`
         return
@@ -609,7 +609,7 @@ function renderResults(data, page) {
         startingSlice = (resultsPerPage * page) - resultsPerPage
         let count = startingSlice + 1;
 
-        totalPages = Math.ceil(data.recordset.length / resultsPerPage);
+        totalPages = Math.ceil(data.length / resultsPerPage);
 
         //creates headers:
         let header = results.createTHead();
@@ -617,7 +617,7 @@ function renderResults(data, page) {
         let cell = headerRow.insertCell();
         cell.innerHTML = "#";
 
-        for (let cellData in data.recordset[0])
+        for (let cellData in data[0])
         {
             cell = headerRow.insertCell();
             cell.innerHTML = cellData;
@@ -637,7 +637,7 @@ function renderResults(data, page) {
         tbody.setAttribute("id","table-data");
         
 
-        for (const row of data.recordset.slice(startingSlice, startingSlice + resultsPerPage)) {
+        for (const row of data.slice(startingSlice, startingSlice + resultsPerPage)) {
             let rowCount = 1;
             let rows = tbody.insertRow()
 
@@ -648,7 +648,7 @@ function renderResults(data, page) {
             {
                 cell = rows.insertCell();
                 cell.dataset.attribute = headerRow.children[rowCount].textContent;
-                cell.dataset.table = dbAttributes[headerRow.children[rowCount].textContent]
+                cell.dataset.table = dbAttributes[cell.dataset.attribute]
 
                 
                 //need to pull the primary key from the attribute (to ensure you have the correct one)

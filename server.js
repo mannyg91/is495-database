@@ -26,7 +26,6 @@ function getDatabase(req, res, next) {
         database: 'Agile-Alpha',
         server: 'DESKTOP-7T1COHN\\SQLEXPRESS',
         driver: 'msnodesqlv8',
-
         options:{
             trustedConnection:true
         }
@@ -36,12 +35,12 @@ function getDatabase(req, res, next) {
             console.log(err);
         }
         var request = new sql.Request();
-        request.query(userQuery,function(err,recordSet) {
+        request.query(userQuery,function(err,results) {
             if(err){
                 console.log(err);
                 next(err)
             } else {
-                res.status(201).send(recordSet); //sends records as a response
+                res.status(201).send(results.recordset); //sends records as a response
             }
         });
     });
