@@ -1,127 +1,5 @@
 
-import { primaryKeys, tables } from "./data.js";
-
-const dbAttributes = {
-    JobTitleID : "JOBTITLE",
-    JobTitle : "JOBTITLE",
-    EmployeeTypeID : "EMPLOYEETYPE",
-    EmployeeType : "EMPLOYEETYPE",
-    CompanyID : "COMPANY",
-    CompanyName : "COMPANY",
-    ServiceTypeID : "SERVICETYPE",
-    ServiceType : "SERVICETYPE",
-    ServiceDescription : "SERVICETYPE",
-    EntryTypeID : "ENTRYTYPE",
-    EntryType : "ENTRYTYPE",
-    Billable : "ENTRYTYPE",
-    TimeTypeID : "TIMETYPE",
-    TimeType : "TIMETYPE",
-    Category : "TIMETYPE",
-    BillingTypeID : "BILLINGTYPE",
-    BillingType : "BILLINGTYPE",
-    StatusID : "WORKORDERSTATUS",
-    StatusType : "WORKORDERSTATUS",
-    PriorityID : "WORKORDERPRIORITY",
-    PriorityType : "WORKORDERPRIORITY",
-    ContactID : "CONTACT",
-    ContactFirstName : "CONTACT",
-    ContactLastName : "CONTACT",
-    ContactEmail : "CONTACT",
-    ContactPhone : "CONTACT",
-    ServiceRateID : "SERVICERATE",
-    RateStartDate : "SERVICERATE",
-    RateEndDate : "SERVICERATE",
-    FiscalYear : "SERVICERATE",
-    ServiceRate : "SERVICERATE",
-    IPOStatusID : "IPOSTATUS",
-    IPOStatus : "IPOSTATUS",
-    DepartmentID : "DEPARTMENT",
-    DepartmentName : "DEPARTMENT",
-    CompanyID_DEPARTMENT : "DEPARTMENT",
-    CustomerID : "CUSTOMER",
-    CustFirstName : "CUSTOMER",
-    CustLastName : "CUSTOMER",
-    DepartmentID_CUSTOMER : "CUSTOMER",
-    CustEmail : "CUSTOMER",
-    CustPhone : "CUSTOMER",
-    CustAddress : "CUSTOMER",
-    CustCity : "CUSTOMER",
-    CustState : "CUSTOMER",
-    CustZip : "CUSTOMER",
-    EmployeeID : "EMPLOYEE",
-    EmpFirstName : "EMPLOYEE",
-    EmpLastName : "EMPLOYEE",
-    DepartmentID_EMPLOYEE : "EMPLOYEE",
-    EmpEmail : "EMPLOYEE",
-    JobTitleID_EMPLOYEE : "EMPLOYEE",
-    EmpPhone : "EMPLOYEE",
-    EmpAddress : "EMPLOYEE",
-    EmpCity : "EMPLOYEE",
-    EmpState : "EMPLOYEE",
-    EmpZipCode : "EMPLOYEE",
-    EmployeeTypeID_EMPLOYEE : "EMPLOYEE",
-    IPOID : "IPO",
-    IPODate : "IPO",
-    IPOCreationDate : "IPO",
-    IPOStatusID_IPO : "IPO",
-    IPOPaymentDate : "IPO",
-    IPORateID : "IPORATE",
-    ServiceRateID_IPORATE : "IPORATE",
-    IPOID_IPORATE : "IPORATE",
-    GrantID : "TBL_GRANT",
-    GrantName : "TBL_GRANT",
-    Budget : "TBL_GRANT",
-    WorkOrderID : "WORKORDER",
-    EmployeeID_WORKORDER : "WORKORDER",
-    CustomerID_WORKORDER : "WORKORDER",
-    PriorityID_WORKORDER : "WORKORDER",
-    StatusID_WORKORDER : "WORKORDER",
-    WorkOrderSubmittedDate : "WORKORDER",
-    WorkOrderDescription : "WORKORDER",
-    WorkOrderStartDate : "WORKORDER",
-    WorkOrderDueDate : "WORKORDER",
-    WorkOrderClosedDate : "WORKORDER",
-    WorkOrderNotes : "WORKORDER",
-    GrantID_WORKORDER : "WORKORDER",
-    ProjectName : "WORKORDER",
-    AssigneeID : "ASSIGNEE",
-    EmployeeID_ASSIGNEE : "ASSIGNEE",
-    WorkOrderID_ASSIGNEE : "ASSIGNEE",
-    TimeSheetID : "TIMESHEET",
-    WorkOrderID_TIMESHEET : "TIMESHEET",
-    EmployeeID_TIMESHEET : "TIMESHEET",
-    EntryTypeID_TIMESHEET : "TIMESHEET",
-    BillingTypeID_TIMESHEET : "TIMESHEET",
-    TimeTypeID_TIMESHEET : "TIMESHEET",
-    ServiceTypeID_TIMESHEET : "TIMESHEET",
-    IPOID_TIMESHEET : "TIMESHEET",
-    TimeSheetDate : "TIMESHEET",
-    TimeWorkedHours : "TIMESHEET",
-    WorkPerformed : "TIMESHEET",
-    WorkOrderContactID : "WORKORDERCONTACT",
-    ContactID_WORKORDERCONTACT : "WORKORDERCONTACT",
-    WorkOrderID_WORKORDERCONTACT : "WORKORDERCONTACT",
-    WorkOrderGrantID : "WORKORDERGRANT",
-    WorkOrderID_WORKORDERGRANT : "WORKORDERGRANT",
-    GrantID_WORKORDERGRANT : "WORKORDERGRANT"
-};
-
-
-//CAN CONDENSE THE ABOVE INTO OBJECTS
-
-
-//EXCLUDED COMPANY BECAUSE OF SECOND-LEVEL JOINS
-const categoryToRelatedTables = {
-    "CUSTOMER" : ["CUSTOMER","DEPARTMENT"],
-    "EMPLOYEE" : ["EMPLOYEE","JOBTITLE","EMPLOYEETYPE","DEPARTMENT"],
-    "IPO" : ["IPO","IPOSTATUS"],
-    "IPORATE" : ["IPORATE","SERVICERATE","IPO"],
-    "TIMESHEET" : ["TIMESHEET","EMPLOYEE","WORKORDER","SERVICETYPE","ENTRYTYPE","TIMETYPE","BILLINGTYPE"],
-    "WORKORDER": ["WORKORDER","WORKORDERSTATUS","WORKORDERPRIORITY"],
-    "ASSIGNEE": ["ASSIGNEE","EMPLOYEE","WORKORDER"],
-    "WORKORDERCONTACT" : ["WORKORDERCONTACT","WORKORDER","CONTACT"],
-    "WORKORDERGRANT": ["WORKORDERGRANT","WORKORDER","TBL_GRANT"]
-}
+import { tables, dbAttributes, categoryToRelatedTables } from "./data.js";
 
 
 let presetQueries = {
@@ -148,8 +26,6 @@ let presetQueries = {
     ON EmployeeID_TIMESHEET = EMPLOYEE.EmployeeID
     WHERE Billable = 0`
 }
-
-
 
 const tableForm = document.getElementById("checkbox-container");
 const submitBtn = document.getElementById("submit-btn");
@@ -448,7 +324,7 @@ function buildJoins(checkedClasses) {
         if (table != startingTable) {
             joinsTxt += 
             `LEFT OUTER JOIN ${table}
-            ON ${primaryKeys[table]} = ${primaryKeys[table]}_${startingTable}
+            ON ${tables[table].primaryKey} = ${tables[table].primaryKey}_${startingTable}
             ` //FIX
         }
     }
@@ -619,7 +495,7 @@ function renderResults(data, page) {
             {
                 cell = rows.insertCell();
                 cell.dataset.attribute = headerRow.children[rowCount].textContent;
-                cell.dataset.table = dbAttributes[cell.dataset.attribute]
+                cell.dataset.table = dbAttributes[cell.dataset.attribute] 
 
                 
                 //need to pull the primary key from the attribute (to ensure you have the correct one)
@@ -646,7 +522,7 @@ function renderResults(data, page) {
 function getID(cell) {
 
     let cellRow = cell.parentElement.children;
-    let primaryKeyAttribute = primaryKeys[cell.dataset.table];
+    let primaryKeyAttribute = tables[cell.dataset.table].primaryKey;
 
     for (let item of cellRow) {
         if (item.dataset.attribute === primaryKeyAttribute) {
@@ -728,7 +604,7 @@ function updateRecord(cell, newValue) {
     let primaryKeyID = getID(cell);
     let attribute = cell.dataset.attribute;
     let table = cell.dataset.table;
-    let primaryKey = primaryKeys[table];
+    let primaryKey = tables[table].primaryKey;
 
     let updateQuery = `UPDATE ${table} SET ${attribute} = '${newValue}' WHERE ${primaryKey} = '${primaryKeyID}'`;
 
