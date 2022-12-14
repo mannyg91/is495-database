@@ -24,9 +24,10 @@ const primaryKeys = {
     WORKORDERGRANT : "WorkOrderGrantID"
 }
 
-export default primaryKeys;
 
+export { primaryKeys, tables };
 
+// tables[table].attributes
 
 const tables = {
     ASSIGNEE: {

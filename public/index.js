@@ -1,5 +1,5 @@
 
-import primaryKeys from "./data.js";
+import { primaryKeys, tables } from "./data.js";
 
 const dbAttributes = {
     JobTitleID : "JOBTITLE",
@@ -106,31 +106,6 @@ const dbAttributes = {
     GrantID_WORKORDERGRANT : "WORKORDERGRANT"
 };
 
-const tableToAttributes = {
-    JOBTITLE : ["JobTitleID","JobTitle"],
-    EMPLOYEETYPE : ["EmployeeTypeID","EmployeeType"],
-    COMPANY : ["CompanyID","CompanyName"],
-    SERVICETYPE : ["ServiceTypeID","ServiceType","ServiceDescription"],
-    ENTRYTYPE : ["EntryTypeID","EntryType","Billable"],
-    TIMETYPE : ["TimeTypeID","TimeType","Category"],
-    BILLINGTYPE : ["BillingTypeID","BillingType"],
-    WORKORDERSTATUS : ["StatusID","StatusType"],
-    WORKORDERPRIORITY : ["PriorityID","PriorityType"],
-    CONTACT : ["ContactID","ContactFirstName","ContactLastName","ContactEmail","ContactPhone"],
-    SERVICERATE : ["ServiceRateID","RateStartDate","RateEndDate","FiscalYear","ServiceRate"],
-    IPOSTATUS : ["IPOStatusID","IPOStatus"],
-    DEPARTMENT : ["DepartmentID","DepartmentName"],
-    CUSTOMER : ["CustomerID","CustFirstName","CustLastName","CustEmail","CustPhone","CustAddress","CustCity","CustState","CustZip"],
-    EMPLOYEE : ["EmployeeID","EmpFirstName","EmpLastName","EmpEmail","EmpPhone","EmpAddress","EmpCity","EmpState","EmpZipCode"],
-    IPO : ["IPOID","IPODate","IPOCreationDate","IPOPaymentDate"],
-    IPORATE : ["IPORateID"],
-    TBL_GRANT : ["GrantID","GrantName","Budget"],
-    WORKORDER : ["WorkOrderID","WorkOrderSubmittedDate","WorkOrderDescription","WorkOrderStartDate","WorkOrderDueDate","WorkOrderClosedDate","WorkOrderNotes","ProjectName"],
-    ASSIGNEE : ["AssigneeID"],
-    TIMESHEET: ["TimeSheetID","TimeSheetDate","TimeWorkedHours","WorkPerformed"],
-    WORKORDERCONTACT : ["WorkOrderContactID"],
-    WORKORDERGRANT : ["WorkOrderGrantID"]
-}
 
 //CAN CONDENSE THE ABOVE INTO OBJECTS
 
@@ -246,7 +221,6 @@ resultsPerPageOptions.addEventListener("change", function() {
 
 
 let attributes;
-let tables;
 let selectStatement;
 let joinsTxt;
 let whereTxt;
@@ -550,9 +524,6 @@ async function buildQuery(event) {
     clearAll();
 
 
-    attributes = getCheckedAttributes(); //gets all values of checked boxes
-    tables = getAttributeClasses(); //all tables involved (className)
-
     //Gathers information
     if (tableSelection.value)
         startingTable = tableSelection.value;
@@ -562,8 +533,8 @@ async function buildQuery(event) {
 
 
     //Builds Query
-    selectStatement = buildSelect(attributes); //starting table and all values of checked boxes
-    joinsTxt = buildJoins(tables);
+    selectStatement = buildSelect(getCheckedAttributes()); //starting table and all values of checked boxes
+    joinsTxt = buildJoins(getAttributeClasses());
     whereTxt = buildWhere();
     sqlQuery = selectStatement + `FROM ${startingTable}\n ` + joinsTxt + whereTxt + orderTxt;
     sqlCode.textContent = sqlQuery;
@@ -910,7 +881,7 @@ function getAttributeClasses(){
 function addWhereOptions() {
 
     for (const table of categoryToRelatedTables[tableSelection.value]) {
-        whereOptions.innerHTML += tableToAttributes[table].map(function(attribute) {
+        whereOptions.innerHTML += tables[table].attributes.map(function(attribute) {
             return `<option value="${attribute}">${attribute}</option>`
         }).join("\r\n")
     }
@@ -961,7 +932,7 @@ function createCheckboxes() {
     let checkboxHTML = "";
 
     for (const table of categoryToRelatedTables[tableSelection.value]) {
-        for (const attribute of tableToAttributes[table]) {
+        for (const attribute of tables[table].attributes) {
             checkboxHTML += `
             <input
                 type="checkbox"
