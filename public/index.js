@@ -1,29 +1,5 @@
 
-const primaryKeys = {
-    JOBTITLE : "JobTitleID",
-    EMPLOYEETYPE : "EmployeeTypeID",
-    COMPANY : "CompanyID",
-    SERVICETYPE : "ServiceTypeID",
-    ENTRYTYPE : "EntryTypeID",
-    TIMETYPE : "TimeTypeID",
-    BILLINGTYPE : "BillingTypeID",
-    WORKORDERSTATUS : "StatusID",
-    WORKORDERPRIORITY : "PriorityID",
-    CONTACT : "ContactID",
-    TBL_GRANT : "GrantID",
-    SERVICERATE : "ServiceRateID",
-    IPOSTATUS : "IPOStatusID",
-    DEPARTMENT : "DepartmentID",
-    CUSTOMER : "CustomerID",
-    EMPLOYEE : "EmployeeID",
-    IPO : "IPOID",
-    IPORATE : "IPORateID",
-    WORKORDER : "WorkOrderID",
-    ASSIGNEE : "AssigneeID",
-    TIMESHEET : "TimesheetID",
-    WORKORDERCONTACT : "WorkOrderContactID",
-    WORKORDERGRANT : "WorkOrderGrantID"
-}
+import primaryKeys from "./data.js";
 
 const dbAttributes = {
     JobTitleID : "JOBTITLE",
@@ -166,6 +142,8 @@ const tableToAttributes = {
     WORKORDERGRANT : ["WorkOrderGrantID"]
 }
 
+//CAN CONDENSE THE ABOVE INTO OBJECTS
+
 
 //EXCLUDED COMPANY BECAUSE OF SECOND-LEVEL JOINS
 const categoryToRelatedTables = {
@@ -242,7 +220,6 @@ if (localStorage.getItem("presets"))
 saveBtn.addEventListener("click", function() {
     const nameQuery = document.getElementById('name-query');
     const saveName = document.getElementById('save-name'); 
-    console.log(sqlQuery);
     nameQuery.style.display = "flex";
     document.getElementById('save-confirm').addEventListener('click', ()=> {
         presetQueries[saveName.value] = sqlQuery;
@@ -480,9 +457,6 @@ function buildSelect(attributes) {
     //     transformAttributeFormat(attributes[i]);
     // }
             
-
-
-
     return selectStatement + " \n"; 
 }
 
@@ -518,8 +492,8 @@ function buildJoins(checkedClasses) {
 }
 
 function buildWhere() {
-    optionArr = document.getElementById("where-condition").getElementsByTagName("select");
-    inputArr = document.getElementsByClassName("where");
+    const optionArr = document.getElementById("where-condition").getElementsByTagName("select");
+    const inputArr = document.getElementsByClassName("where");
     if (inputArr[0].value != "") {
         whereTxt = "WHERE " 
         for(let i = 0; i < optionArr.length; i++) {
@@ -543,7 +517,6 @@ function buildWhere() {
 function populatePresets() {
     savedSelection.innerHTML = "";
     for (let preset of Object.keys(presetQueries)) {
-        console.log(preset);
         savedSelection.innerHTML += `
         <option value="${preset}">${preset}</option>
         `
@@ -574,9 +547,7 @@ async function presetQuery() {
     }
     else
         console.log("No table selected");
-
     try {
-        console.log(sqlQuery);
         sqlData = await getResults(sqlQuery);
         renderResults(sqlData, 1);
     } catch {
@@ -602,14 +573,13 @@ async function buildQuery(event) {
 
     //Builds Query
     selectStatement = buildSelect(attributes); //starting table and all values of checked boxes
-    joinTxt = buildJoins(tables);
+    joinsTxt = buildJoins(tables);
     whereTxt = buildWhere();
-    sqlQuery = selectStatement + `FROM ${startingTable}\n ` + joinTxt + whereTxt + orderTxt;
+    sqlQuery = selectStatement + `FROM ${startingTable}\n ` + joinsTxt + whereTxt + orderTxt;
     sqlCode.textContent = sqlQuery;
     
     //Sends Query and returns Results
     try {
-        console.log(sqlQuery);
         sqlData = await getResults(sqlQuery);
         renderResults(sqlData, 1);
     } catch {
@@ -654,13 +624,12 @@ function renderResults(data, page) {
         //creates headers:
         let header = results.createTHead();
         let headerRow = header.insertRow();
-        cell = headerRow.insertCell();
+        let cell = headerRow.insertCell();
         cell.innerHTML = "#";
-
 
         for (let cellData in data.recordset[0])
         {
-            let cell = headerRow.insertCell();
+            cell = headerRow.insertCell();
             cell.innerHTML = cellData;
 
             cell.addEventListener("click", (e) => {
@@ -678,14 +647,14 @@ function renderResults(data, page) {
         tbody.setAttribute("id","table-data");
         
 
-        for (row of data.recordset.slice(startingSlice, startingSlice + resultsPerPage)) {
+        for (const row of data.recordset.slice(startingSlice, startingSlice + resultsPerPage)) {
             let rowCount = 1;
             let rows = tbody.insertRow()
 
             cell = rows.insertCell();
             cell.innerHTML = count;
 
-            for (cellData in row)
+            for (const cellData in row)
             {
                 cell = rows.insertCell();
                 cell.dataset.attribute = headerRow.children[rowCount].textContent;
@@ -772,7 +741,7 @@ function cellEditConfirmation(e) {
     function yesConfirmation() {
         changesNo.removeEventListener("click", noConfirmation);
         editConfirmation.style.display = "none";
-        console.log(currentInput.value);
+
         updateRecord(originalCell, currentInput.value);
         activeCell.innerHTML = currentInput.value;  
         tableData.addEventListener("click", getCell, { once : true});
@@ -781,7 +750,6 @@ function cellEditConfirmation(e) {
     function noConfirmation() {
         changesYes.removeEventListener("click", yesConfirmation);
         editConfirmation.style.display = "none";
-        console.log(originalContent);
         currentInput.remove();
         originalCell.textContent = originalContent;
         tableData.addEventListener("click", getCell, { once : true});
@@ -795,7 +763,6 @@ function cellEditConfirmation(e) {
 function updateRecord(cell, newValue) {
     // changesYes.removeEventListener("click", yesConfirmation);
     // changesNo.removeEventListener("click", noConfirmation);
-    console.log(cell)
 
     let primaryKeyID = getID(cell);
     let attribute = cell.dataset.attribute;
@@ -803,7 +770,7 @@ function updateRecord(cell, newValue) {
     let primaryKey = primaryKeys[table];
 
     let updateQuery = `UPDATE ${table} SET ${attribute} = '${newValue}' WHERE ${primaryKey} = '${primaryKeyID}'`;
-    console.log(updateQuery);
+
     //run on database
     try {
         sqlData = getResults(updateQuery);
@@ -844,7 +811,7 @@ function paginate(totalPages) {
 
     //iterates through range of total pages,
     //
-    for (page of Array(totalPages).keys()) {
+    for (let page of Array(totalPages).keys()) {
         page += startPage;
         if (countPages < maxPages && page <= totalPages) {
 
@@ -916,7 +883,7 @@ function clearAll() {
 function getCheckedAttributes(){
     const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checked = [];
-    //MIGHT BE ABLE TO USE MAP HERE INSTEAD
+
     for(let i = 0; i < checks.length - 1; i++){
         if(checks[i].checked)
             checked.push(checks[i].value)
@@ -929,7 +896,6 @@ function getCheckedAttributes(){
 function getAttributeClasses(){
     const checks = tableForm.querySelectorAll('input[type="checkbox"]');
     let checkedClasses = [];
-    //MIGHT BE ABLE TO USE MAP HERE INSTEAD
     for(let i = 0; i < checks.length - 1; i++){
         if(checks[i].checked && !checkedClasses.includes(checks[i].className))
             checkedClasses.push(checks[i].className)
@@ -952,17 +918,11 @@ function getAttributeClasses(){
 
 //runs in the beginning
 function addWhereOptions() {
-    console.log(tableSelection.value)
-    console.log(categoryToRelatedTables)
-    console.log(categoryToRelatedTables[tableSelection.value])
-    
 
-    for (table of categoryToRelatedTables[tableSelection.value]) {
-        for (attribute of tableToAttributes[table]) {
-            whereOptions.innerHTML += `
-            <option value="${attribute}">${attribute}</option>
-            `
-        }
+    for (const table of categoryToRelatedTables[tableSelection.value]) {
+        whereOptions.innerHTML += tableToAttributes[table].map(function(attribute) {
+            return `<option value="${attribute}">${attribute}</option>`
+        }).join("\r\n")
     }
 }
 
@@ -982,18 +942,15 @@ function createTableCategories() {
     let categoriesHTML = "";
 
 
-   for (let table of Object.keys(categoryToRelatedTables)) {
-        categoriesHTML += `
-        <option value="${table}">${table}</option>
-        `
-    }
+//    for (let table of Object.keys(categoryToRelatedTables)) {
+//         categoriesHTML += `
+//         <option value="${table}">${table}</option>
+//         `
+//     }
+
+    categoriesHTML += Object.keys(categoryToRelatedTables).map(table => `<option value="${table}">${table}</option>`).join('');
 
 
-    // for (let table of Object.keys(primaryKeys)) {
-    //     categoriesHTML += `
-    //     <option value="${table}">${table}</option>
-    //     `
-    // }
     tableSelection.innerHTML += categoriesHTML;
     tableSelection.addEventListener("change", function() {
         currentPage = 1;
@@ -1013,8 +970,8 @@ createTableCategories();
 function createCheckboxes() {
     let checkboxHTML = "";
 
-    for (table of categoryToRelatedTables[tableSelection.value]) {
-        for (attribute of tableToAttributes[table]) {
+    for (const table of categoryToRelatedTables[tableSelection.value]) {
+        for (const attribute of tableToAttributes[table]) {
             checkboxHTML += `
             <input
                 type="checkbox"
@@ -1036,11 +993,8 @@ function createCheckboxes() {
 }
 
 function selectDeselect() {
-    console.log("deslect called");
     const selectAll = document.getElementById("select-all");
-    console.log(selectAll);
     let inputs = document.getElementsByTagName('input');
-    console.log(inputs.length);
     for( let i= 0; i < inputs.length; i++) {
         if(inputs[i].type.toLowerCase() == 'checkbox')
             if (selectAll.checked)

@@ -19,34 +19,33 @@ app.use(express.text());
 
 //middleware, sets up database connection. Takes request body with userQuery, runs query on database, if successful, returns recordSet
 function getDatabase(req, res, next) {
-  let userQuery = req.body;
+    let userQuery = req.body;
 
-  const sql = require("mssql/msnodesqlv8");
-  var config= {
-      database: 'Agile-Alpha',
-      server: 'DESKTOP-7T1COHN\\SQLEXPRESS',
-      driver: 'msnodesqlv8',
+    const sql = require("mssql/msnodesqlv8");
+    var config= {
+        database: 'Agile-Alpha',
+        server: 'DESKTOP-7T1COHN\\SQLEXPRESS',
+        driver: 'msnodesqlv8',
 
-      options:{
-          trustedConnection:true
-      }
-  };
-  sql.connect(config,function(err){
-      if(err){
-          console.log(err);
-      }
-      var request = new sql.Request();
-      request.query(userQuery,function(err,recordSet) {
-          console.log(userQuery)
-          if(err){
-              console.log(err);
-              next(err)
-          } else {
-              res.status(201).send(recordSet); //sends records as a response
-          }
-      });
-  });
-  next();
+        options:{
+            trustedConnection:true
+        }
+    };
+    sql.connect(config,function(err){
+        if(err){
+            console.log(err);
+        }
+        var request = new sql.Request();
+        request.query(userQuery,function(err,recordSet) {
+            if(err){
+                console.log(err);
+                next(err)
+            } else {
+                res.status(201).send(recordSet); //sends records as a response
+            }
+        });
+    });
+    next();
 }
 
 
@@ -59,14 +58,14 @@ app.post('/', getDatabase, (req, res) => {
 
 
 app.get('/', (req,res) => {
-  res.sendFile(__dirname + '/public/' + '/query-generator.html')
+    res.sendFile(__dirname + '/public/' + '/query-generator.html')
 })
 
 
 
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 })
 
 
