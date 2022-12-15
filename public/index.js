@@ -120,11 +120,7 @@ let originalContent;
 submitBtn.addEventListener("click", buildQuery);
 
 sqlBtn.addEventListener("click", ()=>{
-    if (codeContainer.style.display === "none") {
-        codeContainer.style.display = "flex";
-    } else {
-        codeContainer.style.display = "none";
-    }
+    codeContainer.style.display = codeContainer.style.display === "none" ? "flex" : "none";
 })
 sqlBtn.click();
 
@@ -278,11 +274,7 @@ function transformDataFormat(cell) {
 function buildSelect(attributes) {
 
     let selectStatement = "SELECT ";
-
-    if (attributes.length === 0)
-        selectStatement += " *  ";
-    else
-        selectStatement += attributes.join()
+    selectStatement += attributes.length === 0 ? " *  " : attributes.join()
 
 
     // // TRANSFORMATION SHOULD HAPPEN CLIENT-SIDE NOT SERVER-SIDE
@@ -797,10 +789,11 @@ function createCheckboxes() {
         }
     }
 
+    //FIX: checkbox select all functionality
     checkboxHTML += `<input type="checkbox" onchange="selectDeselect()" id="select-all" checked />
     <label>Select/Deselect All</label>`
     // document.getElementById("select-all").addEventListener('change', selectDeselect);
-
+    
     tableForm.innerHTML += checkboxHTML;
 }
 
@@ -809,10 +802,7 @@ function selectDeselect() {
     let inputs = document.getElementsByTagName('input');
     for( let i= 0; i < inputs.length; i++) {
         if(inputs[i].type.toLowerCase() == 'checkbox')
-            if (selectAll.checked)
-                inputs[i].checked = true; 
-            else
-                inputs[i].checked = false;       
+            inputs[i].checked = selectAll.checked ? true : false;
     }
 }
 
