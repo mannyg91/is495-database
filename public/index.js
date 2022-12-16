@@ -789,12 +789,19 @@ function createCheckboxes() {
         }
     }
 
-    //FIX: checkbox select all functionality
-    checkboxHTML += `<input type="checkbox" onchange="selectDeselect()" id="select-all" checked />
-    <label>Select/Deselect All</label>`
-    // document.getElementById("select-all").addEventListener('change', selectDeselect);
+    let selectAll = document.createElement("input")
+    selectAll.setAttribute("type","checkbox");
+    selectAll.setAttribute("id","select-all");
+    selectAll.setAttribute("checked",true);
+    selectAll.addEventListener('change', selectDeselect);
+
+    let selectAllLabel = document.createElement("Label");
+    selectAllLabel.setAttribute("for","select-all");
+    selectAllLabel.innerHTML = "Select/Deselect All";
     
     tableForm.innerHTML += checkboxHTML;
+    tableForm.appendChild(selectAll);
+    tableForm.appendChild(selectAllLabel);
 }
 
 function selectDeselect() {
